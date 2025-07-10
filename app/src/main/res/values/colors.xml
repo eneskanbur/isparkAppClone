@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Ana Renkler -->
+    <color name="colorPrimary">#FFD700</color>        <!-- Sarı (İSPARK teması) -->
+    <color name="colorPrimaryDark">#E6C200</color>    <!-- Koyu Sarı (Durum çubuğu) -->
+    <color name="colorAccent">#000000</color>         <!-- Siyah (ikonlar, başlıklar) -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Arka Planlar -->
+    <color name="colorBackground">#FFFFFF</color>     <!-- Beyaz arka plan -->
+    <color name="colorCardBackground">#F5F5F5</color> <!-- Kartlar için açık gri -->
+
+    <!-- Yazı Renkleri -->
+    <color name="textPrimary">#212121</color>         <!-- Ana metin -->
+    <color name="textSecondary">#757575</color>       <!-- Açıklama/metin altı -->
+    <color name="textOnPrimary">#000000</color>       <!-- Sarı üstünde siyah yazı -->
+
+    <!-- FAB & Butonlar -->
+    <color name="fabColor">#FFD700</color>
+    <color name="fabRipple">#CCCC00</color>
+    <color name="fabIconColor">#000000</color>
+
+    <!-- Sekme Renkleri -->
+    <color name="tabActiveBackground">#FFD700</color>
+    <color name="tabInactiveBackground">#FFFFFF</color>
+    <color name="tabActiveText">#000000</color>
+    <color name="tabInactiveText">#757575</color>
 </resources>

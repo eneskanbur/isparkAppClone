@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Ispark</string>
+    <string name="find_nearest_parking">En yakın otoparkı hızlıca bulmak için tıklayın!</string>
+    <string name="social_media_text">Haberler, yenilikler, avantajlar...\nHepsi sosyal medya hesaplarımızda\nSen de takip et, güncel kal</string>
+    <string name="for_you">SENİN İÇİN</string>
+    <string name="applications">Başvuru İşlemleri</string>
+    <string name="istmarin_panel">İstmarin Panel</string>
+    <string name="payment">Ücret Öde</string>
+    <string name="solution_center">İBB Çözüm Merkezi</string>
+    <string name="news">Haberler</string>
+    <string name="campaigns">Kampanyalar</string>
+    <string name="menu">Menu</string>
+    <string name="notifications">Notifications</string>
+    <string name="ispark_logo">İSPARK Logo</string>
 </resources>
