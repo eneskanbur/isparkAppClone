@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailFragment">
+    >
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:maxWidth="300dp"
-        android:maxHeight="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin_large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </ImageView>
 
-
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

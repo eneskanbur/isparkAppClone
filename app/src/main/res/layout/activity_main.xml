@@ -7,13 +7,13 @@
     android:layout_width="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5"
         tools:context=".MainActivity">
 
+        <!-- ✅ SCROLL BEHAVIOR KALDIRILDI -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -36,7 +36,6 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/margin_xlarge"
                     android:background="@drawable/ic_notification">
-
                 </ImageButton>
 
                 <ImageView
@@ -45,21 +44,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_ispark_wide">
-
                 </ImageView>
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottieHamburger"
+                <!-- ✅ LOTTIE YERİNE BASIT IMAGEVIEW -->
+                <ImageView
+                    android:id="@+id/ivHamburger"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="@dimen/margin_xlarge"
                     android:clickable="true"
                     android:focusable="true"
-                    app:lottie_autoPlay="false"
-                    app:lottie_loop="false"
-                    app:lottie_rawRes="@raw/ic_hamburger_anim">
-
-                </com.airbnb.lottie.LottieAnimationView>
+                    android:src="@drawable/ic_hamburger_menu"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/black">
+                </ImageView>
 
             </Toolbar>
 
@@ -83,12 +81,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/colorPrimary"
+            android:elevation="8dp"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@color/textOnPrimary"
+            app:itemTextColor="@color/textOnPrimary"
+            app:itemRippleColor="@color/colorCardBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav_menu">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -101,4 +105,5 @@
         app:menu="@menu/activity_main_drawer_menu"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/colorPrimary" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
