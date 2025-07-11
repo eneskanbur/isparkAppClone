@@ -7,16 +7,48 @@
     tools:context=".DetailFragment">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:maxWidth="300dp"
         android:maxHeight="300dp"
+        android:src="@drawable/ic_hamburger_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
+
+    <TextView
+        android:id="@+id/tvDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textOnPrimary"
+        android:text="Title"
+        android:textSize="32sp"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvDetailDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="grekgmroeıhmrepkhrepokhrephjrepohkrephrekhprekhprekhroepkhreopglre"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailTitle">
+
+    </TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
