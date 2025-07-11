@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:icon="@drawable/ic_wallet"
-        android:title="Wallet" />
-    <item
+        android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="Ana Sayfa" />
+
     <item
-        android:icon="@drawable/ic_istmarin"
-        android:title="İstmarin" />
+        android:id="@+id/nav_detail"
+        android:icon="@drawable/ic_parking"
+        android:title="Otopark Bul" />
+
 </menu>
