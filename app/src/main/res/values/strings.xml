@@ -12,6 +12,10 @@
     <string name="menu">Menu</string>
     <string name="notifications">Notifications</string>
     <string name="ispark_logo">İSPARK Logo</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="en_yakin_otopark">En yakın otoparkı hızlıca bulmak için tıklayın!</string>
+    <string name="senin_icin">Senin İçin</string>
+    <string name="basvuru_islemleri">Başvuru İşlemleri</string>
+    <string name="ucret_ode">Ücret Öde</string>
+    <string name="ibb_cozum_merkezi">İBB Çözüm Merkezi</string>
 </resources>

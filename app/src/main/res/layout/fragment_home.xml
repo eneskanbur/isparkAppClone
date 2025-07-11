@@ -1,12 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_home_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".HomeFragment">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="400dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:backgroundTint="@color/colorCardBackground"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_medium">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_car_search" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="@string/en_yakin_otopark"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
+            android:layout_width="400dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:backgroundTint="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvCardFirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="Haberler, yenilikler, avantajlar...\nHepsi sosyal medya hesabımızda \nSen de takip et güncel kal"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <LinearLayout
+                    android:id="@+id/llSocialMedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCardFirst">
+
+                    <ImageView
+                        android:id="@+id/ivIstanbul34"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_istanbul_senin" />
+
+                    <ImageView
+                        android:id="@+id/ivFacebook"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_facebook" />
+
+                    <ImageView
+                        android:id="@+id/ivX"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_x_white"
+                        app:tint="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/ivInstagram"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_instagram" />
+
+                    <ImageView
+                        android:id="@+id/ivYoutube"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_youtube" />
+
+                    <ImageView
+                        android:id="@+id/ivLinkedIn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_linkedin" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="400dp"
+            android:layout_height="260dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:backgroundTint="@color/colorCardBackground"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView2"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/senin_icin"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView3"
+                    android:layout_width="140dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:backgroundTint="@color/colorCardBackground"
+                    android:clickable="true"
+                    android:elevation="8dp"
+                    android:focusable="true"
+                    android:translationZ="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
+                    app:layout_constraintEnd_toStartOf="@+id/materialCardView4"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:rippleColor="@color/ispark_yellow_alpha">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="72dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/ic_basvuru_islemleri"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        app:tint="@color/white">
+
+                    </com.google.android.material.imageview.ShapeableImageView>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/basvuru_islemleri"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+                    app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
+
+                </TextView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView4"
+                    android:layout_width="140dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:backgroundTint="@color/colorCardBackground"
+                    android:clickable="true"
+                    android:elevation="8dp"
+                    android:focusable="true"
+                    android:translationZ="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/materialCardView6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/materialCardView3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:rippleColor="@color/ispark_yellow_alpha">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="72dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/ic_istmarin"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        app:tint="@color/white">
+
+                    </com.google.android.material.imageview.ShapeableImageView>
 
 
+                </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/istmarin_panel"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/materialCardView4"
+                    app:layout_constraintStart_toStartOf="@+id/materialCardView4"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
+
+                </TextView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView6"
+                    android:layout_width="140dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/colorCardBackground"
+                    android:clickable="true"
+                    android:elevation="8dp"
+                    android:focusable="true"
+                    android:translationZ="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/materialCardView5"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:rippleColor="@color/ispark_yellow_alpha">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="72dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/ic_call_center"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        app:tint="@color/white">
+
+                    </com.google.android.material.imageview.ShapeableImageView>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/ibb_cozum_merkezi"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/materialCardView6"
+                    app:layout_constraintStart_toStartOf="@+id/materialCardView6"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView6">
+
+                </TextView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView5"
+                    android:layout_width="140dp"
+                    android:layout_height="80dp"
+                    android:backgroundTint="@color/colorCardBackground"
+                    android:clickable="true"
+                    android:elevation="8dp"
+                    android:focusable="true"
+                    android:translationZ="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/materialCardView6"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:rippleColor="@color/ispark_yellow_alpha">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="72dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/ic_wallet"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        app:tint="@color/white">
+
+                    </com.google.android.material.imageview.ShapeableImageView>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/ucret_ode"
+                    android:textColor="@color/textOnPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/materialCardView5"
+                    app:layout_constraintStart_toStartOf="@+id/materialCardView5"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView5">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
