@@ -4,6 +4,7 @@ import com.knbrgns.isparkappclone.model.Campaign
 import com.knbrgns.isparkappclone.model.LoginRequest
 import com.knbrgns.isparkappclone.model.LoginResponse
 import com.knbrgns.isparkappclone.model.News
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -12,30 +13,31 @@ import retrofit2.http.Path
 
 interface TestAPI {
 
-    @GET()
+    @GET("api/news")
     suspend fun getNews(
         @Header("Authorization") token: String
-    ): List<News>
+    ): Response<List<News>>
 
+    @GET("api/news/{id}")
     suspend fun getNewWithId(
         @Header("Authorization") token: String,
         @Path("id") newsId: Int
-    ): News
+    ): Response<List<News>>
 
     @POST("api/auth/login")
     suspend fun login(
         @Body request: LoginRequest
-    ): LoginResponse
+    ): Response<LoginResponse>
 
     @GET("api/campaign")
     suspend fun getCampaigns(
         @Header("Authorization") token: String
-    ): List<Campaign>
+    ): Response<List<Campaign>>
 
     @GET("api/campaign/{id}")
     suspend fun getCampaignById(
         @Header("Authorization") token: String,
         @Path("id") campaignId: Int
-    ): Campaign
+    ): Response<List<Campaign>>
 }
 

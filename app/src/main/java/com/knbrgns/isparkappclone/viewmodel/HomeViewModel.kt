@@ -20,15 +20,61 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val service = Client.apiService
 
+    private var authToken: String = "Bearer your_token_here"
+
+
     fun getNews() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            val response = service.getNews()
-            if (response.isNotEmpty()) {
-                _news.postValue(response)
+            try {
+                val response = service.getNews(authToken)
+
+                if (response.isSuccessful) {
+                    _news.postValue(response.body())
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun getNewsWithID(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = service.getNewWithId(authToken, id)
+                if (response.isSuccessful && response.body() != null) {
+                    _news.postValue(response.body())
+                }
+            } catch (e: Exception) {
+            }
+        }
+
+        fun getCampaigns() {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val response = service.getCampaigns(authToken)
+                    if (response.isSuccessful) {
+                        _campaign.postValue(response.body())
+                    }
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+        fun getCampaignWithId(id: Int) {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val response = service.getCampaignById(authToken, id)
+                    if (response.isSuccessful && response.body() != null) {
+                        _campaign.postValue(response.body())
+                    }
+                } catch (e: Exception) {
+
+                }
+
             }
 
         }
     }
-
 }

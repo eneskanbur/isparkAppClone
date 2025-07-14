@@ -3,7 +3,6 @@ package com.knbrgns.isparkappclone.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.util.Date
 
 @Parcelize
 data class News(
@@ -15,7 +14,7 @@ data class News(
     val descriptionShort: String,
     @SerializedName("url")
     val imageUrl: String,
-    val sDate: Date,
-    val eDate: Date,
+    val sDate: String,
+    val eDate: String,
     val isDeleted: Boolean
 ) : Parcelable
