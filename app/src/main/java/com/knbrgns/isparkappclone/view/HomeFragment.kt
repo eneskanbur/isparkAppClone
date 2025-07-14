@@ -27,10 +27,6 @@ class HomeFragment : Fragment() {
     private var newsAdapter: NewsAdapter? = null
     private var campaignAdapter: CampaignAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,12 +38,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         observeViewModel()
-        setupOnClickListeners()
         setupTabButtons()
-        viewModel.getNews()
+        setupOnClickListeners()
 
+        viewModel.initialize()
     }
 
     private fun setupTabButtons() {
@@ -55,7 +52,12 @@ class HomeFragment : Fragment() {
             if (!isNewsSelected) {
                 isNewsSelected = true
                 updateTabButtonStates()
-                showNewsInRecyclerView()
+
+                if (newsAdapter != null) {
+                    showNewsInRecyclerView()
+                } else {
+                    viewModel.getNews()
+                }
             }
         }
 
@@ -63,7 +65,12 @@ class HomeFragment : Fragment() {
             if (isNewsSelected) {
                 isNewsSelected = false
                 updateTabButtonStates()
-                showCampaignsInRecyclerView()
+
+                if (campaignAdapter != null) {
+                    showCampaignsInRecyclerView()
+                } else {
+                    viewModel.getCampaigns()
+                }
             }
         }
 
@@ -71,22 +78,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateTabButtonStates() {
-        if (isNewsSelected) {
-            binding.btnNews.isChecked = true
-            binding.btnCampaigns.isChecked = false
-        } else {
-            binding.btnNews.isChecked = false
-            binding.btnCampaigns.isChecked = true
-        }
+        binding.btnNews.isChecked = isNewsSelected
+        binding.btnCampaigns.isChecked = !isNewsSelected
     }
 
     private fun observeViewModel() {
-
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
             newsList?.let {
                 newsAdapter = NewsAdapter(it) { selectedNews ->
                     onNewsItemClick(selectedNews)
                 }
+
                 if (isNewsSelected) {
                     showNewsInRecyclerView()
                 }
@@ -107,9 +109,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun onNewsItemClick(news: News) {
-        // Detail fragmentına git ve haberi aktar
-        val action = HomeFragmentDirections.actionNavHomeToNavDetail()
-        // Eğer Safe Args kullanmıyorsanız bundle ile:
         val bundle = Bundle().apply {
             putParcelable("selected_news", news)
             putString("content_type", "news")
@@ -118,7 +117,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun onCampaignItemClick(campaign: Campaign) {
-        // Detail fragmentına git ve kampanyayı aktar
         val bundle = Bundle().apply {
             putParcelable("selected_campaign", campaign)
             putString("content_type", "campaign")
@@ -138,7 +136,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         binding.rvHomePage.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -148,7 +146,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupOnClickListeners(){
+    private fun setupOnClickListeners() {
         binding.ivIstanbul34.setOnClickListener {
             openWebUrl("https://istanbulsenin.istanbul")
         }
@@ -191,5 +189,10 @@ class HomeFragment : Fragment() {
                 android.widget.Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

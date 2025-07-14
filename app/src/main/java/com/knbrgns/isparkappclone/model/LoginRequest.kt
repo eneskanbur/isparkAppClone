@@ -1,6 +1,6 @@
 package com.knbrgns.isparkappclone.model
 
 data class LoginRequest(
-    val username: String,
+    val userName: String,
     val password: String
 )

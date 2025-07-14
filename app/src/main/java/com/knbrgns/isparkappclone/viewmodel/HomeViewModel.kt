@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.knbrgns.isparkappclone.model.Campaign
+import com.knbrgns.isparkappclone.model.LoginRequest
 import com.knbrgns.isparkappclone.model.News
 import com.knbrgns.isparkappclone.service.Client
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,23 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private var authToken: String = "Bearer your_token_here"
 
 
+    fun initialize() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+
+                val loginRequest = LoginRequest("sp", "sp")
+                val loginResponse = service.login(loginRequest)
+
+                if (loginResponse.isSuccessful && loginResponse.body() != null) {
+                    authToken = "Bearer ${loginResponse.body()!!.token}"
+                    getNews()
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
     fun getNews() {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -33,7 +51,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     _news.postValue(response.body())
                 }
             } catch (e: Exception) {
-
+                _news.postValue(emptyList())
             }
         }
     }
@@ -46,35 +64,36 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     _news.postValue(response.body())
                 }
             } catch (e: Exception) {
+
             }
         }
+    }
 
-        fun getCampaigns() {
-            viewModelScope.launch(Dispatchers.IO) {
-                try {
-                    val response = service.getCampaigns(authToken)
-                    if (response.isSuccessful) {
-                        _campaign.postValue(response.body())
-                    }
-                } catch (e: Exception) {
-
+    fun getCampaignWithId(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = service.getCampaignById(authToken, id)
+                if (response.isSuccessful && response.body() != null) {
+                    _campaign.postValue(response.body())
                 }
+            } catch (e: Exception) {
+
             }
+
         }
 
-        fun getCampaignWithId(id: Int) {
-            viewModelScope.launch(Dispatchers.IO) {
-                try {
-                    val response = service.getCampaignById(authToken, id)
-                    if (response.isSuccessful && response.body() != null) {
-                        _campaign.postValue(response.body())
-                    }
-                } catch (e: Exception) {
+    }
 
+    fun getCampaigns() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = service.getCampaigns(authToken)
+                if (response.isSuccessful) {
+                    _campaign.postValue(response.body())
                 }
-
+            } catch (e: Exception) {
+                _campaign.postValue(emptyList())
             }
-
         }
     }
 
