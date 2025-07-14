@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.knbrgns.isparkappclone.HomeFragment"
+        android:name="com.knbrgns.isparkappclone.view.HomeFragment"
         android:label="Ana Sayfa"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_detail"
-        android:name="com.knbrgns.isparkappclone.DetailFragment"
+        android:name="com.knbrgns.isparkappclone.view.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
 </navigation>
