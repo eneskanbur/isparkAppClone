@@ -5,10 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.knbrgns.isparkappclone.model.Campaign
-import com.knbrgns.isparkappclone.model.LoginRequest
 import com.knbrgns.isparkappclone.model.News
-import com.knbrgns.isparkappclone.service.Client
-import kotlinx.coroutines.Dispatchers
+import com.knbrgns.isparkappclone.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,85 +17,83 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _campaign = MutableLiveData<List<Campaign>>()
     val campaign: MutableLiveData<List<Campaign>> = _campaign
 
-    val service = Client.apiService
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: MutableLiveData<Boolean> = _loading
 
-    private var authToken: String = "Bearer your_token_here"
+    private val _error = MutableLiveData<String>()
+    val error: MutableLiveData<String> = _error
 
+    private val repository = AuthRepository(application)
 
+    // Ana initialization fonksiyonu
     fun initialize() {
-        viewModelScope.launch(Dispatchers.IO) {
+        _loading.value = true
+
+        viewModelScope.launch {
             try {
+                // 1. Login yap
+                val loginResult = repository.login("sp", "sp")
 
-                val loginRequest = LoginRequest("sp", "sp")
-                val loginResponse = service.login(loginRequest)
+                if (loginResult.isSuccess) {
+                    // 2. News verilerini getir
+                    val newsResult = repository.getNews()
+                    if (newsResult.isSuccess) {
+                        _news.value = newsResult.getOrNull()
+                    }
 
-                if (loginResponse.isSuccessful && loginResponse.body() != null) {
-                    authToken = "Bearer ${loginResponse.body()!!.token}"
-                    getNews()
+                    // 3. Campaign verilerini getir
+                    val campaignResult = repository.getCampaigns()
+                    if (campaignResult.isSuccess) {
+                        _campaign.value = campaignResult.getOrNull()
+                    }
+
+                } else {
+                    _error.value = loginResult.exceptionOrNull()?.message ?: "Login başarısız"
                 }
-            } catch (e: Exception) {
 
+            } catch (e: Exception) {
+                _error.value = "Beklenmeyen hata: ${e.message}"
+            } finally {
+                _loading.value = false
             }
         }
     }
 
+    // Manuel news getirme
     fun getNews() {
-        viewModelScope.launch(Dispatchers.IO) {
-
+        viewModelScope.launch {
+            _loading.value = true
             try {
-                val response = service.getNews(authToken)
-
-                if (response.isSuccessful) {
-                    _news.postValue(response.body())
+                val result = repository.getNews()
+                if (result.isSuccess) {
+                    _news.value = result.getOrNull()
+                } else {
+                    _error.value = result.exceptionOrNull()?.message
                 }
             } catch (e: Exception) {
-                _news.postValue(emptyList())
+                _error.value = "News getirilemedi: ${e.message}"
+            } finally {
+                _loading.value = false
             }
         }
     }
 
-    fun getNewsWithID(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = service.getNewWithId(authToken, id)
-                if (response.isSuccessful && response.body() != null) {
-                    _news.postValue(response.body())
-                }
-            } catch (e: Exception) {
-
-            }
-        }
-    }
-
-    fun getCampaignWithId(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = service.getCampaignById(authToken, id)
-                if (response.isSuccessful && response.body() != null) {
-                    _campaign.postValue(response.body())
-                }
-            } catch (e: Exception) {
-
-            }
-
-        }
-
-    }
-
+    // Manuel campaign getirme
     fun getCampaigns() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+            _loading.value = true
             try {
-                val response = service.getCampaigns(authToken)
-                if (response.isSuccessful) {
-                    _campaign.postValue(response.body())
+                val result = repository.getCampaigns()
+                if (result.isSuccess) {
+                    _campaign.value = result.getOrNull()
+                } else {
+                    _error.value = result.exceptionOrNull()?.message
                 }
             } catch (e: Exception) {
-                _campaign.postValue(emptyList())
+                _error.value = "Campaigns getirilemedi: ${e.message}"
+            } finally {
+                _loading.value = false
             }
         }
-    }
-
-    fun updateAuthToken(token: String) {
-        authToken = if (token.startsWith("Bearer ")) token else "Bearer $token"
     }
 }

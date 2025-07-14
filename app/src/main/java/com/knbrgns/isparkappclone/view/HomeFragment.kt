@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.knbrgns.isparkappclone.databinding.FragmentHomeBinding
@@ -83,12 +84,29 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        // Loading durumu
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            // Loading indicator göster/gizle
+            if (isLoading) {
+                // Progress bar göster
+            } else {
+                // Progress bar gizle
+            }
+        }
+
+        // Error durumu
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            }
+        }
+
+        // Mevcut observer'larınız aynen kalabilir...
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
             newsList?.let {
                 newsAdapter = NewsAdapter(it) { selectedNews ->
                     onNewsItemClick(selectedNews)
                 }
-
                 if (isNewsSelected) {
                     showNewsInRecyclerView()
                 }
@@ -100,14 +118,12 @@ class HomeFragment : Fragment() {
                 campaignAdapter = CampaignAdapter(it) { selectedCampaign ->
                     onCampaignItemClick(selectedCampaign)
                 }
-
                 if (!isNewsSelected) {
                     showCampaignsInRecyclerView()
                 }
             }
         }
     }
-
     private fun onNewsItemClick(news: News) {
         val bundle = Bundle().apply {
             putParcelable("selected_news", news)
@@ -168,7 +184,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.ivLinkedIn.setOnClickListener {
-            openWebUrl("https://linkedin.com/company/ispark")
+            openWebUrl("https://www.linkedin.com/company/isparkas/posts/?feedView=all")
         }
 
         binding.cvNearestParking.setOnClickListener {

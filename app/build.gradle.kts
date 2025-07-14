@@ -70,7 +70,6 @@ dependencies {
     implementation(libs.firebase.auth)
 
     implementation(libs.lottie)
-
-
+    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
 
 }

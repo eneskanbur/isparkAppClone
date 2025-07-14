@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         // Drawer Navigation ile NavController'ı bağla
         binding.navView.setupWithNavController(navController)
 
-        // Hamburger menü animasyonu
         binding.ivHamburger.setOnClickListener {
             if (binding.root.isDrawerOpen(binding.navView)) {
                 binding.root.closeDrawer(binding.navView)
