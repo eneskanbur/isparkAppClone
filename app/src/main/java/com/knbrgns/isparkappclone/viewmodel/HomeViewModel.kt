@@ -77,4 +77,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
         }
     }
+
+    fun updateAuthToken(token: String) {
+        authToken = if (token.startsWith("Bearer ")) token else "Bearer $token"
+    }
 }

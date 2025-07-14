@@ -13,7 +13,7 @@
         tools:context=".view.HomeFragment">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
+            android:id="@+id/cvNearestParking"
             android:layout_width="400dp"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/margin_small"
@@ -61,9 +61,9 @@
             android:layout_height="140dp"
             android:layout_marginTop="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/materialCardView"
-            app:layout_constraintStart_toStartOf="@+id/materialCardView"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+            app:layout_constraintEnd_toEndOf="@+id/cvNearestParking"
+            app:layout_constraintStart_toStartOf="@+id/cvNearestParking"
+            app:layout_constraintTop_toBottomOf="@+id/cvNearestParking">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
