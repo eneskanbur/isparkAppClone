@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.knbrgns.isparkappclone.databinding.FragmentHomeBinding
@@ -80,8 +80,57 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateTabButtonStates() {
-        binding.btnNews.isChecked = isNewsSelected
-        binding.btnCampaigns.isChecked = !isNewsSelected
+        if (isNewsSelected) {
+            binding.btnNews.apply {
+                isChecked = true
+                backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedBackground)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.tabSelectedText))
+                strokeColor =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedStroke)
+                iconTint =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedIcon)
+                rippleColor = ContextCompat.getColorStateList(requireContext(), R.color.tabRipple)
+            }
+
+            binding.btnCampaigns.apply {
+                isChecked = false
+                backgroundTintList = ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.tabUnselectedBackground
+                )
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.tabUnselectedText))
+                strokeColor =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabUnselectedStroke)
+                iconTint = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
+                rippleColor = ContextCompat.getColorStateList(requireContext(), R.color.tabRipple)
+            }
+        } else {
+            binding.btnCampaigns.apply {
+                isChecked = true
+                backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedBackground)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.tabSelectedText))
+                strokeColor =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedStroke)
+                iconTint =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabSelectedIcon)
+                rippleColor = ContextCompat.getColorStateList(requireContext(), R.color.tabRipple)
+            }
+
+            binding.btnNews.apply {
+                isChecked = false
+                backgroundTintList = ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.tabUnselectedBackground
+                )
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.tabUnselectedText))
+                strokeColor =
+                    ContextCompat.getColorStateList(requireContext(), R.color.tabUnselectedStroke)
+                iconTint = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
+                rippleColor = ContextCompat.getColorStateList(requireContext(), R.color.tabRipple)
+            }
+        }
     }
 
     private fun observeViewModel() {
@@ -111,19 +160,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun onNewsItemClick(news: News) {
-        val bundle = Bundle().apply {
-            putParcelable("selected_news", news)
-            putString("content_type", "news")
-        }
-        findNavController().navigate(R.id.nav_detail, bundle)
+        val action = HomeFragmentDirections.actionNavHomeToNavDetail(news = news, null)
+        findNavController().navigate(action)
     }
 
     private fun onCampaignItemClick(campaign: Campaign) {
-        val bundle = Bundle().apply {
-            putParcelable("selected_campaign", campaign)
-            putString("content_type", "campaign")
-        }
-        findNavController().navigate(R.id.nav_detail, bundle)
+        val action = HomeFragmentDirections.actionNavHomeToNavDetail(null, campaign)
+        findNavController().navigate(action)
     }
 
     private fun showNewsInRecyclerView() {
@@ -173,8 +216,8 @@ class HomeFragment : Fragment() {
             openWebUrl("https://www.linkedin.com/company/isparkas/posts/?feedView=all")
         }
 
-        binding.cvNearestParking.setOnClickListener {
-            val action = HomeFragmentDirections.actionNavHomeToNavDetail()
+        binding.mcvNearestParking.setOnClickListener {
+            val action = HomeFragmentDirections.actionNavHomeToNavDetail(null, null)
             findNavController().navigate(action)
         }
     }

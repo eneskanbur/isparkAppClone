@@ -30,4 +30,15 @@
     <color name="tabInactiveBackground">#FFFFFF</color>
     <color name="tabActiveText">#000000</color>
     <color name="tabInactiveText">#757575</color>
+
+    <!-- Tab Button States - Mevcut paletteki renklerle uyumlu -->
+    <color name="tabSelectedBackground">@color/colorPrimary</color>           <!-- #FFD700 - Ana sarı -->
+    <color name="tabUnselectedBackground">@color/colorCardBackground</color>  <!-- #FEFEFE - Kart arka planı -->
+    <color name="tabSelectedText">@color/textOnPrimary</color>                <!-- #000000 - Sarı üstünde siyah -->
+    <color name="tabUnselectedText">@color/textSecondary</color>              <!-- #757575 - İkincil metin -->
+    <color name="tabSelectedStroke">@color/colorPrimaryDark</color>           <!-- #E6C200 - Koyu sarı kenar -->
+    <color name="tabUnselectedStroke">@color/textSecondary</color>            <!-- #757575 - Gri kenar -->
+    <color name="tabSelectedIcon">@color/textOnPrimary</color>                <!-- #000000 - Siyah ikon -->
+    <color name="tabUnselectedIcon">@color/textSecondary</color>              <!-- #757575 - Gri ikon -->
+    <color name="tabRipple">@color/ispark_yellow_alpha</color>                <!-- #33FFC107 - Sarı ripple efekti -->
 </resources>

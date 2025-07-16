@@ -15,6 +15,5 @@ data class News(
     @SerializedName("url")
     val imageUrl: String,
     val sDate: String,
-    val eDate: String,
     val isDeleted: Boolean
 ) : Parcelable

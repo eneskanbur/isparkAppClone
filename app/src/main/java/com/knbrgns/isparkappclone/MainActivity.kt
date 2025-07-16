@@ -2,14 +2,14 @@ package com.knbrgns.isparkappclone
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-// ✅ enableEdgeToEdge import'unu kaldır
-// import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.ui.navigateUp
 import com.knbrgns.isparkappclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation()
         setupDrawer()
+        setupBackPressedCallback()
     }
 
     private fun setupNavigation() {
@@ -53,6 +54,27 @@ class MainActivity : AppCompatActivity() {
                 binding.root.openDrawer(binding.navView)
             }
         }
+    }
+
+    private fun setupBackPressedCallback() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.root.isDrawerOpen(binding.navView)) {
+                    binding.root.closeDrawer(binding.navView)
+                } else {
+                    if (navController.currentDestination?.id == R.id.nav_home) {
+                        finish()
+                    } else {
+                        navController.navigateUp()
+                    }
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onDestroy() {

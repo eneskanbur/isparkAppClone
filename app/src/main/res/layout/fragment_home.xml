@@ -13,7 +13,7 @@
         tools:context=".view.HomeFragment">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvNearestParking"
+            android:id="@+id/mcvNearestParking"
             android:layout_width="400dp"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/margin_small"
@@ -56,14 +56,14 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView2"
+            android:id="@+id/mcvSocialMedia"
             android:layout_width="400dp"
             android:layout_height="140dp"
             android:layout_marginTop="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/cvNearestParking"
-            app:layout_constraintStart_toStartOf="@+id/cvNearestParking"
-            app:layout_constraintTop_toBottomOf="@+id/cvNearestParking">
+            app:layout_constraintEnd_toEndOf="@+id/mcvNearestParking"
+            app:layout_constraintStart_toStartOf="@+id/mcvNearestParking"
+            app:layout_constraintTop_toBottomOf="@+id/mcvNearestParking">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -157,9 +157,9 @@
             android:layout_height="260dp"
             android:layout_marginTop="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
-            app:layout_constraintStart_toStartOf="@+id/materialCardView2"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+            app:layout_constraintEnd_toEndOf="@+id/mcvSocialMedia"
+            app:layout_constraintStart_toStartOf="@+id/mcvSocialMedia"
+            app:layout_constraintTop_toBottomOf="@+id/mcvSocialMedia">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -168,46 +168,49 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/senin_icin"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/materialCardView3"
+                    app:layout_constraintStart_toStartOf="@+id/mcvApplication"
                     app:layout_constraintTop_toTopOf="parent">
 
                 </TextView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView3"
+                    android:id="@+id/mcvApplication"
                     android:layout_width="140dp"
                     android:layout_height="80dp"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:backgroundTint="@color/colorCardBackground"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:clickable="true"
                     android:focusable="true"
-                    android:translationZ="4dp"
+                    android:translationZ="8dp"
+                    app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
+                    app:cardElevation="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
                     app:layout_constraintEnd_toStartOf="@+id/materialCardView4"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5"
-                    app:rippleColor="@color/ispark_yellow_alpha">
+                    app:rippleColor="@color/ispark_yellow_alpha"
+                    app:strokeWidth="0dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gradient_overlay" />
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="72dp"
-                        android:layout_height="52dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:src="@drawable/ic_basvuru_islemleri"
+                        android:src="@drawable/ic_mail"
                         app:shapeAppearanceOverlay="@style/RoundedImageView"
-                        app:tint="@color/white">
-
-                    </com.google.android.material.imageview.ShapeableImageView>
+                        app:tint="@color/black" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -215,13 +218,14 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/basvuru_islemleri"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
-                    app:layout_constraintStart_toStartOf="@+id/materialCardView3"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
+                    app:layout_constraintEnd_toEndOf="@+id/mcvApplication"
+                    app:layout_constraintStart_toStartOf="@+id/mcvApplication"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvApplication">
 
                 </TextView>
 
@@ -230,28 +234,33 @@
                     android:layout_width="140dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:backgroundTint="@color/colorCardBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:translationZ="4dp"
+                    android:translationZ="8dp"
+                    app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
+                    app:cardElevation="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/materialCardView6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/materialCardView3"
+                    app:layout_constraintStart_toEndOf="@+id/mcvApplication"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5"
-                    app:rippleColor="@color/ispark_yellow_alpha">
+                    app:rippleColor="@color/ispark_yellow_alpha"
+                    app:strokeWidth="0dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gradient_overlay" />
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="72dp"
-                        android:layout_height="52dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
                         android:src="@drawable/ic_istmarin"
                         app:shapeAppearanceOverlay="@style/RoundedImageView"
-                        app:tint="@color/white">
+                        app:tint="@color/black">
 
                     </com.google.android.material.imageview.ShapeableImageView>
 
@@ -262,6 +271,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/istmarin_panel"
                     android:textColor="@color/textOnPrimary"
@@ -276,28 +286,35 @@
                     android:id="@+id/materialCardView6"
                     android:layout_width="140dp"
                     android:layout_height="80dp"
-                    android:backgroundTint="@color/colorCardBackground"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:clickable="true"
                     android:focusable="true"
-                    android:translationZ="4dp"
+                    android:translationZ="8dp"
+                    app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
+                    app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/materialCardView5"
                     app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
                     app:layout_constraintVertical_bias="0.5"
-                    app:rippleColor="@color/ispark_yellow_alpha">
+                    app:rippleColor="@color/ispark_yellow_alpha"
+                    app:strokeWidth="0dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gradient_overlay" />
+
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="72dp"
-                        android:layout_height="52dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
                         android:src="@drawable/ic_call_center"
                         app:shapeAppearanceOverlay="@style/RoundedImageView"
-                        app:tint="@color/white">
+                        app:tint="@color/black">
 
                     </com.google.android.material.imageview.ShapeableImageView>
 
@@ -307,6 +324,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/ibb_cozum_merkezi"
                     android:textColor="@color/textOnPrimary"
@@ -321,28 +339,35 @@
                     android:id="@+id/materialCardView5"
                     android:layout_width="140dp"
                     android:layout_height="80dp"
-                    android:backgroundTint="@color/colorCardBackground"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:clickable="true"
                     android:focusable="true"
-                    android:translationZ="4dp"
+                    android:translationZ="8dp"
+                    app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
+                    app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/materialCardView6"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                    app:layout_constraintTop_toBottomOf="@+id/mcvApplication"
                     app:layout_constraintVertical_bias="0.5"
-                    app:rippleColor="@color/ispark_yellow_alpha">
+                    app:rippleColor="@color/ispark_yellow_alpha"
+                    app:strokeWidth="0dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gradient_overlay" />
+
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="72dp"
-                        android:layout_height="52dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
                         android:src="@drawable/ic_wallet"
                         app:shapeAppearanceOverlay="@style/RoundedImageView"
-                        app:tint="@color/white">
+                        app:tint="@color/black">
 
                     </com.google.android.material.imageview.ShapeableImageView>
 
@@ -352,6 +377,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/ucret_ode"
                     android:textColor="@color/textOnPrimary"

@@ -12,11 +12,26 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_nav_home_to_nav_detail"
-            app:destination="@id/nav_detail" />
+            app:destination="@id/nav_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_detail"
         android:name="com.knbrgns.isparkappclone.view.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="news"
+            app:argType="com.knbrgns.isparkappclone.model.News"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="campaign"
+            app:argType="com.knbrgns.isparkappclone.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
