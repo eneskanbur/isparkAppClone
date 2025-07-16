@@ -1,6 +1,7 @@
 package com.knbrgns.isparkappclone.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -84,26 +85,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Loading durumu
-        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            // Loading indicator göster/gizle
-            if (isLoading) {
-                // Progress bar göster
-            } else {
-                // Progress bar gizle
-            }
-        }
-
-        // Error durumu
-        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            errorMessage?.let {
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-            }
-        }
-
-        // Mevcut observer'larınız aynen kalabilir...
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
             newsList?.let {
+                Log.d("ISPARK_FLOW", "📱 UI UPDATE -> News received (${it.size} items)")
                 newsAdapter = NewsAdapter(it) { selectedNews ->
                     onNewsItemClick(selectedNews)
                 }
@@ -115,6 +99,7 @@ class HomeFragment : Fragment() {
 
         viewModel.campaign.observe(viewLifecycleOwner) { campaignList ->
             campaignList?.let {
+                Log.d("ISPARK_FLOW", "📱 UI UPDATE -> Campaigns received (${it.size} items)")
                 campaignAdapter = CampaignAdapter(it) { selectedCampaign ->
                     onCampaignItemClick(selectedCampaign)
                 }
@@ -124,6 +109,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun onNewsItemClick(news: News) {
         val bundle = Bundle().apply {
             putParcelable("selected_news", news)

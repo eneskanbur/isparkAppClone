@@ -14,7 +14,7 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 object Client {
-    private const val BASE_URL = "https://10.11.11.101:7102/"
+    private const val BASE_URL = "http://192.168.137.1:7102/"
 
     private fun getUnsafeOkHttpClient(): OkHttpClient {
         return try {
