@@ -34,4 +34,9 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_find_parking"
+        android:name="com.knbrgns.isparkappclone.view.FindParkingFragment"
+        android:label="fragment_find_parking"
+        tools:layout="@layout/fragment_find_parking" />
 </navigation>

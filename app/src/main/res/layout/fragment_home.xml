@@ -55,101 +55,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/mcvSocialMedia"
-            android:layout_width="400dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/mcvNearestParking"
-            app:layout_constraintStart_toStartOf="@+id/mcvNearestParking"
-            app:layout_constraintTop_toBottomOf="@+id/mcvNearestParking">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tvCardFirst"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center"
-                    android:text="Haberler, yenilikler, avantajlar...\nHepsi sosyal medya hesabımızda \nSen de takip et güncel kal"
-                    android:textColor="@color/textOnPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
-
-                <LinearLayout
-                    android:id="@+id/llSocialMedia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCardFirst">
-
-                    <ImageView
-                        android:id="@+id/ivIstanbul34"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_istanbul_senin" />
-
-                    <ImageView
-                        android:id="@+id/ivFacebook"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_facebook" />
-
-                    <ImageView
-                        android:id="@+id/ivX"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_x_white"
-                        app:tint="@color/black" />
-
-                    <ImageView
-                        android:id="@+id/ivInstagram"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@drawable/ic_instagram" />
-
-                    <ImageView
-                        android:id="@+id/ivYoutube"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_youtube" />
-
-                    <ImageView
-                        android:id="@+id/ivLinkedIn"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_linkedin" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView7"
@@ -157,9 +62,9 @@
             android:layout_height="260dp"
             android:layout_marginTop="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/mcvSocialMedia"
-            app:layout_constraintStart_toStartOf="@+id/mcvSocialMedia"
-            app:layout_constraintTop_toBottomOf="@+id/mcvSocialMedia">
+            app:layout_constraintEnd_toEndOf="@+id/mcvNearestParking"
+            app:layout_constraintStart_toStartOf="@+id/mcvNearestParking"
+            app:layout_constraintTop_toBottomOf="@+id/mcvNearestParking">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -181,7 +86,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mcvApplication"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/margin_xsmall"
                     android:clickable="true"
@@ -231,7 +136,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView4"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/margin_small"
                     android:clickable="true"
@@ -284,7 +189,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView6"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/margin_small"
                     android:clickable="true"
@@ -337,7 +242,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView5"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/margin_small"
                     android:clickable="true"
@@ -448,10 +353,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            android:paddingBottom="10dp"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnNews" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

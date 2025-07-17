@@ -11,7 +11,11 @@ class NewsViewHolder(binding: ItemNewsCampaignBinding) : RecyclerView.ViewHolder
     private val title = binding.tvTitle
     private val shortDescription = binding.tvDetailDescription
 
-    fun bind(item: News, onItemClick: (News) -> Unit){
+    fun bind(item: News, onItemClick: (News) -> Unit) {
+        image.setImageDrawable(null)
+        title.text = ""
+        shortDescription.text = ""
+
         Glide.with(itemView.context).load(item.imageUrl).into(image)
         title.text = item.title
         shortDescription.text = item.descriptionShort
@@ -20,5 +24,4 @@ class NewsViewHolder(binding: ItemNewsCampaignBinding) : RecyclerView.ViewHolder
             onItemClick.invoke(item)
         }
     }
-
 }

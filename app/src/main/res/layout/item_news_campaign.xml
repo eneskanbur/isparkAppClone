@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:paddingBottom="@dimen/padding_xsmall"
+    android:paddingStart="@dimen/padding_xsmall"
+    android:paddingEnd="@dimen/padding_xsmall"
+    >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -25,7 +28,7 @@
             <View
                 android:id="@+id/gradientOverlay"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="260dp"
                 android:background="@drawable/gradient_overlay"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +40,8 @@
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_margin="12dp"
-                app:cardCornerRadius="12dp"
                 app:cardBackgroundColor="@color/colorCardBackground"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,10 +81,7 @@
                 android:id="@+id/tvDetailDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/margin_xsmall"
                 android:alpha="0.8"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif"
@@ -89,10 +89,9 @@
                 android:maxLines="3"
                 android:textColor="@color/textSecondary"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+                app:layout_constraintStart_toStartOf="@+id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 tools:text="Bu modern açıklama metni ürün hakkında bilgi verir ve kullanıcının ilgisini çeker." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

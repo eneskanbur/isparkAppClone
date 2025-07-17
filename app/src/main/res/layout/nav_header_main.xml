@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/margin_xsmall"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -17,6 +17,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_user_profile" />
@@ -25,6 +27,7 @@
         android:id="@+id/textViewUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="İSPARK Kullanıcısı"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -32,6 +35,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -39,12 +43,123 @@
         android:id="@+id/textViewUserEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="kullanici@ispark.istanbul"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+
+    <TextView
+        android:id="@+id/tvSocialMediaTitle"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Sosyal Medya Hesaplarımızı Sen De Takip Et Güncel Kal!"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserEmail" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xsmall"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvSocialMediaTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvSocialMediaTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvSocialMediaTitle"
+        app:layout_constraintVertical_bias="0.5"
+        app:strokeWidth="0.8dp">
+
+        <LinearLayout
+            android:id="@+id/llSocialMediaDrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_xsmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSocialMediaTitle">
+
+            <ImageView
+                android:id="@+id/ivIstanbul34Drawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_istanbul_senin" />
+
+            <ImageView
+                android:id="@+id/ivFacebookDrawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_facebook" />
+
+            <ImageView
+                android:id="@+id/ivXDrawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_x_white"
+                app:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/ivInstagramDrawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_instagram" />
+
+            <ImageView
+                android:id="@+id/ivYoutubeDrawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_youtube" />
+
+            <ImageView
+                android:id="@+id/ivLinkedInDrawer"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_linkedin" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

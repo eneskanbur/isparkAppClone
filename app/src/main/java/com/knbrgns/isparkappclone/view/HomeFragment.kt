@@ -188,34 +188,13 @@ class HomeFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
+            setHasFixedSize(true)
+            setItemViewCacheSize(20)
+
         }
     }
 
     private fun setupOnClickListeners() {
-        binding.ivIstanbul34.setOnClickListener {
-            openWebUrl("https://istanbulsenin.istanbul")
-        }
-
-        binding.ivFacebook.setOnClickListener {
-            openWebUrl("https://www.facebook.com/isparkas/?locale=tr_TR")
-        }
-
-        binding.ivX.setOnClickListener {
-            openWebUrl("https://x.com/ispark?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor")
-        }
-
-        binding.ivInstagram.setOnClickListener {
-            openWebUrl("https://instagram.com/ispark_as")
-        }
-
-        binding.ivYoutube.setOnClickListener {
-            openWebUrl("https://www.youtube.com/c/ispark")
-        }
-
-        binding.ivLinkedIn.setOnClickListener {
-            openWebUrl("https://www.linkedin.com/company/isparkas/posts/?feedView=all")
-        }
-
         binding.mcvNearestParking.setOnClickListener {
             val action = HomeFragmentDirections.actionNavHomeToNavDetail(null, null)
             findNavController().navigate(action)
