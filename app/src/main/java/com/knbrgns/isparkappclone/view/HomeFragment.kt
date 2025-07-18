@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
         setupTabButtons()
-        setupOnClickListeners()
 
         viewModel.initialize()
     }
@@ -191,13 +190,6 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             setItemViewCacheSize(20)
 
-        }
-    }
-
-    private fun setupOnClickListeners() {
-        binding.mcvNearestParking.setOnClickListener {
-            val action = HomeFragmentDirections.actionNavHomeToNavDetail(null, null)
-            findNavController().navigate(action)
         }
     }
 

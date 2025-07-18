@@ -10,61 +10,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_toolbar"
         tools:context=".view.HomeFragment">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/mcvNearestParking"
-            android:layout_width="400dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:backgroundTint="@color/colorCardBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:translationZ="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:rippleColor="@color/ispark_yellow_alpha">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_large"
-                android:paddingEnd="@dimen/margin_medium">
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_car_search" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center"
-                    android:text="@string/en_yakin_otopark"
-                    android:textColor="@color/textOnPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView7"
             android:layout_width="400dp"
             android:layout_height="260dp"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_margin="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintEnd_toEndOf="@+id/mcvNearestParking"
-            app:layout_constraintStart_toStartOf="@+id/mcvNearestParking"
-            app:layout_constraintTop_toBottomOf="@+id/mcvNearestParking">
+            app:layout_constraintBottom_toTopOf="@+id/btnNews"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
