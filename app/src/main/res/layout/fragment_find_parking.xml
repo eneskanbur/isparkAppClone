@@ -44,8 +44,8 @@
             <!-- Arama Icon -->
             <ImageView
                 android:id="@+id/ivSearchIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="@+id/etSearch"
                 app:layout_constraintStart_toStartOf="parent"

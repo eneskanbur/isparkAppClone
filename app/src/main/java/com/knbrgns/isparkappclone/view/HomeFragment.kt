@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
         setupTabButtons()
-
         viewModel.initialize()
     }
 

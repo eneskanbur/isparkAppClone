@@ -15,6 +15,7 @@ import javax.net.ssl.X509TrustManager
 
 object Client {
     private const val BASE_URL = "http://192.168.137.1:7102/"
+    private const val BASE_PARK_URL = "https://api.ibb.gov.tr/ispark/"
 
     private fun getUnsafeOkHttpClient(): OkHttpClient {
         return try {
@@ -39,6 +40,15 @@ object Client {
         } catch (e: Exception) {
             throw RuntimeException("SSL client oluşturulamadı", e)
         }
+    }
+
+    fun getParkService(): ParkAPI {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(ParkAPI::class.java)
     }
 
     // Login için (token olmadan)

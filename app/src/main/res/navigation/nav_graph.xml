@@ -38,5 +38,14 @@
         android:id="@+id/nav_find_parking"
         android:name="com.knbrgns.isparkappclone.view.FindParkingFragment"
         android:label="fragment_find_parking"
-        tools:layout="@layout/fragment_find_parking" />
+        tools:layout="@layout/fragment_find_parking" >
+        <action
+            android:id="@+id/action_nav_find_parking_to_parkDetailFragment"
+            app:destination="@id/parkDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parkDetailFragment"
+        android:name="com.knbrgns.isparkappclone.view.ParkDetailFragment"
+        android:label="fragment_park_detail"
+        tools:layout="@layout/fragment_park_detail" />
 </navigation>
