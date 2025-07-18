@@ -9,4 +9,11 @@
         <item name="android:color">@color/ispark_yellow_alpha</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
     </style>
+
+    <style name="TransparentAppBarTheme" parent="ThemeOverlay.Material3.Light">
+        <item name="colorOnSurface">@color/colorPrimary</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
+    </style>
 </resources>

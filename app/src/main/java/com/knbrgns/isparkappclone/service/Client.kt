@@ -44,7 +44,7 @@ object Client {
 
     fun getParkService(): ParkAPI {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_PARK_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
