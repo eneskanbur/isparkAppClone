@@ -1,6 +1,10 @@
 package com.knbrgns.isparkappclone.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +21,12 @@ class FindParkingFragment : Fragment() {
 
     private var _binding: FragmentFindParkingBinding? = null
     private val binding get() = _binding!!
-    private val viewModel : FindParkingViewModel by viewModels()
+    private val viewModel: FindParkingViewModel by viewModels()
     private var parkAdapter: ParkAdapter? = null
+
+    private var allParks: List<Park> = emptyList()
+    private var filteredParks: List<Park> = emptyList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +40,65 @@ class FindParkingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupSearchBar()
         observeViewModel()
+        viewModel.loading.value = false
         viewModel.initialize()
     }
 
-    fun setupRecyclerView(){
+    private fun setupSearchBar() {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            private var searchRunnable: Runnable? = null
+
+            override fun afterTextChanged(s: Editable?) {
+                // ✅ 300ms bekle, sürekli arama yapmasın
+                searchRunnable?.let { handler.removeCallbacks(it) }
+
+                searchRunnable = Runnable {
+                    val searchText = s.toString().trim()
+                    filterParks(searchText)
+                }
+
+                handler.postDelayed(searchRunnable!!, 300)
+            }
+
+            override fun beforeTextChanged(
+                p0: CharSequence?,
+                p1: Int,
+                p2: Int,
+                p3: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                p0: CharSequence?,
+                p1: Int,
+                p2: Int,
+                p3: Int
+            ) {
+            }
+        })
+    }
+
+    companion object {
+        private val handler = Handler(Looper.getMainLooper())
+    }
+
+    private fun filterParks(searchText: String) {
+        filteredParks = if (searchText.isEmpty()) {
+            allParks
+        } else {
+            allParks.filter { park ->
+                park.parkName.contains(searchText, ignoreCase = true) ||
+                        park.district.contains(searchText, ignoreCase = true) ||
+                        park.address?.contains(searchText, ignoreCase = true) == true
+            }
+        }
+        updateRecyclerView()
+    }
+
+    fun setupRecyclerView() {
         binding.rvParkingResults.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -47,7 +109,17 @@ class FindParkingFragment : Fragment() {
         }
     }
 
-    fun observeViewModel(){
+    private fun updateRecyclerView() {
+        parkAdapter = ParkAdapter(filteredParks) { selectedPark ->
+            onParkItemClick(selectedPark)
+        }
+        binding.rvParkingResults.adapter = parkAdapter
+
+        binding.tvResultsCount.text = "${filteredParks.size} otopark bulundu"
+
+    }
+
+    fun observeViewModel() {
         viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
             parkList.let {
                 parkAdapter = ParkAdapter(it) { selectedPark ->
@@ -56,6 +128,16 @@ class FindParkingFragment : Fragment() {
                 binding.rvParkingResults.adapter = parkAdapter
 
             }
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
+            allParks = parkList
+            filteredParks = parkList
+            updateRecyclerView()
         }
     }
 

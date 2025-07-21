@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
-        app:liftOnScroll="false"
         android:theme="@style/TransparentAppBarTheme"
-        app:elevation="0dp">
+        app:elevation="0dp"
+        app:liftOnScroll="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/colorMojitoBreeze"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +52,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 app:strokeWidth="0dp">
 
-                <!-- Search içeriği -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +93,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Sabit kalacak "Otoparklar" header -->
         <LinearLayout
             android:id="@+id/resultsHeader"
             android:layout_width="match_parent"
@@ -115,14 +112,52 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
-                android:text="Otoparklar"
+                tools:text="@string/tvNumberOfParkFindParking"
                 android:textColor="@color/textPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNews"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.6"
+                android:backgroundTint="@color/colorMojitoBreeze"
+                android:checkable="true"
+                android:checked="true"
+                android:text="@string/btnAllFindParking"
+                android:textColor="@color/textOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:rippleColor="@color/cardview_light_background"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCampaigns"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.6"
+                android:backgroundTint="@color/colorMojitoBreeze"
+                android:checkable="true"
+                android:text="@string/btnFavoritesFindParking"
+                android:textColor="@color/textOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:rippleColor="@color/cardview_light_background"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="1dp" />
+
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvParkingResults"
@@ -137,7 +172,15 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_parking" />
 
-    <!-- Empty State aynı kalacak -->
-    <!-- ... -->
+    <!-- Loading Animation -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimation"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_anim" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

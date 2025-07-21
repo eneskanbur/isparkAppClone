@@ -7,10 +7,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 
-/**
- * Custom Behavior for super smooth AppBarLayout + RecyclerView scrolling
- * Modern UX solution for ISPARK app
- */
 class SmoothFlingBehavior : AppBarLayout.Behavior {
 
     companion object {
@@ -32,12 +28,10 @@ class SmoothFlingBehavior : AppBarLayout.Behavior {
     ): Boolean {
         var newVelocityY = velocityY
 
-        // ✅ Smooth velocity adjustment
         if (velocityY > 0 && !isPositive || velocityY < 0 && isPositive) {
             newVelocityY = velocityY * -1
         }
 
-        // ✅ Handle RecyclerView fling behavior
         var newConsumed = consumed
         if (target is RecyclerView && velocityY < 0) {
             val firstChild = target.getChildAt(0)
@@ -47,7 +41,14 @@ class SmoothFlingBehavior : AppBarLayout.Behavior {
             }
         }
 
-        return super.onNestedFling(coordinatorLayout, child, target, velocityX, newVelocityY, newConsumed)
+        return super.onNestedFling(
+            coordinatorLayout,
+            child,
+            target,
+            velocityX,
+            newVelocityY,
+            newConsumed
+        )
     }
 
     override fun onNestedPreScroll(

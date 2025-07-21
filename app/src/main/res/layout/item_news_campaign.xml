@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/ispark_yellow_alpha"
-        app:strokeWidth="0dp">
+        app:strokeWidth="0.5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:id="@+id/gradientOverlay"
                 android:layout_width="0dp"
                 android:layout_height="260dp"
-                android:background="@drawable/gradient_overlay"
+                android:background="@drawable/background_seamless_parking"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

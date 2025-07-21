@@ -13,6 +13,7 @@ class ParkViewHolder(binding: ItemParkingBinding) : RecyclerView.ViewHolder(bind
     private val pricing = binding.tvPricing
     private val navigate = binding.btnNavigate
     private val freeMinute = binding.tvFreeMinutes
+    private val cardRoot = binding.cardParking
 
     fun bind(item: Park, onItemClick: (Park) -> Unit) {
         parkName.text = item.parkName
@@ -22,6 +23,7 @@ class ParkViewHolder(binding: ItemParkingBinding) : RecyclerView.ViewHolder(bind
         pricing.text = "Saatlik ${item.tariff} ₺" ?: "Null"
         freeMinute.text = "İlk ${item.freeTime} dk ücretsiz"
         navigate.setOnClickListener { onItemClick.invoke(item) }
+        cardRoot.setOnClickListener { onItemClick.invoke(item) }
     }
 
 

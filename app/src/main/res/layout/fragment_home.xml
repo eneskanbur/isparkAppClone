@@ -22,7 +22,8 @@
             app:layout_constraintBottom_toTopOf="@+id/btnNews"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -262,10 +263,10 @@
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorCardBackground"
+            android:backgroundTint="@color/colorMojitoBreeze"
             android:checkable="true"
             android:checked="true"
-            android:text="Haberler"
+            android:text="@string/btnNewsHome"
             android:textColor="@color/textOnPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -288,9 +289,9 @@
             android:layout_height="48dp"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorCardBackground"
+            android:backgroundTint="@color/colorMojitoBreeze"
             android:checkable="true"
-            android:text="Kampanyalar"
+            android:text="@string/btnCampaignsHome"
             android:textColor="@color/textOnPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -311,11 +312,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:paddingBottom="10dp"
             android:clipToPadding="false"
+            android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNews" />
+            app:layout_constraintTop_toBottomOf="@+id/btnNews"
+            tools:listitem="@layout/item_news_campaign" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

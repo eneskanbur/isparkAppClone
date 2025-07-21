@@ -11,8 +11,9 @@
 
     <!-- Arka Planlar -->
     <color name="colorBackground">#FFFFFF</color>     <!-- Beyaz arka plan -->
-    <color name="colorCardBackground">#FEFEFE</color> <!-- Kartlar için açık gri -->
+    <color name="colorCardBackground">#FCF5E5</color> <!-- Kartlar için açık gri -->
     <color name="colorWavyBackground">#FFF8E6</color>
+    <color name="colorMojitoBreeze">#FBFFF4</color>
 
     <color name="ispark_yellow_alpha">#33FFC107</color>
 

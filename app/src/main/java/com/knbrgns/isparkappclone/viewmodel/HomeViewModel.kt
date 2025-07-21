@@ -30,48 +30,107 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = AuthRepository(application)
 
+    private fun createMockNews(): List<News> {
+        return listOf(
+            News(
+                id = 1,
+                title = "İSPARK Yeni Otopark Alanları",
+                descriptionLong = "İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.İstanbul'da yeni otopark alanları açılıyor. Bu alanlar şehir merkezinde daha kolay park etmenizi sağlayacak.",
+                descriptionShort = "Yeni otopark alanları açılıyor",
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEhj8VZBgvInkfeuvO_WI64LPoN7DLYwGHhQ&s",
+                sDate = "15 Ocak 2025",
+                isDeleted = false
+            ),
+            News(
+                id = 2,
+                title = "Akıllı Park Sistemi Güncellendi",
+                descriptionLong = "İSPARK mobil uygulaması yeni özelliklerle güncellendi. Artık daha hızlı otopark bulabilirsiniz.",
+                descriptionShort = "Mobil uygulama güncellendi",
+                imageUrl = "https://www.kadikoylife.com/wp-content/uploads/ispark-kampanya.jpg",
+                sDate = "12 Ocak 2025",
+                isDeleted = false
+            )
+        )
+    }
+
+    private fun createMockCampaigns(): List<Campaign> {
+        return listOf(
+            Campaign(
+                id = 1,
+                title = "Yeni Kullanıcı Kampanyası",
+                descriptionLong = "İlk kullanıcılar için özel indirim kampanyası. İlk 5 park işleminizde %50 indirim fırsatı.",
+                descriptionShort = "İlk kullanıcılar için %50 indirim",
+                imageUrl = "https://cms.vodafone.com.tr/static/img/content/22-09/27/ispark_kullanimi.jpg",
+                sDate = "10 Ocak 2025",
+                isDeleted = false
+            ),
+            Campaign(
+                id = 2,
+                title = "Hafta Sonu İndirimi",
+                descriptionLong = "Hafta sonları tüm İSPARK otoparkları için özel indirim kampanyası başladı.",
+                descriptionShort = "Hafta sonları özel indirim",
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9AFaNZXu9TZ4zVGdpddwmqTKqwQRjjxmj_g&s",
+                sDate = "8 Ocak 2025",
+                isDeleted = false
+            )
+        )
+    }
+
+
     fun initialize() {
+        _news.value = createMockNews()
+        _campaign.value = createMockCampaigns()
+
         Log.d(TAG, "🚀 INITIALIZE START -> Full app flow beginning")
         _loading.value = true
 
         viewModelScope.launch {
             try {
-                // 1. Login işlemi
-                Log.d(TAG, "📍 STEP 1 -> Login attempt")
                 val loginResult = repository.login("sp", "sp")
 
                 if (loginResult.isSuccess) {
-                    Log.d(TAG, "📍 STEP 2 -> Login success, fetching data")
-
-                    // 2. News verilerini getir
                     val newsResult = repository.getNews()
                     if (newsResult.isSuccess) {
-                        _news.value = newsResult.getOrNull()
-                        Log.d(TAG, "📍 STEP 3 -> News data set to UI")
+                        val newsList = newsResult.getOrNull()
+                        if (newsList.isNullOrEmpty()) {
+                            _news.value = createMockNews()
+                            Log.d(TAG, "📍 MOCK NEWS -> Using mock data")
+                        } else {
+                            _news.value = newsList
+                            Log.d(TAG, "📍 REAL NEWS -> Using API data")
+                        }
+                    } else {
+                        _news.value = createMockNews()
+                        Log.d(TAG, "📍 ERROR NEWS -> Using mock data")
                     }
 
-                    // 3. Campaign verilerini getir
                     val campaignResult = repository.getCampaigns()
                     if (campaignResult.isSuccess) {
-                        _campaign.value = campaignResult.getOrNull()
-                        Log.d(TAG, "📍 STEP 4 -> Campaigns data set to UI")
+                        val campaignList = campaignResult.getOrNull()
+                        if (campaignList.isNullOrEmpty()) {
+                            _campaign.value = createMockCampaigns()
+                            Log.d(TAG, "📍 MOCK CAMPAIGNS -> Using mock data")
+                        } else {
+                            _campaign.value = campaignList
+                            Log.d(TAG, "📍 REAL CAMPAIGNS -> Using API data")
+                        }
+                    } else {
+                        _campaign.value = createMockCampaigns()
+                        Log.d(TAG, "📍 ERROR CAMPAIGNS -> Using mock data")
                     }
 
-                    Log.d(TAG, "🎉 INITIALIZE COMPLETE -> All data loaded successfully")
-
                 } else {
-                    val errorMessage = loginResult.exceptionOrNull()?.message ?: "Login başarısız"
-                    _error.value = errorMessage
-                    Log.e(TAG, "❌ INITIALIZE FAILED -> $errorMessage")
+                    _news.value = createMockNews()
+                    _campaign.value = createMockCampaigns()
+                    Log.d(TAG, "📍 LOGIN FAILED -> Using all mock data")
                 }
 
             } catch (e: Exception) {
-                val errorMessage = "Beklenmeyen hata: ${e.message}"
-                _error.value = errorMessage
-                Log.e(TAG, "❌ INITIALIZE ERROR -> $errorMessage")
+                _news.value = createMockNews()
+                _campaign.value = createMockCampaigns()
+                Log.d(TAG, "📍 EXCEPTION -> Using all mock data")
             } finally {
                 _loading.value = false
-                Log.d(TAG, "🏁 INITIALIZE END -> Loading completed")
             }
         }
     }
