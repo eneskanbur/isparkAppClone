@@ -5,7 +5,6 @@ import com.knbrgns.isparkappclone.local.FavoriteParkDao
 import com.knbrgns.isparkappclone.local.FavoriteParkDatabase
 import com.knbrgns.isparkappclone.model.Park
 import com.knbrgns.isparkappclone.service.Client
-import java.util.concurrent.locks.LockSupport.park
 
 class ParkRepository {
     private val parkAPI = Client.getParkService()
@@ -18,6 +17,7 @@ class ParkRepository {
     suspend fun getParks(): Result<List<Park>> {
         return try {
             val response = parkAPI.getParks()
+
             if (response.isSuccessful) {
                 Result.success(response.body() ?: emptyList())
             } else {
@@ -43,30 +43,31 @@ class ParkRepository {
         }
     }
 
-    suspend fun getFavoriteIds(): List<Int> {
+    suspend fun addToFavorites(park: Park): Result<Unit> {
         return try {
-            favoriteDb.getFavoriteParks().map { it.parkID }
+            favoriteDb.addFavoritePark(park)
+            Result.success(Unit)
         } catch (e: Exception) {
-            emptyList()
+            Result.failure(e)
         }
     }
 
-    suspend fun addToFavorites(park: Park) {
-        try {
-            favoriteDb.addFavoritePArk(park)
+    suspend fun removeFromFavorites(park: Park): Result<Unit> {
+        return try {
+            favoriteDb.deleteFavoritePark(park)
+            Result.success(Unit)
         } catch (e: Exception) {
-            // Silent fail
+            Result.failure(e)
         }
     }
 
-    suspend fun removeFromFavorites(parkId: Int) {
-        try {
-
-            favoriteDb.deleteFavoriteParkById(parkId)
+    suspend fun getFavoriteIds(): Result<List<Park>> {
+        return try {
+            val favoriteParks = favoriteDb.getFavoriteParks()
+            Result.success(favoriteParks)
         } catch (e: Exception) {
-            // Silent fail
+            Result.failure(e)
         }
     }
 
 }
-

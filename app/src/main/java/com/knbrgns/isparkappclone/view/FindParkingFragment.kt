@@ -22,18 +22,16 @@ class FindParkingFragment : Fragment() {
     private var _binding: FragmentFindParkingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FindParkingViewModel by viewModels()
-    private var allParks: List<Park> = emptyList()
-    private var favoriteIds: List<Int> = emptyList()
-    private var showOnlyFavorites = false
+    private var parkAdapter: ParkAdapter? = null
 
-    private lateinit var parkAdapter: ParkAdapter
+    private var allParks: List<Park> = emptyList()
+    private var filteredParks: List<Park> = emptyList()
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentFindParkingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,76 +41,9 @@ class FindParkingFragment : Fragment() {
 
         setupRecyclerView()
         setupSearchBar()
-        setupButtons()
         observeViewModel()
+        viewModel.loading.value = false
         viewModel.initialize()
-    }
-
-    private fun setupRecyclerView() {
-        parkAdapter = ParkAdapter(
-            onItemClick = { park -> onParkItemClick(park) },
-            onFavoriteClick = { park ->
-                viewModel.toggleFavorite(park)
-            }
-        )
-
-        binding.rvParkingResults.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = parkAdapter
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun setupButtons() {
-
-        updateButtonStates(false)
-
-        binding.btnNews.setOnClickListener {
-            showOnlyFavorites = false
-            updateButtonStates(false)
-            updateList()
-        }
-
-        binding.btnCampaigns.setOnClickListener {
-            showOnlyFavorites = true
-            updateButtonStates(true)
-            updateList()
-        }
-    }
-
-    private fun updateButtonStates(favoritesSelected: Boolean) {
-        binding.btnNews.isChecked = !favoritesSelected
-        binding.btnCampaigns.isChecked = favoritesSelected
-    }
-
-    private fun updateList() {
-        val searchText = binding.etSearch.text.toString().trim()
-
-        val filteredByFavorites = if (showOnlyFavorites) {
-            allParks.filter { favoriteIds.contains(it.parkID) }
-        } else {
-            allParks
-        }
-
-        val finalList = if (searchText.isEmpty()) {
-            filteredByFavorites
-        } else {
-            filteredByFavorites.filter { park ->
-                park.parkName.contains(searchText, ignoreCase = true) ||
-                        park.district.contains(searchText, ignoreCase = true) ||
-                        park.address?.contains(searchText, ignoreCase = true) == true
-            }
-        }
-
-        // ✅ ADAPTER'I YENİDEN OLUŞTURMA, SADECE DATA'YI GÜNCELLE
-        parkAdapter.updateData(finalList, favoriteIds)
-
-        val resultText = if (showOnlyFavorites) {
-            "${finalList.size} favori otopark"
-        } else {
-            "${finalList.size} otopark bulundu"
-        }
-        binding.tvResultsCount.text = resultText
     }
 
     private fun setupSearchBar() {
@@ -120,29 +51,70 @@ class FindParkingFragment : Fragment() {
             private var searchRunnable: Runnable? = null
 
             override fun afterTextChanged(s: Editable?) {
+
                 searchRunnable?.let { handler.removeCallbacks(it) }
-                searchRunnable = Runnable { updateList() }
+
+                searchRunnable = Runnable {
+                    val searchText = s.toString().trim()
+                    filterParks(searchText)
+                }
+
                 handler.postDelayed(searchRunnable!!, 300)
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun beforeTextChanged(
+                p0: CharSequence?,
+                p1: Int,
+                p2: Int,
+                p3: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                p0: CharSequence?,
+                p1: Int,
+                p2: Int,
+                p3: Int
+            ) {
+            }
         })
     }
 
-    private fun observeViewModel() {
-        viewModel.parkList.observe(viewLifecycleOwner) { parks ->
-            allParks = parks
-            updateList()
+    companion object {
+        private val handler = Handler(Looper.getMainLooper())
+    }
+
+
+    fun setupRecyclerView() {
+        binding.rvParkingResults.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            setHasFixedSize(true)
+        }
+    }
+
+    fun observeViewModel() {
+        viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
+            parkList.let {
+                parkAdapter = ParkAdapter(it) { selectedPark ->
+                    onParkItemClick(selectedPark)
+                }
+                binding.rvParkingResults.adapter = parkAdapter
+
+            }
         }
 
-        viewModel.favoriteIds.observe(viewLifecycleOwner) { favorites ->
-            favoriteIds = favorites
-            updateList()
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        viewModel.loading.observe(viewLifecycleOwner) { loading ->
-            binding.loadingAnimation.visibility = if (loading) View.VISIBLE else View.GONE
+        viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
+            allParks = parkList
+            filteredParks = parkList
         }
     }
 
@@ -156,7 +128,5 @@ class FindParkingFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private val handler = Handler(Looper.getMainLooper())
-    }
+
 }

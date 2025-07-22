@@ -12,7 +12,6 @@ data class Campaign(
     val descriptionLong: String,
     @SerializedName("description_Back")
     val descriptionShort: String,
-    @SerializedName("url")
     val imageUrl: String,
     val sDate: String,
     val isDeleted: Boolean

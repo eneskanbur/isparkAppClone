@@ -26,10 +26,10 @@ interface ParkAPI{
 }
 
 interface DataAPI {
-    @GET("api/news")
+    @GET("api/getnews")
     suspend fun getNews(): Response<List<News>>
 
-    @GET("api/campaign")
+    @GET("api/getcampaign")
     suspend fun getCampaigns(): Response<List<Campaign>>
 
 }

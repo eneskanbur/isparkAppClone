@@ -16,12 +16,15 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
     private val _parkList = MutableLiveData<List<Park>>()
     val parkList: MutableLiveData<List<Park>> = _parkList
 
-    private val _favoriteIds = MutableLiveData<List<Int>>()
-    val favoriteIds: MutableLiveData<List<Int>> = _favoriteIds
-
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: MutableLiveData<Boolean> = _loading
 
+    private val _favoriteParks = MutableLiveData<List<Park>>()
+    val favoriteParks: MutableLiveData<List<Park>> = _favoriteParks
+
+    init {
+        repository.initDatabase(application)
+    }
 
     fun getParks() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,33 +35,46 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
                     _parkList.postValue(result.getOrNull())
                 }
             } catch (e: Exception) {
-                // Error handling
+
             } finally {
                 _loading.postValue(false)
             }
+
         }
     }
 
+    fun addToFavorites(park: Park) {
 
-    fun loadFavorites() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val favorites = repository.getFavoriteIds()
-            _favoriteIds.postValue(favorites)
-        }
     }
 
-    fun toggleFavorite(park: Park) {
+    fun deleteFromFavorites(park: Park) {
 
+    }
+
+    fun getFavoriteParks() {
+        _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val currentFavorites = _favoriteIds.value ?: emptyList()
-
-            if (currentFavorites.contains(park.parkID)) {
-                repository.removeFromFavorites(park.parkID)
-            } else {
-                repository.addToFavorites(park)
+            val result = repository.getFavoriteParks()
+            if (result.isSuccess) {
+                _favoriteParks.postValue(result.getOrNull())
             }
+            _loading.postValue(false)
+        }
+    }
 
-            loadFavorites()
+    fun getParkWithId(parkId: Int) {
+        _loading.postValue(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = repository.getParkWithId(parkId)
+                if (result.isSuccess && result.getOrNull() != null) {
+                    _parkList.postValue(listOf(result.getOrNull() as Park))
+                }
+            } catch (e: Exception) {
+
+            } finally {
+                _loading.postValue(false)
+            }
         }
     }
 
@@ -66,6 +82,6 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
         if (_parkList.value.isNullOrEmpty()) {
             getParks()
         }
-        loadFavorites()
     }
+
 }
