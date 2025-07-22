@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.knbrgns.isparkappclone.databinding.FragmentHomeBinding
 import com.knbrgns.isparkappclone.view.adapter.CampaignAdapter
 import com.knbrgns.isparkappclone.view.adapter.NewsAdapter
-import com.knbrgns.isparkappclone.viewmodel.HomeViewModel
+import com.knbrgns.isparkappclone.view.viewmodel.HomeViewModel
 import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import com.knbrgns.isparkappclone.R
@@ -155,6 +155,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        /*viewModel.loading.observe(viewLifecycleOwner){ isLoading ->
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }*/
     }
 
     private fun onNewsItemClick(news: News) {

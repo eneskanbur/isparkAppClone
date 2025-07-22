@@ -11,7 +11,7 @@ import com.knbrgns.isparkappclone.model.Park
 
 abstract class FavoriteParkDatabase : RoomDatabase() {
 
-    abstract fun FavoriteParkDao(): FavoriteParkDao
+    abstract fun favoriteParkDao(): FavoriteParkDao
 
     companion object {
         @Volatile

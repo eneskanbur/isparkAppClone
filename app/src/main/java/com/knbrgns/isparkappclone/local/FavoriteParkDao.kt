@@ -12,11 +12,11 @@ import com.knbrgns.isparkappclone.model.Park
 interface  FavoriteParkDao {
 
     @Query("SELECT * FROM favoritePark")
-    suspend fun getFavoriteParks() : LiveData<List<Park>>
+    suspend fun getFavoriteParks() : List<Park>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavoritePArk(park: Park)
 
-    @Delete
-    suspend fun deleteFavoritePark(park: Park)
+    @Query("DELETE FROM favoritePark WHERE parkID = :parkId")
+    suspend fun deleteFavoriteParkById(parkId: Int)
 }

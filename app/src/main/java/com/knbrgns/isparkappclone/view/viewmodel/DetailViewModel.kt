@@ -1,4 +1,4 @@
-package com.knbrgns.isparkappclone.viewmodel
+package com.knbrgns.isparkappclone.view.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
