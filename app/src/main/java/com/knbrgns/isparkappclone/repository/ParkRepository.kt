@@ -28,6 +28,7 @@ class ParkRepository {
             Result.failure(e)
         }
     }
+
     private suspend fun checkFavorites(parks: List<Park>): List<Park> {
         val favoriteParks = favoriteDb.getFavoriteParks()
         val favoriteIds = favoriteParks.map { it.parkID }.toSet()
@@ -36,7 +37,6 @@ class ParkRepository {
             park.copy(isFavorite = favoriteIds.contains(park.parkID))
         }
     }
-
 
     suspend fun getParkWithId(parkId: Int): Result<Park> {
         return try {
@@ -53,15 +53,27 @@ class ParkRepository {
         }
     }
 
+    // ✅ DÜZELTME: Database'den güncel durumu kontrol et
     suspend fun toggleFavorite(park: Park): Result<Boolean> {
         return try {
-            if (park.isFavorite) {
+            // Database'den güncel durumu kontrol et
+            val currentFavorites = favoriteDb.getFavoriteParks()
+            val isCurrentlyFavorite = currentFavorites.any { it.parkID == park.parkID }
+
+            val newFavoriteState = if (isCurrentlyFavorite) {
+                // Şu an favorilerde -> Çıkar
                 favoriteDb.deleteFavoritePark(park)
+                false
             } else {
-                favoriteDb.addFavoritePark(park)
+                // Şu an favorilerde değil -> Ekle
+                favoriteDb.addFavoritePark(park.copy(isFavorite = true))
+                true
             }
-            Result.success(!park.isFavorite)
+
+            println("DEBUG: Park ${park.parkID} toggle - was: $isCurrentlyFavorite, now: $newFavoriteState")
+            Result.success(newFavoriteState)
         } catch (e: Exception) {
+            println("DEBUG: Toggle favorite exception: ${e.message}")
             Result.failure(e)
         }
     }
@@ -75,4 +87,14 @@ class ParkRepository {
         }
     }
 
+    // ✅ YENİ: Park'ın güncel favori durumunu kontrol et
+    suspend fun isParkFavorite(parkId: Int): Result<Boolean> {
+        return try {
+            val favoriteParks = favoriteDb.getFavoriteParks()
+            val isFavorite = favoriteParks.any { it.parkID == parkId }
+            Result.success(isFavorite)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
