@@ -16,11 +16,14 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
     private val _parkList = MutableLiveData<List<Park>>()
     val parkList: MutableLiveData<List<Park>> = _parkList
 
+    private val _showOnlyFavorites = MutableLiveData<Boolean>(false)
+    val showOnlyFavorites: MutableLiveData<Boolean> = _showOnlyFavorites
+
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: MutableLiveData<Boolean> = _loading
 
-    private val _favoriteParks = MutableLiveData<List<Park>>()
-    val favoriteParks: MutableLiveData<List<Park>> = _favoriteParks
+    private var allParks: List<Park> = emptyList()
+
 
     init {
         repository.initDatabase(application)
@@ -32,34 +35,68 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
             try {
                 val result = repository.getParks()
                 if (result.isSuccess) {
-                    _parkList.postValue(result.getOrNull())
+                    allParks = result.getOrNull() ?: emptyList()
+
+                    // DEBUG LOG
+                    println("DEBUG: Parks loaded, count: ${allParks.size}")
+
+                    _parkList.postValue(allParks)
+                } else {
+                    println("DEBUG: Failed to load parks")
                 }
             } catch (e: Exception) {
-
+                println("DEBUG: Exception: ${e.message}")
             } finally {
                 _loading.postValue(false)
             }
-
         }
     }
-
-    fun addToFavorites(park: Park) {
-
-    }
-
-    fun deleteFromFavorites(park: Park) {
-
-    }
-
-    fun getFavoriteParks() {
-        _loading.postValue(true)
+    fun toggleFavorite(park: Park) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.getFavoriteParks()
-            if (result.isSuccess) {
-                _favoriteParks.postValue(result.getOrNull())
+            try {
+                val result = repository.toggleFavorite(park)
+                if (result.isSuccess) {
+                    // Park listesini güncelle
+                    val updatedParks = allParks.map {
+                        if (it.parkID == park.parkID) {
+                            it.copy().apply { isFavorite = result.getOrNull() ?: false }
+                        } else it
+                    }
+                    allParks = updatedParks
+
+                    // Gösterilen listeyi güncelle
+                    if (_showOnlyFavorites.value == true) {
+                        showFavoritesOnly()
+                    } else {
+                        _parkList.postValue(allParks)
+                    }
+                }
+            } catch (e: Exception) {
+                // Hata yönetimi
             }
-            _loading.postValue(false)
         }
+    }
+
+    fun showFavoritesOnly() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _loading.postValue(true)
+            try {
+                val result = repository.getFavoriteParks()
+                if (result.isSuccess) {
+                    _parkList.postValue(result.getOrNull() ?: emptyList())
+                    _showOnlyFavorites.postValue(true)
+                }
+            } catch (e: Exception) {
+                // Hata yönetimi
+            } finally {
+                _loading.postValue(false)
+            }
+        }
+    }
+
+    fun showAllParks() {
+        _parkList.postValue(allParks)
+        _showOnlyFavorites.postValue(false)
     }
 
     fun getParkWithId(parkId: Int) {
@@ -79,7 +116,7 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun initialize() {
-        if (_parkList.value.isNullOrEmpty()) {
+        if (allParks.isEmpty()) {
             getParks()
         }
     }

@@ -118,7 +118,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNews"
+                android:id="@+id/btnAll"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -137,7 +137,7 @@
                 app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCampaigns"
+                android:id="@+id/btnFavorites"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="0dp"
                 android:layout_height="48dp"

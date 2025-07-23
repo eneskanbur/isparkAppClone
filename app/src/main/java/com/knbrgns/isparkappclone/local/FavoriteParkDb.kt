@@ -7,8 +7,7 @@ import androidx.room.RoomDatabase
 import com.knbrgns.isparkappclone.model.Park
 
 
-@Database(entities = [Park::class], version = 1, exportSchema = false)
-
+@Database(entities = [Park::class], version = 2, exportSchema = false) // version 1'den 2'ye
 abstract class FavoriteParkDatabase : RoomDatabase() {
 
     abstract fun favoriteParkDao(): FavoriteParkDao
@@ -24,15 +23,12 @@ abstract class FavoriteParkDatabase : RoomDatabase() {
                     FavoriteParkDatabase::class.java,
                     "favorite_park_database"
                 )
-                    .fallbackToDestructiveMigration(false) // Sadece development için
+                    .fallbackToDestructiveMigration()
                     .build()
 
                 INSTANCE = instance
                 instance
             }
-
         }
-
     }
-
 }

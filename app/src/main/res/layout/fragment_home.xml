@@ -19,7 +19,7 @@
             android:layout_height="260dp"
             android:layout_margin="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintBottom_toTopOf="@+id/btnNews"
+            app:layout_constraintBottom_toTopOf="@+id/btnAll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

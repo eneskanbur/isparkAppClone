@@ -2,6 +2,7 @@ package com.knbrgns.isparkappclone.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -21,8 +22,7 @@ data class Park(
     val parkType: String,
     val freeTime: Int,
     val district: String,
-
-    // Diğer nullable alanlar
+    var isFavorite: Boolean = false,
     val isOpen: Int? = null,
     val updateDate: String? = null,
     val monthlyFee: Int? = null,
