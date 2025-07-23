@@ -10,7 +10,7 @@ import com.knbrgns.isparkappclone.view.viewholder.ParkViewHolder
 class ParkAdapter(
     private var parkList: MutableList<Park>,
     private val onItemClick: (Park) -> Unit,
-    private val onFavoriteClick: (Park, Int) -> Unit // Position da gönder
+    private val onFavoriteClick: (Park, Int) -> Unit
 ) : RecyclerView.Adapter<ParkViewHolder>() {
 
     companion object {
@@ -28,14 +28,14 @@ class ParkAdapter(
         }
     }
 
-    // 💡 Payload ile sadece favori durumunu güncelle
+    // ✅ Payload ile sadece favori durumunu güncelle
     override fun onBindViewHolder(
         holder: ParkViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
         if (payloads.isNotEmpty() && payloads.contains(PAYLOAD_FAVORITE_CHANGED)) {
-            // Sadece favori ikonunu güncelle, diğer view'lara dokunma
+            // Sadece favori ikonunu güncelle, scroll pozisyonu korunur
             holder.updateFavoriteOnly(parkList[position].isFavorite)
         } else {
             super.onBindViewHolder(holder, position, payloads)
@@ -44,53 +44,67 @@ class ParkAdapter(
 
     override fun getItemCount(): Int = parkList.size
 
-    // ✅ Tek item'i güncelle (scroll pozisyonu korunur)
+    // ✅ TEK ITEM GÜNCELLEMESİ - Scroll pozisyonu korunur
     fun updateFavorite(position: Int, newFavoriteState: Boolean) {
         if (position in 0 until parkList.size) {
+            println("DEBUG: Adapter updating single item - Position: $position, New state: $newFavoriteState")
             parkList[position] = parkList[position].copy(isFavorite = newFavoriteState)
-            // Sadece o pozisyondaki item'i güncelle
+            // Sadece o pozisyondaki item'i güncelle - SCROLL KORUNUR
             notifyItemChanged(position, PAYLOAD_FAVORITE_CHANGED)
         }
     }
 
-    // ✅ Favori item'i listeden çıkar (favoriler modunda)
+    // ✅ FAVORİ ITEM ÇIKARMA - Favoriler modunda
     fun removeFavoriteItem(position: Int) {
         if (position in 0 until parkList.size) {
             parkList.removeAt(position)
             notifyItemRemoved(position)
-            // Kalan item'ların pozisyonlarını güncelle
             notifyItemRangeChanged(position, parkList.size - position)
         }
     }
 
-    // ✅ OPTIMIZED UPDATE: DiffUtil benzeri akıllı güncelleme
+    // ✅ OPTIMIZE EDİLMİŞ LISTE GÜNCELLEMESİ
     fun updateList(newList: List<Park>) {
         println("DEBUG: ParkAdapter.updateList called - New list size: ${newList.size}, Current size: ${parkList.size}")
 
-        // Eğer liste boyutu değişmediyse ve içerik büyük ölçüde aynıysa partial update yap
-        if (parkList.size == newList.size && shouldUsePartialUpdate(newList)) {
-            updatePartially(newList)
-        } else {
-            // Tam güncelleme gerekli
-            parkList.clear()
-            parkList.addAll(newList)
-            notifyDataSetChanged()
+        // ✅ AKILLI GÜNCELLEME: Boyut kontrolü
+        when {
+            // Liste tamamen boşsa
+            parkList.isEmpty() && newList.isNotEmpty() -> {
+                println("DEBUG: First time loading - using notifyDataSetChanged")
+                parkList.clear()
+                parkList.addAll(newList)
+                notifyDataSetChanged()
+            }
+
+            // Liste boyutu aynı - partial update
+            parkList.size == newList.size -> {
+                println("DEBUG: Same size - using partial update")
+                updatePartially(newList)
+            }
+
+            // Liste boyutu farklı - tam güncelleme gerekli
+            else -> {
+                println("DEBUG: Different size - using full update")
+                val oldSize = parkList.size
+                parkList.clear()
+                parkList.addAll(newList)
+
+                // ✅ Boyut farkına göre optimize notify
+                if (newList.size > oldSize) {
+                    notifyItemRangeChanged(0, oldSize)
+                    notifyItemRangeInserted(oldSize, newList.size - oldSize)
+                } else {
+                    notifyItemRangeChanged(0, newList.size)
+                    notifyItemRangeRemoved(newList.size, oldSize - newList.size)
+                }
+            }
         }
 
         println("DEBUG: ParkAdapter.updateList completed")
     }
 
-    private fun shouldUsePartialUpdate(newList: List<Park>): Boolean {
-        // İlk 10 item'ın ID'leri aynıysa partial update kullan
-        val sampleSize = minOf(10, parkList.size, newList.size)
-        for (i in 0 until sampleSize) {
-            if (parkList[i].parkID != newList[i].parkID) {
-                return false
-            }
-        }
-        return true
-    }
-
+    // ✅ KISMÎ GÜNCELLEME - Scroll pozisyonu korunur
     private fun updatePartially(newList: List<Park>) {
         println("DEBUG: Using partial update - checking individual items")
         var changedCount = 0
@@ -98,6 +112,7 @@ class ParkAdapter(
         for (i in parkList.indices) {
             if (i < newList.size && parkList[i] != newList[i]) {
                 parkList[i] = newList[i]
+                // Sadece değişen item'ları güncelle
                 notifyItemChanged(i, PAYLOAD_FAVORITE_CHANGED)
                 changedCount++
             }
@@ -106,6 +121,5 @@ class ParkAdapter(
         println("DEBUG: Partial update complete - $changedCount items changed")
     }
 
-    // ✅ Current list'i al
     fun getCurrentList(): List<Park> = parkList.toList()
 }

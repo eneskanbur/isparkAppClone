@@ -53,19 +53,15 @@ class ParkRepository {
         }
     }
 
-    // ✅ DÜZELTME: Database'den güncel durumu kontrol et
     suspend fun toggleFavorite(park: Park): Result<Boolean> {
         return try {
-            // Database'den güncel durumu kontrol et
             val currentFavorites = favoriteDb.getFavoriteParks()
             val isCurrentlyFavorite = currentFavorites.any { it.parkID == park.parkID }
 
             val newFavoriteState = if (isCurrentlyFavorite) {
-                // Şu an favorilerde -> Çıkar
                 favoriteDb.deleteFavoritePark(park)
                 false
             } else {
-                // Şu an favorilerde değil -> Ekle
                 favoriteDb.addFavoritePark(park.copy(isFavorite = true))
                 true
             }
@@ -87,14 +83,4 @@ class ParkRepository {
         }
     }
 
-    // ✅ YENİ: Park'ın güncel favori durumunu kontrol et
-    suspend fun isParkFavorite(parkId: Int): Result<Boolean> {
-        return try {
-            val favoriteParks = favoriteDb.getFavoriteParks()
-            val isFavorite = favoriteParks.any { it.parkID == parkId }
-            Result.success(isFavorite)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
 }

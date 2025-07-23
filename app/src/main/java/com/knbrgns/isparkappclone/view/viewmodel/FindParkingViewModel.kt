@@ -22,9 +22,11 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: MutableLiveData<Boolean> = _loading
 
-    // ✅ MASTER STATE: Bu listeler her zaman güncel tutulacak
+    // ✅ TEK ITEM GÜNCELLEMESİ İÇİN
+    private val _favoriteUpdate = MutableLiveData<Pair<Int, Boolean>>()
+    val favoriteUpdate: MutableLiveData<Pair<Int, Boolean>> = _favoriteUpdate
+
     private var allParks: MutableList<Park> = mutableListOf()
-    private var currentDisplayedList: MutableList<Park> = mutableListOf()
 
     init {
         repository.initDatabase(application)
@@ -36,141 +38,89 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
             try {
                 val result = repository.getParks()
                 if (result.isSuccess) {
-                    val newParks = result.getOrNull() ?: emptyList()
-
-                    // Master state'i güncelle
                     allParks.clear()
-                    allParks.addAll(newParks)
-
-                    // Current displayed list'i güncelle
-                    if (_showOnlyFavorites.value == true) {
-                        updateDisplayedListForFavorites()
-                    } else {
-                        updateDisplayedListForAll()
-                    }
-
-                    println("DEBUG: Parks loaded - Total: ${allParks.size}, Displayed: ${currentDisplayedList.size}")
-                } else {
-                    println("DEBUG: Failed to load parks")
+                    allParks.addAll(result.getOrNull() ?: emptyList())
+                    refreshDisplayList()
                 }
             } catch (e: Exception) {
-                println("DEBUG: Exception: ${e.message}")
+                // Handle error
             } finally {
                 _loading.postValue(false)
             }
         }
     }
 
-    // ✅ DISPLAY LIST MANAGEMENT
-    private fun updateDisplayedListForAll() {
-        currentDisplayedList.clear()
-        currentDisplayedList.addAll(allParks)
-
-        // ✅ Main thread'de UI güncellemesi yap
-        _parkList.postValue(currentDisplayedList.toList())
-        println("DEBUG: Updated display for ALL - Count: ${currentDisplayedList.size}")
-    }
-
-    private fun updateDisplayedListForFavorites() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val result = repository.getFavoriteParks()
-                if (result.isSuccess) {
-                    val favoriteParks = result.getOrNull() ?: emptyList()
-                    val updatedFavorites = favoriteParks.map { it.copy(isFavorite = true) }
-
-                    currentDisplayedList.clear()
-                    currentDisplayedList.addAll(updatedFavorites)
-                    _parkList.postValue(currentDisplayedList.toList())
-                    println("DEBUG: Updated display for FAVORITES - Count: ${currentDisplayedList.size}")
-                }
-            } catch (e: Exception) {
-                println("DEBUG: Error updating favorites display: ${e.message}")
-            }
-        }
-    }
-
-    // ✅ TOGGLE FAVORITE - Optimized for state preservation
     fun toggleFavorite(park: Park, position: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val result = repository.toggleFavorite(park)
-                if (result.isSuccess) {
-                    val newFavoriteState = result.getOrNull() ?: false
+            val result = repository.toggleFavorite(park)
+            if (result.isSuccess) {
+                val newState = result.getOrNull() ?: false
 
-                    println("DEBUG: Toggle result - Park: ${park.parkID}, Position: $position, New state: $newFavoriteState")
+                // Master listeyi güncelle
+                updateParkInList(park.parkID, newState)
 
-                    // Master state'i güncelle
-                    updateMasterState(park.parkID, newFavoriteState)
-
-                    // ✅ STATE PRESERVATION: Listeyi güncelle (blink yok - sadece data değişir)
-                    if (_showOnlyFavorites.value == true) {
-                        // Favoriler modunda - listeyi yenile
-                        updateDisplayedListForFavorites()
-                    } else {
-                        // Tümü modunda - listeyi yenile
-                        updateDisplayedListForAll()
-                    }
+                if (_showOnlyFavorites.value == true && !newState) {
+                    // Favorilerden çıkarıldı - listeyi yenile
+                    refreshDisplayList()
+                } else {
+                    // Sadece tek item güncelle
+                    _favoriteUpdate.postValue(Pair(position, newState))
                 }
-            } catch (e: Exception) {
-                println("DEBUG: Toggle favorite error: ${e.message}")
             }
         }
     }
 
-    private fun updateMasterState(parkID: Int, newFavoriteState: Boolean) {
-        val parkIndex = allParks.indexOfFirst { it.parkID == parkID }
-        if (parkIndex != -1) {
-            allParks[parkIndex] = allParks[parkIndex].copy(isFavorite = newFavoriteState)
-            println("DEBUG: Updated master state - Park: $parkID, New state: $newFavoriteState")
-        }
-    }
-
-    // ✅ TAB SWITCHING
     fun showFavoritesOnly() {
-        _loading.postValue(true)
         _showOnlyFavorites.postValue(true)
-        updateDisplayedListForFavorites()
-        _loading.postValue(false)
+        refreshDisplayList()
     }
 
     fun showAllParks() {
         _showOnlyFavorites.postValue(false)
-        updateDisplayedListForAll()
+        refreshDisplayList()
     }
 
-    // ✅ RESTORE DISPLAY - Navigation'dan dönüldüğünde
-    fun restoreDisplay() {
-        println("DEBUG: Restoring display - Current mode: ${if (_showOnlyFavorites.value == true) "FAVORITES" else "ALL"}")
-        println("DEBUG: Master state - AllParks: ${allParks.size}, CurrentDisplay: ${currentDisplayedList.size}")
-
-        if (currentDisplayedList.isEmpty() && allParks.isNotEmpty()) {
-            // Eğer displayed list boşsa ve master list doluysa, restore et
-            if (_showOnlyFavorites.value == true) {
-                updateDisplayedListForFavorites()
-            } else {
-                updateDisplayedListForAll()
-            }
-        } else {
-            // Mevcut displayed list'i tekrar emit et
-            _parkList.postValue(currentDisplayedList.toList())
-            println("DEBUG: Re-emitted current display list - Count: ${currentDisplayedList.size}")
-        }
-    }
-
-    // ✅ INITIALIZATION
     fun initialize() {
+        println("DEBUG: initialize called - allParks.size: ${allParks.size}")
         if (allParks.isEmpty()) {
-            println("DEBUG: Initializing - Loading parks")
             getParks()
         } else {
-            println("DEBUG: Already initialized - Restoring display")
+            // ✅ Data varsa tekrar göster
             restoreDisplay()
         }
     }
 
-    // ✅ GET CURRENT STATE
-    fun getCurrentListSize(): Int = currentDisplayedList.size
+    // ✅ GERİ GELİNDİĞİNDE RESTORE
+    fun restoreDisplay() {
+        println("DEBUG: restoreDisplay called - allParks.size: ${allParks.size}")
+        if (allParks.isNotEmpty()) {
+            refreshDisplayList()
+        } else {
+            // ✅ Eğer allParks boşsa tekrar yükle
+            println("DEBUG: allParks empty, reloading...")
+            getParks()
+        }
+    }
 
-    fun isShowingFavorites(): Boolean = _showOnlyFavorites.value == true
+    // ✅ SADECE 2 HELPER FUNCTION
+    private fun refreshDisplayList() {
+        println("DEBUG: refreshDisplayList called - Favorites mode: ${_showOnlyFavorites.value}")
+        viewModelScope.launch(Dispatchers.IO) {
+            val displayList = if (_showOnlyFavorites.value == true) {
+                val favorites = repository.getFavoriteParks()
+                favorites.getOrNull()?.map { it.copy(isFavorite = true) } ?: emptyList()
+            } else {
+                allParks.toList()
+            }
+            println("DEBUG: Posting ${displayList.size} items to parkList")
+            _parkList.postValue(displayList)
+        }
+    }
+
+    private fun updateParkInList(parkID: Int, newState: Boolean) {
+        val index = allParks.indexOfFirst { it.parkID == parkID }
+        if (index != -1) {
+            allParks[index] = allParks[index].copy(isFavorite = newState)
+        }
+    }
 }

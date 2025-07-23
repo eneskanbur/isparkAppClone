@@ -23,9 +23,7 @@ class FindParkingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: FindParkingViewModel by navGraphViewModels(R.id.nav_graph)
-
     private var parkAdapter: ParkAdapter? = null
-    private var recyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,135 +35,120 @@ class FindParkingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("DEBUG: FindParkingFragment - onViewCreated")
 
         setupRecyclerView()
         setupButtons()
-        observeViewModel()
-
-        // ✅ STATE MANAGEMENT: ViewModel initialize edilirse data zaten var
+        observeViewModel() // Observer'lar butonları otomatik güncelleyecek
         viewModel.initialize()
     }
 
-    // ✅ SCROLL STATE SAVE: Fragment destroy edilmeden önce state kaydet
     override fun onDestroyView() {
         super.onDestroyView()
-
-        // RecyclerView scroll state'ini kaydet
-        recyclerViewState = binding.rvParkingResults.layoutManager?.onSaveInstanceState()
-        println("DEBUG: ScrollView state saved on destroy")
-
-        // Adapter'ı null yapma - ViewModel state korunuyor
-        parkAdapter = null
+        // ✅ Adapter'ı null yapma - navigation'da state korunsun
+        // parkAdapter = null  <-- KALDIRDIK
         _binding = null
     }
 
-    // ✅ onResume basitleştirildi - state korunuyor
+    // ✅ GERİ GELİNDİĞİNDE RESTORE
     override fun onResume() {
         super.onResume()
-        println("DEBUG: FindParkingFragment - onResume")
+        println("DEBUG: onResume - Restoring display")
 
-        // Navigation-safe ViewModel sayesinde data zaten korunuyor
-        // Gereksiz restore işlemi yok
+        // ✅ Adapter null olduysa yeniden bağla
+        if (binding.rvParkingResults.adapter == null && parkAdapter != null) {
+            println("DEBUG: Re-attaching adapter to RecyclerView")
+            binding.rvParkingResults.adapter = parkAdapter
+        }
+
+        viewModel.restoreDisplay()
     }
 
     private fun setupRecyclerView() {
-        binding.rvParkingResults.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-        }
+        binding.rvParkingResults.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun setupButtons() {
-        updateButtonStates(showingFavorites = false)
-
         binding.btnAll.setOnClickListener {
-            println("DEBUG: All button clicked")
-            updateButtonStates(showingFavorites = false)
             viewModel.showAllParks()
+            // updateButtonStates artık gerekmiyor - observer otomatik yapar
         }
 
         binding.btnFavorites.setOnClickListener {
-            println("DEBUG: Favorites button clicked")
-            updateButtonStates(showingFavorites = true)
             viewModel.showFavoritesOnly()
+            // updateButtonStates artık gerekmiyor - observer otomatik yapar
         }
     }
 
     private fun updateButtonStates(showingFavorites: Boolean) {
+        val selectedColor = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
+        val unselectedColor = ContextCompat.getColorStateList(requireContext(), R.color.colorCardBackground)
+        val selectedText = ContextCompat.getColor(requireContext(), R.color.textOnPrimary)
+        val unselectedText = ContextCompat.getColor(requireContext(), R.color.textSecondary)
+
         if (showingFavorites) {
-            binding.btnFavorites.apply {
-                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.textOnPrimary))
-            }
-            binding.btnAll.apply {
-                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.colorCardBackground)
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondary))
-            }
+            binding.btnFavorites.backgroundTintList = selectedColor
+            binding.btnFavorites.setTextColor(selectedText)
+            binding.btnAll.backgroundTintList = unselectedColor
+            binding.btnAll.setTextColor(unselectedText)
         } else {
-            binding.btnAll.apply {
-                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.textOnPrimary))
-            }
-            binding.btnFavorites.apply {
-                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.colorCardBackground)
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondary))
-            }
+            binding.btnAll.backgroundTintList = selectedColor
+            binding.btnAll.setTextColor(selectedText)
+            binding.btnFavorites.backgroundTintList = unselectedColor
+            binding.btnFavorites.setTextColor(unselectedText)
         }
     }
 
     private fun observeViewModel() {
-        // ✅ Liste güncellemeleri
+        // ✅ LISTE GÜNCELLEMELERİ
         viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
-            println("DEBUG: ParkList observer triggered - Count: ${parkList.size}")
+            println("DEBUG: parkList observer - Size: ${parkList.size}")
 
             if (parkList.isEmpty()) {
-                println("DEBUG: WARNING - Park list is empty!")
-                binding.rvParkingResults.visibility = View.GONE
+                println("DEBUG: Park list is EMPTY!")
                 binding.tvResultsCount.text = "0 Otopark Bulundu"
                 return@observe
             }
 
-            binding.rvParkingResults.visibility = View.VISIBLE
-
-            // ✅ BASIT ÇÖZÜM: Her seferinde yeni adapter oluştur
-            println("DEBUG: Creating fresh adapter with ${parkList.size} items")
-            parkAdapter = ParkAdapter(
-                parkList = parkList.toMutableList(),
-                onItemClick = { park -> onParkItemClick(park) },
-                onFavoriteClick = { park, position ->
-                    println("DEBUG: Heart clicked - Park: ${park.parkID}, Position: $position")
-                    viewModel.toggleFavorite(park, position)
-                }
-            )
-            binding.rvParkingResults.adapter = parkAdapter
-            println("DEBUG: Fresh adapter set to RecyclerView - ItemCount: ${parkAdapter?.itemCount}")
-
             binding.tvResultsCount.text = "${parkList.size} Otopark Bulundu"
+
+            if (parkAdapter == null) {
+                println("DEBUG: Creating NEW adapter")
+                // İlk kere adapter oluştur
+                parkAdapter = ParkAdapter(
+                    parkList = parkList.toMutableList(),
+                    onItemClick = { park ->
+                        findNavController().navigate(
+                            FindParkingFragmentDirections.actionNavFindParkingToParkDetailFragment()
+                        )
+                    },
+                    onFavoriteClick = { park, position ->
+                        viewModel.toggleFavorite(park, position)
+                    }
+                )
+                binding.rvParkingResults.adapter = parkAdapter
+            } else {
+                println("DEBUG: Updating existing adapter")
+                // Mevcut adapter'ı güncelle
+                parkAdapter?.updateList(parkList)
+            }
         }
 
-        // ✅ Tek item güncelleme - Artık gerekmiyor (her seferinde yeni adapter)
+        // ✅ BUTON DURUMLARI - OTOMATIK GÜNCELLEME
+        viewModel.showOnlyFavorites.observe(viewLifecycleOwner) { showingFavorites ->
+            println("DEBUG: Button state update - Showing favorites: $showingFavorites")
+            updateButtonStates(showingFavorites)
+        }
 
+        // ✅ TEK ITEM GÜNCELLEMESİ
+        viewModel.favoriteUpdate.observe(viewLifecycleOwner) { (position, newState) ->
+            println("DEBUG: favoriteUpdate - Position: $position, State: $newState")
+            parkAdapter?.updateFavorite(position, newState)
+        }
 
-        // ✅ Loading durumu
+        // ✅ LOADING
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             println("DEBUG: Loading state: $isLoading")
             binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
-
-    private fun onParkItemClick(park: Park) {
-        println("DEBUG: Park item clicked - ID: ${park.parkID}, Name: ${park.parkName}")
-
-        // ✅ NAVIGATION: Park objesini argument olarak geç
-        val action = FindParkingFragmentDirections
-            .actionNavFindParkingToParkDetailFragment()
-        findNavController().navigate(action)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        println("DEBUG: FindParkingFragment - onPause")
-    }
-
 }
