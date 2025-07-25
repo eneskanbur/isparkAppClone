@@ -1,11 +1,16 @@
 package com.knbrgns.isparkappclone.view
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,23 +43,20 @@ class FindParkingFragment : Fragment() {
 
         setupRecyclerView()
         setupButtons()
-        observeViewModel() // Observer'lar butonları otomatik güncelleyecek
+        setupSearchView()
+        observeViewModel()
         viewModel.initialize()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // ✅ Adapter'ı null yapma - navigation'da state korunsun
-        // parkAdapter = null  <-- KALDIRDIK
         _binding = null
     }
 
-    // ✅ GERİ GELİNDİĞİNDE RESTORE
     override fun onResume() {
         super.onResume()
         println("DEBUG: onResume - Restoring display")
 
-        // ✅ Adapter null olduysa yeniden bağla
         if (binding.rvParkingResults.adapter == null && parkAdapter != null) {
             println("DEBUG: Re-attaching adapter to RecyclerView")
             binding.rvParkingResults.adapter = parkAdapter
@@ -70,12 +72,10 @@ class FindParkingFragment : Fragment() {
     private fun setupButtons() {
         binding.btnAll.setOnClickListener {
             viewModel.showAllParks()
-            // updateButtonStates artık gerekmiyor - observer otomatik yapar
         }
 
         binding.btnFavorites.setOnClickListener {
             viewModel.showFavoritesOnly()
-            // updateButtonStates artık gerekmiyor - observer otomatik yapar
         }
     }
 
@@ -98,8 +98,36 @@ class FindParkingFragment : Fragment() {
         }
     }
 
+    private fun setupSearchView() {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val searchText = s.toString().trim()
+                viewModel.searchParks(searchText)
+            }
+        })
+
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                hideKeyboard()
+                true
+            } else false
+        }
+
+        binding.ivSearchIcon.setOnClickListener {
+            val query = binding.etSearch.text.toString().trim()
+            viewModel.searchParks(query)
+            hideKeyboard()
+        }
+    }
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+    }
+
     private fun observeViewModel() {
-        // ✅ LISTE GÜNCELLEMELERİ
         viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
             println("DEBUG: parkList observer - Size: ${parkList.size}")
 
@@ -113,12 +141,11 @@ class FindParkingFragment : Fragment() {
 
             if (parkAdapter == null) {
                 println("DEBUG: Creating NEW adapter")
-                // İlk kere adapter oluştur
                 parkAdapter = ParkAdapter(
                     parkList = parkList.toMutableList(),
                     onItemClick = { park ->
                         findNavController().navigate(
-                            FindParkingFragmentDirections.actionNavFindParkingToParkDetailFragment()
+                            FindParkingFragmentDirections.actionNavFindParkingToParkDetailFragment(park)
                         )
                     },
                     onFavoriteClick = { park, position ->
@@ -133,19 +160,17 @@ class FindParkingFragment : Fragment() {
             }
         }
 
-        // ✅ BUTON DURUMLARI - OTOMATIK GÜNCELLEME
+
         viewModel.showOnlyFavorites.observe(viewLifecycleOwner) { showingFavorites ->
             println("DEBUG: Button state update - Showing favorites: $showingFavorites")
             updateButtonStates(showingFavorites)
         }
 
-        // ✅ TEK ITEM GÜNCELLEMESİ
         viewModel.favoriteUpdate.observe(viewLifecycleOwner) { (position, newState) ->
             println("DEBUG: favoriteUpdate - Position: $position, State: $newState")
             parkAdapter?.updateFavorite(position, newState)
         }
 
-        // ✅ LOADING
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             println("DEBUG: Loading state: $isLoading")
             binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE

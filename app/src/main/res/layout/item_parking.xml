@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +8,6 @@
     android:paddingEnd="8dp"
     android:paddingBottom="12dp">
 
-    <!-- Ana Otopark Kartı -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardParking"
         android:layout_width="0dp"
@@ -20,8 +18,8 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
         app:cardMaxElevation="4dp"
-        app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,15 +31,14 @@
             android:layout_height="wrap_content"
             android:padding="20dp">
 
-            <!-- Park Icon Container -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/iconContainer"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
+                android:translationX="2dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                android:translationX="2dp"
                 app:cardMaxElevation="2dp"
                 app:cardUseCompatPadding="false"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +55,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Status Badge (Uygun/Dolu) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/statusBadge"
                 android:layout_width="wrap_content"
@@ -105,7 +101,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Park İsmi -->
             <TextView
                 android:id="@+id/tvParkName"
                 android:layout_width="0dp"
@@ -124,7 +119,6 @@
                 app:layout_constraintTop_toTopOf="@+id/iconContainer"
                 tools:text="Taksim Meydanı Otoparkı" />
 
-            <!-- Adres/Bölge -->
             <TextView
                 android:id="@+id/tvParkAddress"
                 android:layout_width="0dp"
@@ -141,7 +135,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvParkName"
                 tools:text="Beyoğlu, İstanbul" />
 
-            <!-- Alt Bilgiler Container -->
             <LinearLayout
                 android:id="@+id/infoContainer"
                 android:layout_width="0dp"
@@ -152,14 +145,12 @@
                 app:layout_constraintStart_toStartOf="@+id/iconContainer"
                 app:layout_constraintTop_toBottomOf="@+id/iconContainer">
 
-                <!-- Ücretsiz Dakika + Mesafe -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!-- Ücretsiz Dakika -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -168,25 +159,25 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/ic_clock"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_parking"
                             app:tint="@color/colorPrimary" />
 
                         <TextView
-                            android:id="@+id/tvFreeMinutes"
+                            android:id="@+id/tvParkType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:fontFamily="sans-serif"
-                            android:text="İlk 30 dk ücretsiz"
                             android:textColor="@color/textSecondary"
                             android:textSize="13sp"
-                            tools:text="İlk 30 dk ücretsiz" />
+                            android:textStyle="bold"
+                            tools:text="Açık Otopark" />
+
 
                     </LinearLayout>
 
-                    <!-- Mesafe -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,8 +185,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:src="@drawable/ic_location"
                             app:tint="@color/colorPrimary" />
 
@@ -215,7 +206,6 @@
 
                 </LinearLayout>
 
-                <!-- Fiyat + Navigasyon + Favori -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -223,7 +213,6 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!-- Fiyat Bilgisi -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -232,22 +221,25 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:id="@+id/ivFreeMinutes"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_wallet"
                             app:tint="@color/colorPrimary" />
 
                         <TextView
-                            android:id="@+id/tvPricing"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvFreeMinutes"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
+                            android:maxLines="2"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Saatlik 15 ₺"
+                            android:text="İlk 30 dk ücretsiz"
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            tools:text="Saatlik 15 ₺" />
+                            tools:text="İlk 30 dk ücretsiz" />
+
 
                     </LinearLayout>
 
@@ -259,8 +251,8 @@
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@android:color/transparent"
                         app:cornerRadius="22dp"
-                        app:iconGravity="textStart"
                         app:icon="@drawable/ic_heart"
+                        app:iconGravity="textStart"
                         app:iconSize="22dp"
                         app:iconTint="@color/red"
                         app:rippleColor="@color/ispark_yellow_alpha"
@@ -273,10 +265,10 @@
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:backgroundTint="@color/colorPrimary"
-                        app:cornerRadius="14dp"
                         android:elevation="2dp"
-                        app:iconGravity="textStart"
+                        app:cornerRadius="14dp"
                         app:icon="@drawable/ic_direction"
+                        app:iconGravity="textStart"
                         app:iconSize="20dp"
                         app:iconTint="@color/black"
                         app:rippleColor="@color/colorPrimaryDark" />

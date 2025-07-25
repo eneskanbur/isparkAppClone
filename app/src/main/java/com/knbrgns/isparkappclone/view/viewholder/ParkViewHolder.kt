@@ -1,5 +1,6 @@
 package com.knbrgns.isparkappclone.view.viewholder
 
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.knbrgns.isparkappclone.R
@@ -15,8 +16,14 @@ class ParkViewHolder(
         binding.tvParkName.text = item.parkName
         binding.tvAvailableSpots.text = "${item.emptyCapacity} boş"
         binding.tvParkAddress.text = item.district ?: item.address
-        binding.tvPricing.text = "Saatlik ${item.tariff ?: "15"} ₺"
-        binding.tvFreeMinutes.text = "İlk ${item.freeTime} dk ücretsiz"
+        binding.tvParkType.text = item.parkType
+        if (item.freeTime != 0){
+            binding.tvFreeMinutes.text = "İlk ${item.freeTime} dk ücretsiz"
+        }else{
+            binding.tvFreeMinutes.text = "Ücretsiz dakika avantajı yok"
+           /* binding.tvFreeMinutes.visibility = View.GONE
+            binding.ivFreeMinutes.visibility = View.GONE*/
+        }
         binding.tvDistance.text = "Null"
 
         updateFavoriteIcon(item.isFavorite)

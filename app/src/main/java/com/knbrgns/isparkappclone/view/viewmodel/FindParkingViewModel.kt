@@ -16,13 +16,15 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
     private val _parkList = MutableLiveData<List<Park>>()
     val parkList: MutableLiveData<List<Park>> = _parkList
 
+    private val _searchQuery = MutableLiveData<String>("")
+    val searchQuery: MutableLiveData<String> = _searchQuery
+
     private val _showOnlyFavorites = MutableLiveData<Boolean>(false)
     val showOnlyFavorites: MutableLiveData<Boolean> = _showOnlyFavorites
 
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: MutableLiveData<Boolean> = _loading
 
-    // ✅ TEK ITEM GÜNCELLEMESİ İÇİN
     private val _favoriteUpdate = MutableLiveData<Pair<Int, Boolean>>()
     val favoriteUpdate: MutableLiveData<Pair<Int, Boolean>> = _favoriteUpdate
 
@@ -56,28 +58,48 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
             if (result.isSuccess) {
                 val newState = result.getOrNull() ?: false
 
-                // Master listeyi güncelle
                 updateParkInList(park.parkID, newState)
 
-                if (_showOnlyFavorites.value == true && !newState) {
-                    // Favorilerden çıkarıldı - listeyi yenile
+                val currentQuery = _searchQuery.value ?: ""
+                if (currentQuery.isNotBlank()) {
+                    // ✅ Main thread'e geç - UI güncelleme için
+                    viewModelScope.launch(Dispatchers.Main) {
+                        searchParks(currentQuery)
+                    }
+                } else if (_showOnlyFavorites.value == true && !newState) {
                     refreshDisplayList()
                 } else {
-                    // Sadece tek item güncelle
                     _favoriteUpdate.postValue(Pair(position, newState))
                 }
             }
         }
     }
 
+    fun clearSearch() {
+        _searchQuery.value = ""
+        refreshDisplayList()
+    }
+
     fun showFavoritesOnly() {
         _showOnlyFavorites.postValue(true)
-        refreshDisplayList()
+
+        val currentQuery = _searchQuery.value ?: ""
+        if (currentQuery.isNotBlank()) {
+            searchParks(currentQuery)
+        } else {
+            refreshDisplayList()
+        }
     }
 
     fun showAllParks() {
         _showOnlyFavorites.postValue(false)
-        refreshDisplayList()
+
+        val currentQuery = _searchQuery.value ?: ""
+        if (currentQuery.isNotBlank()) {
+            searchParks(currentQuery)
+        } else {
+            refreshDisplayList()
+        }
     }
 
     fun initialize() {
@@ -85,24 +107,21 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
         if (allParks.isEmpty()) {
             getParks()
         } else {
-            // ✅ Data varsa tekrar göster
+
             restoreDisplay()
         }
     }
 
-    // ✅ GERİ GELİNDİĞİNDE RESTORE
     fun restoreDisplay() {
         println("DEBUG: restoreDisplay called - allParks.size: ${allParks.size}")
         if (allParks.isNotEmpty()) {
             refreshDisplayList()
         } else {
-            // ✅ Eğer allParks boşsa tekrar yükle
             println("DEBUG: allParks empty, reloading...")
             getParks()
         }
     }
 
-    // ✅ SADECE 2 HELPER FUNCTION
     private fun refreshDisplayList() {
         println("DEBUG: refreshDisplayList called - Favorites mode: ${_showOnlyFavorites.value}")
         viewModelScope.launch(Dispatchers.IO) {
@@ -123,4 +142,36 @@ class FindParkingViewModel(application: Application) : AndroidViewModel(applicat
             allParks[index] = allParks[index].copy(isFavorite = newState)
         }
     }
+
+    fun searchParks(query: String) {
+        println("DEBUG: Search query: '$query'")
+        _searchQuery.postValue(query) // ✅ setValue -> postValue
+
+        if (query.isBlank()) {
+            refreshDisplayList()
+            return
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val filtered = allParks.filter { park ->
+                park.parkName.contains(query, ignoreCase = true) ||
+                        park.district.contains(query, ignoreCase = true) ||
+                        (park.address?.contains(query, ignoreCase = true) ?: false)
+            }
+
+            val finalFiltered = if (_showOnlyFavorites.value == true) {
+                val favoritesResult = repository.getFavoriteParks()
+                val favoriteIds =
+                    favoritesResult.getOrNull()?.map { it.parkID }?.toSet() ?: emptySet()
+                filtered.filter { favoriteIds.contains(it.parkID) }
+                    .map { it.copy(isFavorite = true) }
+            } else {
+                filtered
+            }
+
+            println("DEBUG: Search '$query' - Found: ${finalFiltered.size}/${allParks.size}")
+            _parkList.postValue(finalFiltered)
+        }
+    }
+
 }

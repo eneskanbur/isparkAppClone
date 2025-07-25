@@ -47,5 +47,9 @@
         android:id="@+id/parkDetailFragment"
         android:name="com.knbrgns.isparkappclone.view.ParkDetailFragment"
         android:label="fragment_park_detail"
-        tools:layout="@layout/fragment_park_detail" />
+        tools:layout="@layout/fragment_park_detail" >
+        <argument
+            android:name="park"
+            app:argType="com.knbrgns.isparkappclone.model.Park" />
+    </fragment>
 </navigation>
