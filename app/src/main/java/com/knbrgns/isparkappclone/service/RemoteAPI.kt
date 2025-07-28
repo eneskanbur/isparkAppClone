@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface AuthAPI {
@@ -21,8 +22,8 @@ interface ParkAPI{
     @GET("Park")
     suspend fun getParks(): Response<List<Park>>
 
-    @GET("ParkDetay?id={parkID}")
-    suspend fun getParkWithId(@Path("parkID") parkID: Int): Response<Park>
+    @GET("ParkDetay")
+    suspend fun getParkWithId(@Query("id") parkID: Int): Response<List<Park>>
 }
 
 interface DataAPI {

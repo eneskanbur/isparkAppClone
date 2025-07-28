@@ -62,6 +62,7 @@
 
     <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="340dp"
@@ -69,11 +70,11 @@
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="24dp">
 
-            <!-- Park Info Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/parkInfoCard"
                 android:layout_width="0dp"
@@ -173,14 +174,14 @@
                         android:id="@+id/tvAddress"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/margin_xsmall"
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/textSecondary"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/parkIconContainer"
-                        app:layout_constraintTop_toBottomOf="@+id/parkIconContainer"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDistrict"
                         tools:text="TOPKAPI MH.ARPA EMİNİ MAHALLESİ GUREBA HASTANESİ CADDESİ" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -230,7 +231,22 @@
                             app:tint="@color/colorPrimary" />
 
                         <TextView
-                            android:id="@+id/tvCapacityValue"
+                            android:id="@+id/tvEmptyCapacityHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Boş Park Yeri"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivCapacityIcon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/tvEmptyCapacity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -238,9 +254,10 @@
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/ivCapacityIcon"
-                            tools:text="Boş Yer: 396" />
+                            tools:text="396" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -274,6 +291,21 @@
                             app:tint="@color/colorPrimary" />
 
                         <TextView
+                            android:id="@+id/tvWorkHoursHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Çalışma Saati"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivTimeIcon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                        </TextView>
+
+                        <TextView
                             android:id="@+id/tvWorkHours"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -282,9 +314,10 @@
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/ivTimeIcon"
-                            tools:text="Çalışma Saati: 24 Saat" />
+                            tools:text="24 Saat" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -318,7 +351,9 @@
                         android:id="@+id/tvPricingTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:text="Ücretlendirme"
+
                         android:textColor="@color/textPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -338,8 +373,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvPricingTitle">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@drawable/ic_clock"
                             app:tint="@color/colorPrimary" />
 
@@ -367,8 +402,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/freeTimeLayout">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="top"
                             android:src="@drawable/ic_wallet"
                             app:tint="@color/colorPrimary" />
 
@@ -376,20 +412,21 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_weight="1"
+                            android:layout_gravity="top"
                             android:text="Aylık Abonelik"
+                            android:layout_weight="1"
                             android:textColor="@color/textPrimary"
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvMonthlyFee"
+                            android:id="@+id/tvtariff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:textColor="@color/textPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            tools:text="3.900 ₺" />
+                            tools:text="0-1 Saat : 100,00\n1-2 Saat : 130,00\n2-4 Saat : 160,00\n4-8 Saat : 200,00\n8-12 Saat : 260,00\nTam Gün : 400,00" />
 
                     </LinearLayout>
 
@@ -405,8 +442,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/monthlyFeeLayout">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@drawable/ic_parking"
                             app:tint="@color/colorPrimary" />
 
@@ -435,8 +472,22 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingAnimation"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_anim" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

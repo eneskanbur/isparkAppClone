@@ -172,7 +172,6 @@ class FindParkingFragment : Fragment() {
         }
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            println("DEBUG: Loading state: $isLoading")
             binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }

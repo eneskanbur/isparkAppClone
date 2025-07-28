@@ -42,8 +42,11 @@ class ParkRepository {
         return try {
             val response = parkAPI.getParkWithId(parkId)
             if (response.isSuccessful) {
-                response.body()?.let {
-                    Result.success(it)
+                response.body()?.let { park ->
+                    val favoriteParks = favoriteDb.getFavoriteParks()
+                    val isFavorite = favoriteParks.any { it.parkID == park.first().parkID }
+
+                    Result.success(park.first().copy(isFavorite = isFavorite))
                 } ?: Result.failure(Exception("Park bulunamadı"))
             } else {
                 Result.failure(Exception("Park detayı alınamadı"))
