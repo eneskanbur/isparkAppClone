@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.databinding.FragmentParkDetailBinding
 import com.knbrgns.isparkappclone.model.Park
@@ -48,6 +51,7 @@ class ParkDetailFragment : Fragment() {
             park = detailedPark
             detailedPark?.let {
                 setupParkInfo()
+                setupMapView()
             }
         }
 
@@ -62,16 +66,12 @@ class ParkDetailFragment : Fragment() {
         }
     }
 
-    private fun openMapsForDirections(lat: Double, lng: Double) {
+    private fun showDirectionsToParking(lat: Double, lng: Double) {
         try {
-            val uri = "google.navigation:q=$lat,$lng"
+            val uri = "https://www.google.com/maps/dir/?api=1&destination=$lat,$lng&travelmode=driving"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            intent.setPackage("com.google.android.apps.maps")
             startActivity(intent)
         } catch (e: Exception) {
-            val uri = "https://maps.google.com/maps?daddr=$lat,$lng"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            startActivity(intent)
         }
     }
 
@@ -97,6 +97,41 @@ class ParkDetailFragment : Fragment() {
                 tvParkType.text = park.parkType
             }
         }
+
+    private fun setupMapView() {
+        val latStr = park.lat
+        val lngStr = park.lng
+
+        val lat = latStr.toDoubleOrNull() ?: 0.0
+        val lng = lngStr.toDoubleOrNull() ?: 0.0
+
+        if (lat == 0.0 || lng == 0.0) {
+            binding.mapPlaceholder.setImageResource(R.drawable.ic_location)
+            return
+        }
+
+        val osmMapUrl = "https://www.openstreetmap.org/export/embed.html?" +
+                "bbox=${lng-0.005},${lat-0.005},${lng+0.005},${lat+0.005}" +
+                "&layer=mapnik" +
+                "&marker=$lat,$lng"
+
+        binding.mapPlaceholder.visibility = View.GONE
+
+        val webView = WebView(requireContext()).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            settings.javaScriptEnabled = true
+            loadUrl(osmMapUrl)
+        }
+
+        (binding.mapPlaceholder.parent as ViewGroup).addView(webView)
+
+        binding.fabDirections.setOnClickListener {
+            showDirectionsToParking(lat, lng)
+        }
+    }
 
 
     override fun onDestroyView() {
