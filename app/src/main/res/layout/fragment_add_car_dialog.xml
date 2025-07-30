@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:padding="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        app:cardBackgroundColor="@color/colorCardBackground"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_overlay"
+            android:padding="24dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerSection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iconCard"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:translationX="2dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_car"
+                        app:tint="@color/black" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tvDialogTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Yeni Araç Ekle"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvDialogSubtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iconCard"
+                    app:layout_constraintTop_toTopOf="@+id/iconCard"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/tvDialogSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Araç bilgilerinizi girin"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconCard"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvDialogTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDialogTitle" />
+
+                <!-- Form Section (moved inside header's container but constrained below it) -->
+                <LinearLayout
+                    android:id="@+id/formSection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iconCard">
+
+                    <!-- Car Name Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCarName"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Araç Adı"
+                        android:textColorHint="@color/textSecondary"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:boxStrokeWidth="2dp"
+                        app:hintTextColor="@color/textOnPrimary"
+                        app:startIconCheckable="false"
+                        app:startIconContentDescription="Araç Adı Ikonu"
+                        app:startIconDrawable="@drawable/ic_car_name_inset"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCarName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
+                            android:minHeight="56dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- License Plate Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPlate"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Plaka"
+                        android:textColorHint="@color/textSecondary"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:boxStrokeWidth="2dp"
+                        app:helperText="Örnek: 34 ABC 123"
+                        app:helperTextTextColor="@color/textSecondary"
+                        app:hintTextColor="@color/textOnPrimary"
+                        app:startIconCheckable="false"
+                        app:startIconContentDescription="Plaka Ikonu"
+                        app:startIconDrawable="@drawable/ic_licence_plate_inset"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPlate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapCharacters"
+                            android:maxLines="1"
+                            android:minHeight="56dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCarType"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Araç Tipi"
+                        android:textColorHint="@color/textSecondary"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:boxStrokeWidth="2dp"
+                        app:startIconCheckable="false"
+                        app:hintTextColor="@color/textOnPrimary"
+                        app:startIconContentDescription="Araç Tipi Ikonu"
+                        app:startIconDrawable="@drawable/ic_car_type"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/actvCarType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="none"
+                            android:minHeight="56dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="16sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <!-- Action Buttons -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formSection">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancel"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:minHeight="48dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:text="İptal"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="16sp"
+                        app:cornerRadius="14dp"
+                        app:rippleColor="@color/ispark_yellow_alpha"
+                        app:strokeWidth="1dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:minHeight="48dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:text="Kaydet"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="14dp"
+                        app:icon="@drawable/ic_add"
+                        app:iconGravity="textStart"
+                        app:iconSize="20dp"
+                        app:iconTint="@color/black"
+                        app:rippleColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

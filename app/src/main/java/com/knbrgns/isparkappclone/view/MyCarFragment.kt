@@ -13,7 +13,6 @@ import com.knbrgns.isparkappclone.model.Car
 import com.knbrgns.isparkappclone.view.adapter.CarAdapter
 import com.knbrgns.isparkappclone.view.viewmodel.MyCarViewModel
 
-
 class MyCarFragment : Fragment() {
     private var _binding: FragmentMyCarBinding? = null
     private val binding get() = _binding!!
@@ -26,9 +25,7 @@ class MyCarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMyCarBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,23 +38,45 @@ class MyCarFragment : Fragment() {
 
     private fun setupButtons() {
         binding.fabAddCar.setOnClickListener {
-
+            showAddCarDialog()
         }
+    }
+
+    private fun showAddCarDialog() {
+        val dialog = AddCarDialogFragment { newCar ->
+            viewModel.addCar(newCar)
+        }
+
+        dialog.show(childFragmentManager, "AddCarDialog")
     }
 
     private fun observeViewModel() {
         viewModel.cars.observe(viewLifecycleOwner) { cars ->
-            cars?.let {
-                carAdapter = CarAdapter(cars){ selectedCar ->
-                    onCarItemClick(selectedCar)
-                }
-                binding.rvCarList.adapter = carAdapter
+            updateUI(cars)
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun updateUI(cars: List<Car>) {
+        if (cars.isEmpty()) {
+            binding.rvCarList.visibility = View.GONE
+            binding.emptyStateLayout.visibility = View.VISIBLE
+        } else {
+            binding.rvCarList.visibility = View.VISIBLE
+            binding.emptyStateLayout.visibility = View.GONE
+
+            carAdapter = CarAdapter(cars) { selectedCar ->
+                onCarItemClick(selectedCar)
             }
+            binding.rvCarList.adapter = carAdapter
         }
     }
 
     private fun onCarItemClick(car: Car) {
-
+        // Araba detay sayfasına gitme işlemi burada olacak
     }
 
     private fun setupRecyclerView() {
@@ -76,5 +95,4 @@ class MyCarFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

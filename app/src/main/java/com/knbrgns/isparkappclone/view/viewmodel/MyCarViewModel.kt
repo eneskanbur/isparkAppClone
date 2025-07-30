@@ -19,6 +19,10 @@ class MyCarViewModel(application: Application) : AndroidViewModel(application) {
     private val _loading = MutableLiveData<Boolean>()
     val loading: MutableLiveData<Boolean> = _loading
 
+    init {
+        repository.initDatabase(application)
+    }
+
     fun initialize() {
         getCars()
     }
@@ -37,16 +41,17 @@ class MyCarViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun addCar(car: Car) {
+    fun addCar(car: Car) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addCar(car)
+            getCars()
         }
     }
 
-    private fun deleteCar(car: Car) {
+    fun deleteCar(car: Car) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteCar(car)
+            getCars()
         }
     }
-
 }

@@ -146,14 +146,12 @@
                 app:layout_constraintStart_toStartOf="@+id/carIconContainer"
                 app:layout_constraintTop_toBottomOf="@+id/carIconContainer">
 
-                <!-- Info Section (Car Type & Location) -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <!-- Car Type Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -163,7 +161,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_car_type"
+                            android:src="@drawable/ic_car_2"
                             app:tint="@color/colorPrimary" />
 
                         <TextView
@@ -180,7 +178,6 @@
 
                     </LinearLayout>
 
-                    <!-- Location Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
