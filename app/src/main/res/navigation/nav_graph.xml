@@ -59,5 +59,19 @@
         android:id="@+id/myCarFragment"
         android:name="com.knbrgns.isparkappclone.view.MyCarFragment"
         android:label="fragment_my_car"
-        tools:layout="@layout/fragment_my_car" />
+        tools:layout="@layout/fragment_my_car" >
+        <action
+            android:id="@+id/action_myCarFragment_to_carDetailFragment"
+            app:destination="@id/carDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/carDetailFragment"
+        android:name="com.knbrgns.isparkappclone.view.CarDetailFragment"
+        android:label="fragment_car_detail"
+        tools:layout="@layout/fragment_car_detail" >
+        <argument
+            android:name="car"
+            app:argType="com.knbrgns.isparkappclone.model.Car" />
+    </fragment>
 </navigation>
