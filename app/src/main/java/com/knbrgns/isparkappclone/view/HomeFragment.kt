@@ -74,6 +74,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+        binding.btnMyCar.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_home_to_myCarFragment)
+        }
+
         updateTabButtonStates()
     }
 

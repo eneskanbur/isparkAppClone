@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            navController.popBackStack()
+            navController.navigate(item.itemId)
+            true
+        }
     }
 
     private fun setupDrawer() {

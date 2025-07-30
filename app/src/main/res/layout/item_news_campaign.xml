@@ -28,7 +28,7 @@
             <View
                 android:id="@+id/gradientOverlay"
                 android:layout_width="0dp"
-                android:layout_height="260dp"
+                android:layout_height="240dp"
                 android:background="@drawable/background_seamless_parking"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

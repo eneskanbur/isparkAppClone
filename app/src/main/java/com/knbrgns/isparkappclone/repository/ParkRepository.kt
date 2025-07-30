@@ -3,6 +3,7 @@ package com.knbrgns.isparkappclone.repository
 import android.content.Context
 import com.knbrgns.isparkappclone.local.FavoriteParkDao
 import com.knbrgns.isparkappclone.local.FavoriteParkDatabase
+import com.knbrgns.isparkappclone.model.Car
 import com.knbrgns.isparkappclone.model.Park
 import com.knbrgns.isparkappclone.service.Client
 
@@ -83,6 +84,31 @@ class ParkRepository {
             Result.success(favoriteParks)
         } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    suspend fun getCars(): Result<List<Car>> {
+        return try {
+            val cars = favoriteDb.getCars()
+            Result.success(cars)
+        }catch (e : Exception){
+            Result.failure(e)
+        }
+    }
+
+    suspend fun addCar(car: Car) {
+        try {
+            favoriteDb.addCar(car)
+        }catch (e: Exception){
+
+        }
+    }
+
+    suspend fun deleteCar(car: Car) {
+        try {
+            favoriteDb.deleteCar(car)
+        }catch (e : Exception){
+
         }
     }
 

@@ -81,7 +81,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         _news.value = createMockNews()
         _campaign.value = createMockCampaigns()
 
-        Log.d(TAG, "🚀 INITIALIZE START -> Full app flow beginning")
         _loading.value = true
 
         viewModelScope.launch {

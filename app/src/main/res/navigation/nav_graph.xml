@@ -17,6 +17,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_home_to_myCarFragment"
+            app:destination="@id/myCarFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_detail"
@@ -52,4 +55,9 @@
             android:name="park"
             app:argType="com.knbrgns.isparkappclone.model.Park" />
     </fragment>
+    <fragment
+        android:id="@+id/myCarFragment"
+        android:name="com.knbrgns.isparkappclone.view.MyCarFragment"
+        android:label="fragment_my_car"
+        tools:layout="@layout/fragment_my_car" />
 </navigation>

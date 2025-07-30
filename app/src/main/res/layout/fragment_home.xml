@@ -19,7 +19,6 @@
             android:layout_height="260dp"
             android:layout_margin="@dimen/margin_medium"
             android:backgroundTint="@color/colorCardBackground"
-            app:layout_constraintBottom_toTopOf="@+id/btnAll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -316,8 +315,7 @@
             android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNews"
-            tools:listitem="@layout/item_news_campaign" />
+            app:layout_constraintTop_toBottomOf="@+id/btnNews" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadingAnimation"
@@ -334,6 +332,63 @@
             app:lottie_rawRes="@raw/loading_anim">
 
         </com.airbnb.lottie.LottieAnimationView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMyCar"
+            android:layout_width="185dp"
+            android:layout_height="72dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Araçlarım"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/ic_car_type"
+            app:iconGravity="textStart"
+            app:iconSize="28dp"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView7"
+            app:layout_constraintTop_toBottomOf="@+id/rvHomePage"
+            app:rippleColor="@color/colorPrimaryDark">
+
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnParkHistory"
+            android:layout_width="185dp"
+            android:layout_height="72dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="6dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:fontFamily="sans-serif-medium"
+            android:text="Park Geçmişi"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/ic_history"
+            app:iconGravity="textStart"
+            app:iconSize="28dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView7"
+            app:layout_constraintTop_toTopOf="@+id/btnMyCar"
+            app:rippleColor="@color/colorPrimaryDark">
+
+        </com.google.android.material.button.MaterialButton>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
