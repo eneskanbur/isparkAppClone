@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.databinding.FragmentSignUpBinding
 import com.knbrgns.isparkappclone.repository.AuthResult
 import com.knbrgns.isparkappclone.view.viewmodel.SignUpViewModel
@@ -30,60 +32,76 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.btnSignup.setOnClickListener {
-            val phoneNumber = binding.etPhone.text.toString().trim()
-            val fullName = binding.etFullName.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
-
-            if (phoneNumber.length != 10) {
-                binding.tilPhone.error = "Geçerli bir telefon numarası girin (10 haneli)."
-                return@setOnClickListener
-            }
-            if (password != confirmPassword) {
-                binding.tilConfirmPassword.error = "Şifreler eşleşmiyor."
-                return@setOnClickListener
-            }
-            binding.tilPhone.error = null
-            binding.tilConfirmPassword.error = null
-
-            val fullPhoneNumber = "+90$phoneNumber"
-            activity?.let {
-                viewModel.startPhoneNumberVerification(fullPhoneNumber, it)
-            }
-        }
-
+        setupClickListeners()
         observeAuthResult()
+    }
+
+    private fun setupClickListeners() {
+        binding.btnSignup.setOnClickListener {
+            handleSignUp()
+        }
+        binding.signInLayout.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun handleSignUp() {
+        // XML'de etEmail olduğunu varsayıyoruz.
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
+        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+
+        if (validateInputs(email, password, confirmPassword)) {
+            viewModel.signUpUser(email, password)
+        }
+    }
+
+    private fun validateInputs(email: String, password: String, confirmPassword: String): Boolean {
+        clearErrors()
+        var isValid = true
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.tilEmail.error = "Geçerli bir e-posta adresi girin"
+            isValid = false
+        }
+        if (password.length < 6) {
+            binding.tilPassword.error = "Şifre en az 6 karakter olmalıdır"
+            isValid = false
+        }
+        if (password != confirmPassword) {
+            binding.tilConfirmPassword.error = "Şifreler eşleşmiyor"
+            isValid = false
+        }
+        return isValid
+    }
+
+    private fun clearErrors() {
+        binding.tilEmail.error = null
+        binding.tilPassword.error = null
+        binding.tilConfirmPassword.error = null
     }
 
     private fun observeAuthResult() {
         lifecycleScope.launch {
             viewModel.authResult.collect { result ->
+                setLoadingState(false)
                 when (result) {
-                    is AuthResult.Loading -> {
-                        binding.loadingAnimation.visibility = View.VISIBLE
-                    }
-                    is AuthResult.CodeSent -> {
-                        binding.loadingAnimation.visibility = View.GONE
-                        Toast.makeText(context, "Doğrulama kodu gönderildi.", Toast.LENGTH_SHORT).show()
-                        // Burada kullanıcıyı SMS kodunu gireceği ekrana yönlendirebilirsiniz.
-                    }
+                    is AuthResult.Loading -> setLoadingState(true)
                     is AuthResult.Success -> {
-                        binding.loadingAnimation.visibility = View.GONE
-                        Toast.makeText(context, "Kayıt başarılı!", Toast.LENGTH_LONG).show()
-                        // Ana ekrana veya profil ekranına yönlendirme yapabilirsiniz.
+                        Toast.makeText(context, "Kayıt başarılı! Hoş geldiniz!", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_signUpFragment_to_nav_home)
                     }
                     is AuthResult.Error -> {
-                        binding.loadingAnimation.visibility = View.GONE
                         Toast.makeText(context, "Hata: ${result.message}", Toast.LENGTH_LONG).show()
                     }
-                    is AuthResult.Idle -> {
-                        binding.loadingAnimation.visibility = View.GONE
-                    }
+                    else -> {}
                 }
             }
         }
+    }
+
+    private fun setLoadingState(isLoading: Boolean) {
+        binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnSignup.isEnabled = !isLoading
     }
 
     override fun onDestroyView() {

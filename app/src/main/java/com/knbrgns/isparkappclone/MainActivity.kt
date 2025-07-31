@@ -14,12 +14,16 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.ui.navigateUp
 import androidx.core.net.toUri
+import androidx.navigation.NavOptions
+import androidx.navigation.ui.NavigationUI
+import com.google.firebase.auth.FirebaseAuth
 import com.knbrgns.isparkappclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +32,25 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
+        auth = FirebaseAuth.getInstance()
+
         setupNavigation()
         setupDrawer()
         setupSocialMediaDrawer()
         setupBackPressedCallback()
+        setupDestinationListener()
+        checkCurrentUser()
+
+    }
+
+    private fun checkCurrentUser() {
+        if (auth.currentUser != null && navController.currentDestination?.id == R.id.signInFragment) {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.signInFragment, true)
+                .build()
+            navController.navigate(R.id.action_signInFragment_to_nav_home, null, navOptions)
+        }
     }
 
     private fun setupNavigation() {
@@ -48,14 +67,125 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupDestinationListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.signInFragment, R.id.signUpFragment -> {
+                    binding.bottomNavigation.visibility = View.GONE
+                    binding.appBarLayout.visibility = View.GONE
+                }
+
+                else -> {
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.appBarLayout.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     private fun setupDrawer() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.nav_home, R.id.nav_parking, R.id.nav_campaigns, R.id.nav_profile),
             binding.root
         )
 
-        // Drawer Navigation ile NavController'ı bağla
         binding.navView.setupWithNavController(navController)
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            var navigationSuccess = false
+
+            when (menuItem.itemId) {
+                R.id.nav_logout -> {
+                    auth.signOut()
+                    binding.root.closeDrawers()
+
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_graph, true)
+                        .build()
+
+                    try {
+                        navController.navigate(R.id.signInFragment, null, navOptions)
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        // Navigation başarısız
+                        navigationSuccess = false
+                    }
+                }
+
+                R.id.nav_home -> {
+                    try {
+                        if (navController.currentDestination?.id != R.id.nav_home) {
+                            navController.navigate(R.id.nav_home)
+                        }
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+
+                R.id.nav_parking -> {
+                    try {
+                        if (navController.currentDestination?.id != R.id.nav_find_parking) {
+                            navController.navigate(R.id.nav_find_parking)
+                        }
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+
+                R.id.nav_news -> {
+                    // Haberler -> HomePage
+                    try {
+                        if (navController.currentDestination?.id != R.id.nav_home) {
+                            navController.navigate(R.id.nav_home)
+                        }
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+
+                R.id.nav_campaigns -> {
+                    try {
+                        if (navController.currentDestination?.id != R.id.nav_home) {
+                            navController.navigate(R.id.nav_home)
+                        }
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+
+                R.id.nav_profile -> {
+                    try {
+                        if (navController.currentDestination?.id != R.id.nav_profile) {
+                            navController.navigate(R.id.nav_profile)
+                        }
+                        navigationSuccess = true
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+
+                // Diğer drawer itemleri için genel handling
+                else -> {
+                    try {
+                        navigationSuccess =
+                            NavigationUI.onNavDestinationSelected(menuItem, navController)
+                    } catch (e: Exception) {
+                        navigationSuccess = false
+                    }
+                }
+            }
+
+            // Sadece navigation başarılı olursa drawer'ı kapat
+            if (navigationSuccess) {
+                binding.root.closeDrawers()
+            }
+
+            navigationSuccess
+        }
 
         binding.ivHamburger.setOnClickListener {
             if (binding.root.isDrawerOpen(binding.navView)) {
@@ -72,6 +202,11 @@ class MainActivity : AppCompatActivity() {
                 if (binding.root.isDrawerOpen(binding.navView)) {
                     binding.root.closeDrawer(binding.navView)
                 } else {
+                    if (navController.currentDestination?.id == R.id.signInFragment) {
+                        finish()
+                        return
+                    }
+
                     if (navController.currentDestination?.id == R.id.nav_home) {
                         finish()
                     } else {
@@ -116,7 +251,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = url.toUri()
             startActivity(intent)
-            binding.root.closeDrawer(binding.navView) // Drawer'ı kapat
+            binding.root.closeDrawer(binding.navView)
         } catch (e: Exception) {
             android.widget.Toast.makeText(
                 this,

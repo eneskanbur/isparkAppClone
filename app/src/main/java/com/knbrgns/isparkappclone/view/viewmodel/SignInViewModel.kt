@@ -1,6 +1,5 @@
 package com.knbrgns.isparkappclone.view.viewmodel
 
-import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -14,15 +13,9 @@ class SignInViewModel : ViewModel() {
     private val authRepo = FirebaseRepo(FirebaseAuth.getInstance())
     val authResult: StateFlow<AuthResult> = authRepo.authResult
 
-    fun startPhoneNumberVerification(phoneNumber: String, activity: Activity) {
+    fun signInUser(email: String, password: String) {
         viewModelScope.launch {
-            authRepo.sendVerificationCode(phoneNumber, activity)
-        }
-    }
-
-    fun verifySmsCode(code: String) {
-        viewModelScope.launch {
-            authRepo.signInWithVerificationCode(code)
+            authRepo.signInWithEmailPassword(email, password)
         }
     }
 }
