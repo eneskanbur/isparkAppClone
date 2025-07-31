@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/nav_home"
@@ -73,5 +73,28 @@
         <argument
             android:name="car"
             app:argType="com.knbrgns.isparkappclone.model.Car" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.knbrgns.isparkappclone.view.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.knbrgns.isparkappclone.view.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        >
+        <action
+            android:id="@+id/action_signUpFragment_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 </navigation>
