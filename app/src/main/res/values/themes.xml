@@ -3,7 +3,28 @@
     <style name="Base.Theme.IsparkAppClone" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
-    <style name="Theme.IsparkAppClone" parent="Base.Theme.IsparkAppClone" />
+    <style name="Theme.IsparkAppClone" parent="Base.Theme.IsparkAppClone">
+
+        <item name="android:navigationBarColor">@android:color/black</item>
+
+    </style>
+
+    <style name="Theme.IsparkAppClone.Splash" parent="Theme.SplashScreen.IconBackground">
+
+        <item name="windowSplashScreenBackground">@color/colorMojitoBreeze</item>
+
+        <!-- ISPARK logosu ortada -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_ispark_app</item>
+
+        <!-- Logo animasyon süresi -->
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+
+        <!-- Splash'dan sonra ana tema -->
+        <item name="postSplashScreenTheme">@style/Theme.IsparkAppClone</item>
+
+
+    </style>
 </resources>

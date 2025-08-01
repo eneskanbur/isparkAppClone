@@ -12,8 +12,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.navigation.ui.navigateUp
 import androidx.core.net.toUri
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavOptions
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
@@ -26,12 +29,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
 
         auth = FirebaseAuth.getInstance()
 
@@ -41,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         setupBackPressedCallback()
         setupDestinationListener()
         checkCurrentUser()
-
     }
 
     private fun checkCurrentUser() {
@@ -107,7 +109,6 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.signInFragment, null, navOptions)
                         navigationSuccess = true
                     } catch (e: Exception) {
-                        // Navigation başarısız
                         navigationSuccess = false
                     }
                 }
@@ -135,7 +136,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_news -> {
-                    // Haberler -> HomePage
                     try {
                         if (navController.currentDestination?.id != R.id.nav_home) {
                             navController.navigate(R.id.nav_home)
@@ -168,7 +168,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                // Diğer drawer itemleri için genel handling
                 else -> {
                     try {
                         navigationSuccess =
@@ -179,7 +178,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            // Sadece navigation başarılı olursa drawer'ı kapat
             if (navigationSuccess) {
                 binding.root.closeDrawers()
             }
