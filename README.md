@@ -1,7 +1,7 @@
 # 🚗 İSPARK - İstanbul Akıllı Park Uygulaması
 
 <div align="center">
-  <img src="app/src/main/drawable/app_ic_ispark.png" alt="İSPARK Logo" width="200"/>
+  <img src="ic_ispark_wide.png" alt="İSPARK Logo" width="200"/>
   <br>
   <h3>İstanbul'un resmi park uygulamasının modern klonu</h3>
   <p>Kotlin ve MVVM mimarisi ile geliştirilmiş Android uygulaması</p>
