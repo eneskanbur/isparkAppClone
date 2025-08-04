@@ -207,21 +207,14 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 ## 👨‍💻 Geliştirici
 
 **Enes Kanbur**
-- GitHub: [@knbrgns](https://github.com/knbrgns)
-- Email: developer@knbrgns.com
+- GitHub: [@eneskanbur](https://github.com/eneskanbur)
+- Email: kanburenes02@gmail.com
 
 ## 🙏 Teşekkürler
 
 - İstanbul Büyükşehir Belediyesi İSPARK A.Ş.
 - Android Developer Community
 - Material Design ekibi
-
-## 📞 İletişim
-
-Herhangi bir sorunuz veya öneriniz için:
-- 📧 Email: kullanici@ispark.istanbul
-- 🌐 Website: [ispark.istanbul](https://ispark.istanbul)
-- 📱 Sosyal Medya: [@ispark_as](https://instagram.com/ispark_as)
 
 ---
 
