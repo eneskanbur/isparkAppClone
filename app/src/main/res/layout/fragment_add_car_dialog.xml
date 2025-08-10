@@ -61,7 +61,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Yeni Araç Ekle"
-                    android:textColor="@color/textPrimary"
+                    android:textColor="@color/textOnPrimary"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tvDialogSubtitle"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Araç bilgilerinizi girin"
-                    android:textColor="@color/textSecondary"
+                    android:textColor="@color/textOnSecondary"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iconCard"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:hint="Araç Adı"
-                        android:textColorHint="@color/textSecondary"
+                        android:textColorHint="@color/textOnSecondary"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -124,7 +124,7 @@
                             android:minHeight="56dp"
                             android:paddingStart="16dp"
                             android:paddingEnd="16dp"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:hint="Plaka"
-                        android:textColorHint="@color/textSecondary"
+                        android:textColorHint="@color/textOnSecondary"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -145,7 +145,7 @@
                         app:boxStrokeColor="@color/colorPrimary"
                         app:boxStrokeWidth="2dp"
                         app:helperText="Örnek: 34 ABC 123"
-                        app:helperTextTextColor="@color/textSecondary"
+                        app:helperTextTextColor="@color/textOnSecondary"
                         app:hintTextColor="@color/textOnPrimary"
                         app:startIconCheckable="false"
                         app:startIconContentDescription="Plaka Ikonu"
@@ -161,7 +161,7 @@
                             android:minHeight="56dp"
                             android:paddingStart="16dp"
                             android:paddingEnd="16dp"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -173,7 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:hint="Araç Tipi"
-                        android:textColorHint="@color/textSecondary"
+                        android:textColorHint="@color/textOnSecondary"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -196,7 +196,7 @@
                             android:minHeight="56dp"
                             android:paddingStart="16dp"
                             android:paddingEnd="16dp"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -224,7 +224,7 @@
                         android:paddingStart="24dp"
                         android:paddingEnd="24dp"
                         android:text="İptal"
-                        android:textColor="@color/textSecondary"
+                        android:textColor="@color/textOnSecondary"
                         android:textSize="16sp"
                         app:cornerRadius="14dp"
                         app:rippleColor="@color/ispark_yellow_alpha"

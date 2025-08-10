@@ -50,7 +50,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/textPrimary"
+                android:textColor="@color/textOnPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +213,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="sans-serif-medium"
                             android:text="Kayıt Tarihi"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -223,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnSecondary"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             tools:text="15 Ocak 2025" />
@@ -262,7 +262,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
                         android:text="Son Park Lokasyonu"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -291,7 +291,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:fontFamily="sans-serif"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             tools:text="Taksim Meydanı Otoparkı" />
 
@@ -321,7 +321,7 @@
                     android:backgroundTint="@color/colorCardBackground"
                     android:fontFamily="sans-serif-medium"
                     android:text="Düzenle"
-                    android:textColor="@color/textPrimary"
+                    android:textColor="@color/textOnPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:cornerRadius="16dp"
@@ -350,7 +350,7 @@
                     app:iconGravity="textStart"
                     app:iconSize="24dp"
                     app:iconTint="@color/white"
-                    app:rippleColor="#80FFFFFF" />
+                    app:rippleColor="@color/rippleColorLight" />
 
             </LinearLayout>
 

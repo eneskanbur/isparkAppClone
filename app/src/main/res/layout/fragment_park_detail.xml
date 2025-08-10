@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Harita Yükleniyor..."
-                android:textColor="@color/textSecondary"
+                android:textColor="@color/textOnSecondary"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +73,8 @@
             android:id="@+id/detailParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:paddingBottom="24dp">
 
             <com.google.android.material.card.MaterialCardView
@@ -95,8 +97,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradient_overlay"
                     android:padding="20dp">
-
-                    <!-- Park Icon -->
 
                     <!-- Favorite Button -->
                     <com.google.android.material.card.MaterialCardView
@@ -127,7 +127,7 @@
                         style="@style/Widget.Material3.Button.IconButton"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/transparent"
                         app:cornerRadius="24dp"
                         app:icon="@drawable/ic_heart"
                         app:iconGravity="textStart"
@@ -135,7 +135,7 @@
                         app:iconTint="@color/red"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:strokeColor="@color/textSecondary"
+                        app:strokeColor="@color/textOnSecondary"
                         app:strokeWidth="1dp" />
 
                     <!-- Park Name -->
@@ -148,7 +148,7 @@
                         android:ellipsize="end"
                         android:fontFamily="sans-serif-medium"
                         android:maxLines="2"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
@@ -162,7 +162,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/textSecondary"
+                        android:textColor="@color/textOnSecondary"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/tvParkName"
                         app:layout_constraintStart_toStartOf="@+id/tvParkName"
@@ -177,7 +177,7 @@
                         android:layout_marginTop="@dimen/margin_xsmall"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:textColor="@color/textSecondary"
+                        android:textColor="@color/textOnSecondary"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/parkIconContainer"
@@ -194,7 +194,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/margin_xsmall"
                 android:layout_marginEnd="16dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -212,7 +212,6 @@
                     app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true"
                     app:strokeWidth="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -223,8 +222,8 @@
 
                         <ImageView
                             android:id="@+id/ivCapacityIcon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_car"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -236,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="Boş Park Yeri"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/ivCapacityIcon"
@@ -251,7 +250,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -272,7 +271,6 @@
                     app:cardBackgroundColor="@color/colorCardBackground"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true"
                     app:strokeWidth="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -283,8 +281,8 @@
 
                         <ImageView
                             android:id="@+id/ivTimeIcon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_clock"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -296,7 +294,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="Çalışma Saati"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/ivTimeIcon"
@@ -311,7 +309,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -335,7 +333,6 @@
                 app:cardBackgroundColor="@color/colorCardBackground"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/statusInfoRow"
@@ -354,7 +351,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:text="Ücretlendirme"
 
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -373,8 +370,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvPricingTitle">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_clock"
                             app:tint="@color/colorPrimary" />
 
@@ -384,7 +381,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             tools:text="İlk 5 dakika ücretsiz" />
 
@@ -402,8 +399,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/freeTimeLayout">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_gravity="top"
                             android:src="@drawable/ic_wallet"
                             app:tint="@color/colorPrimary" />
@@ -415,7 +412,7 @@
                             android:layout_gravity="top"
                             android:text="Aylık Abonelik"
                             android:layout_weight="1"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -423,7 +420,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:text="0-1 Saat : 100,00\n1-2 Saat : 130,00\n2-4 Saat : 160,00\n4-8 Saat : 200,00\n8-12 Saat : 260,00\nTam Gün : 400,00" />
@@ -442,8 +439,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/monthlyFeeLayout">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:src="@drawable/ic_parking"
                             app:tint="@color/colorPrimary" />
 
@@ -453,7 +450,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="Park Tipi"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -461,7 +458,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             tools:text="AÇIK OTOPARK" />

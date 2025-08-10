@@ -10,7 +10,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient_toolbar"
+        android:background="@drawable/background_seamless_parking"
         android:padding="24dp">
 
         <com.google.android.material.card.MaterialCardView
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Ad Soyad"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -120,7 +120,7 @@
                         android:inputType="textPersonName|textCapWords"
                         android:maxLines="1"
                         android:minHeight="56dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Email"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -154,7 +154,7 @@
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:minHeight="56dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Şifre"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -176,7 +176,7 @@
                     app:endIconMode="password_toggle"
                     app:endIconTint="@color/colorPrimary"
                     app:helperText="En az 6 karakter"
-                    app:helperTextTextColor="@color/textSecondary"
+                    app:helperTextTextColor="@color/textOnSecondary"
                     app:hintTextColor="@color/textOnPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:minHeight="56dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Şifre Tekrar"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -226,7 +226,7 @@
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:minHeight="56dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>

@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@color/transparent"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <TextView
@@ -55,6 +55,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorCardBackground"
                     android:padding="24dp">
 
                     <ImageView
@@ -97,7 +98,7 @@
             android:id="@+id/resultsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@color/transparent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="20dp"

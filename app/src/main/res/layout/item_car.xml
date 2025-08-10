@@ -29,6 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/gradient_overlay"
             android:padding="20dp">
 
             <com.google.android.material.card.MaterialCardView
@@ -110,7 +111,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="1"
                 android:text="BMW 3.20i"
-                android:textColor="@color/textPrimary"
+                android:textColor="@color/textOnPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/statusBadge"
@@ -127,7 +128,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="1"
                 android:text="34 ABC 123"
-                android:textColor="@color/textSecondary"
+                android:textColor="@color/textOnSecondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/tvCarName"
@@ -201,7 +202,7 @@
                             android:fontFamily="sans-serif"
                             android:maxLines="2"
                             android:text="Taksim Meydanı Otoparkı"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             tools:text="Taksim Meydanı Otoparkı" />

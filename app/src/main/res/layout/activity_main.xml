@@ -10,10 +10,9 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F5F5F5"
+        android:background="@color/backgroundColor"
         tools:context=".MainActivity">
 
-        <!-- ✅ SCROLL BEHAVIOR KALDIRILDI -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -106,6 +105,7 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer_menu"
         app:itemIconTint="@color/white"
-        app:itemTextColor="@color/colorPrimary" />
+        app:itemRippleColor="@color/white"
+        app:itemTextColor="@color/drawerTextColor" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

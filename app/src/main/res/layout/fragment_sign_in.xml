@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_gradient_toolbar"
+        android:background="@drawable/background_seamless_parking"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="24dp">
@@ -83,7 +83,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:cardBackgroundColor="@color/colorCardBackground"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toTopOf="@+id/signUpLayout"
@@ -105,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Email"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
@@ -131,7 +130,7 @@
                         android:minHeight="56dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -142,7 +141,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="Şifre"
-                    android:textColorHint="@color/textSecondary"
+                    android:textColorHint="@color/textOnSecondary"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
@@ -170,7 +169,7 @@
                         android:minHeight="56dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>

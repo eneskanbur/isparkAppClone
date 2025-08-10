@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/ispark_yellow_alpha"
-        app:strokeWidth="0.5dp">
+        app:strokeColor="@color/colorMojitoBreeze"
+        app:strokeWidth="0.8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -69,7 +70,7 @@
                 android:letterSpacing="0.01"
                 android:lineSpacingExtra="2dp"
                 android:maxLines="2"
-                android:textColor="@color/textOnPrimary"
+                android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

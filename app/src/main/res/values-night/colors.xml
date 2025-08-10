@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Ana Renkler - Dark Theme -->
+    <color name="colorPrimary">#E6A800</color>        <!-- Daha yumuşak sarı -->
+    <color name="colorPrimaryDark">#CC9600</color>    <!-- Daha koyu sarı -->
+    <color name="colorAccent">#FF8F00</color>         <!-- Turuncu vurgu -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#E21212</color>
+
+    <!-- Arka Planlar - Dark Theme -->
+    <color name="colorBackground">#121212</color>     <!-- Koyu arka plan -->
+    <color name="colorCardBackground">#E8E1D4</color> <!-- Kart arka planı - daha az parlak beyaz -->
+    <color name="colorWavyBackground">#1E1E1E</color>
+    <color name="colorMojitoBreeze">#DDDDD6</color>
+
+    <color name="ispark_yellow_alpha">#33E6A800</color>
+
+    <!-- Yazı Renkleri - Dark Theme -->
+    <color name="textPrimary">#E0E0E0</color>         <!-- Ana metin -->
+    <color name="textSecondary">#BEBEBE</color>       <!-- Açıklama/metin altı -->
+    <color name="textOnPrimary">#000000</color>
+    <color name="textOnSecondary">#757474</color>  <!-- Sarı üstünde siyah yazı -->
+
+    <!-- FAB & Butonlar - Dark Theme -->
+    <color name="fabColor">#E6A800</color>
+    <color name="fabRipple">#CC9600</color>
+    <color name="fabIconColor">#000000</color>
+
+    <!-- Sekme Renkleri - Dark Theme -->
+    <color name="tabActiveBackground">#E6A800</color>
+    <color name="tabInactiveBackground">#2D2D2D</color>
+    <color name="tabActiveText">#000000</color>
+    <color name="tabInactiveText">#B0B0B0</color>
+
+    <!-- Tab Button States - Dark Theme -->
+    <color name="tabSelectedBackground">@color/colorPrimary</color>           
+    <color name="tabUnselectedBackground">@color/colorCardBackground</color>  
+    <color name="tabSelectedText">@color/textOnPrimary</color>                
+    <color name="tabUnselectedText">@color/textSecondary</color>              
+    <color name="tabSelectedStroke">@color/colorPrimaryDark</color>           
+    <color name="tabUnselectedStroke">@color/textSecondary</color>            
+    <color name="tabSelectedIcon">@color/textOnPrimary</color>                
+    <color name="tabUnselectedIcon">@color/textSecondary</color>              
+    <color name="tabRipple">@color/ispark_yellow_alpha</color>                
+    
+    <!-- Additional theme colors - Dark Theme -->
+    <color name="backgroundColor">#121212</color>            <!-- Ana arka plan -->
+    <color name="surfaceColor">#1E1E1E</color>              <!-- Yüzey rengi -->
+    <color name="rippleColorLight">#80E6A800</color>         <!-- Koyu ripple -->
+    <color name="transparent">#00000000</color>             <!-- Şeffaf -->
+    <color name="drawerTextColor">#E0E0E0</color>           <!-- Drawer menü yazı rengi - Dark -->
+</resources>

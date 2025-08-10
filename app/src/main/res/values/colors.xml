@@ -20,7 +20,8 @@
     <!-- Yazı Renkleri -->
     <color name="textPrimary">#212121</color>         <!-- Ana metin -->
     <color name="textSecondary">#757575</color>       <!-- Açıklama/metin altı -->
-    <color name="textOnPrimary">#000000</color>       <!-- Sarı üstünde siyah yazı -->
+    <color name="textOnPrimary">#000000</color>
+    <color name="textOnSecondary">#757575</color>
 
     <!-- FAB & Butonlar -->
     <color name="fabColor">#FFD700</color>
@@ -43,4 +44,11 @@
     <color name="tabSelectedIcon">@color/textOnPrimary</color>                <!-- #000000 - Siyah ikon -->
     <color name="tabUnselectedIcon">@color/textSecondary</color>              <!-- #757575 - Gri ikon -->
     <color name="tabRipple">@color/ispark_yellow_alpha</color>                <!-- #33FFC107 - Sarı ripple efekti -->
+    
+    <!-- Additional theme colors -->
+    <color name="backgroundColor">#F5F5F5</color>            <!-- Ana arka plan -->
+    <color name="surfaceColor">#F8F9FA</color>              <!-- Yüzey rengi -->
+    <color name="rippleColorLight">#80FFFFFF</color>         <!-- Açık ripple -->
+    <color name="transparent">#00000000</color>             <!-- Şeffaf -->
+    <color name="drawerTextColor">#333333</color>           <!-- Drawer menü yazı rengi -->
 </resources>

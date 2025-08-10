@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_gradient_toolbar"
+        android:background="@drawable/background_seamless_parking"
         tools:context=".view.HomeFragment">
 
         <com.google.android.material.card.MaterialCardView

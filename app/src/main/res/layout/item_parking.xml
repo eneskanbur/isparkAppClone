@@ -111,7 +111,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="2"
                 android:text="Taksim Meydanı Otoparkı"
-                android:textColor="@color/textPrimary"
+                android:textColor="@color/textOnPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/statusBadge"
@@ -128,7 +128,7 @@
                 android:fontFamily="sans-serif"
                 android:maxLines="1"
                 android:text="Beyoğlu, İstanbul"
-                android:textColor="@color/textSecondary"
+                android:textColor="@color/textOnSecondary"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/tvParkName"
                 app:layout_constraintStart_toStartOf="@+id/tvParkName"
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:fontFamily="sans-serif"
-                            android:textColor="@color/textSecondary"
+                            android:textColor="@color/textOnSecondary"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             tools:text="Açık Otopark" />
@@ -218,7 +218,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:maxLines="2"
                             android:text="İlk 30 dk ücretsiz"
-                            android:textColor="@color/textPrimary"
+                            android:textColor="@color/textOnPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             tools:text="İlk 30 dk ücretsiz" />
@@ -232,14 +232,14 @@
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/transparent"
                         app:cornerRadius="22dp"
                         app:icon="@drawable/ic_heart"
                         app:iconGravity="textStart"
                         app:iconSize="22dp"
                         app:iconTint="@color/red"
                         app:rippleColor="@color/ispark_yellow_alpha"
-                        app:strokeColor="@color/textSecondary"
+                        app:strokeColor="@color/textOnSecondary"
                         app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
