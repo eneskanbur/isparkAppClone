@@ -81,7 +81,8 @@ class FindParkingFragment : Fragment() {
 
     private fun updateButtonStates(showingFavorites: Boolean) {
         val selectedColor = ContextCompat.getColorStateList(requireContext(), R.color.colorPrimary)
-        val unselectedColor = ContextCompat.getColorStateList(requireContext(), R.color.colorCardBackground)
+        val unselectedColor =
+            ContextCompat.getColorStateList(requireContext(), R.color.colorCardBackground)
         val selectedText = ContextCompat.getColor(requireContext(), R.color.textOnPrimary)
         val unselectedText = ContextCompat.getColor(requireContext(), R.color.textSecondary)
 
@@ -122,30 +123,26 @@ class FindParkingFragment : Fragment() {
             hideKeyboard()
         }
     }
+
     private fun hideKeyboard() {
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
     }
 
     private fun observeViewModel() {
         viewModel.parkList.observe(viewLifecycleOwner) { parkList ->
-            println("DEBUG: parkList observer - Size: ${parkList.size}")
-
-            if (parkList.isEmpty()) {
-                println("DEBUG: Park list is EMPTY!")
-                binding.tvResultsCount.text = "0 Otopark Bulundu"
-                return@observe
-            }
 
             binding.tvResultsCount.text = "${parkList.size} Otopark Bulundu"
 
             if (parkAdapter == null) {
-                println("DEBUG: Creating NEW adapter")
                 parkAdapter = ParkAdapter(
                     parkList = parkList.toMutableList(),
                     onItemClick = { park ->
                         findNavController().navigate(
-                            FindParkingFragmentDirections.actionNavFindParkingToParkDetailFragment(park)
+                            FindParkingFragmentDirections.actionNavFindParkingToParkDetailFragment(
+                                park
+                            )
                         )
                     },
                     onFavoriteClick = { park, position ->
@@ -154,20 +151,16 @@ class FindParkingFragment : Fragment() {
                 )
                 binding.rvParkingResults.adapter = parkAdapter
             } else {
-                println("DEBUG: Updating existing adapter")
-                // Mevcut adapter'ı güncelle
                 parkAdapter?.updateList(parkList)
             }
+
         }
 
-
         viewModel.showOnlyFavorites.observe(viewLifecycleOwner) { showingFavorites ->
-            println("DEBUG: Button state update - Showing favorites: $showingFavorites")
             updateButtonStates(showingFavorites)
         }
 
         viewModel.favoriteUpdate.observe(viewLifecycleOwner) { (position, newState) ->
-            println("DEBUG: favoriteUpdate - Position: $position, State: $newState")
             parkAdapter?.updateFavorite(position, newState)
         }
 

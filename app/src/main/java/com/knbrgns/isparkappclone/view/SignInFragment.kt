@@ -99,7 +99,7 @@ class SignInFragment : Fragment() {
                     is AuthResult.Loading -> setLoadingState(true)
                     is AuthResult.Success -> {
                         Toast.makeText(context, "Giriş başarılı!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_signInFragment_to_nav_home)
+                        findNavController().navigate(R.id.nav_home)
                     }
 
                     is AuthResult.Error -> {

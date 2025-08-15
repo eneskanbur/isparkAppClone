@@ -18,4 +18,5 @@ class SignUpViewModel : ViewModel() {
             authRepo.signUpWithEmailPassword(email, password)
         }
     }
+
 }

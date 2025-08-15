@@ -41,6 +41,7 @@ class FirebaseRepo(private val auth: FirebaseAuth) {
 
     fun getCurrentUser() = auth.currentUser
 
+
 }
 
 sealed class AuthResult {
