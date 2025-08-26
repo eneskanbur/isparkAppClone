@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.model.Campaign
 import com.knbrgns.isparkappclone.model.News
+import com.knbrgns.isparkappclone.view.dialog.ErrorDialog
 
 class HomeFragment : Fragment() {
 
@@ -44,7 +45,20 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
         setupTabButtons()
+        setupButtons()
         viewModel.initialize()
+    }
+
+    private fun setupButtons() {
+        binding.btnParkHistory.setOnClickListener {
+            ErrorDialog.Builder(requireContext())
+                .setCancelable(true)
+                .setOnConfirm {  }
+                .setErrorTitle("İşlem Başarısız")
+                .setErrorMessage("Bu işlem henüz uygulanmamaktadır.")
+                .build()
+                .show()
+        }
     }
 
     private fun setupTabButtons() {

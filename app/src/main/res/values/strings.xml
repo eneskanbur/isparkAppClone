@@ -26,4 +26,5 @@
     <string name="tvNumberOfParkFindParking">585 Otopark Bulundu</string>
     <string name="btnCampaignsHome">Kampanyalar</string>
     <string name="btnNewsHome">Haberler</string>
+    <string name="dialog_confirm">Tamam</string>
 </resources>
