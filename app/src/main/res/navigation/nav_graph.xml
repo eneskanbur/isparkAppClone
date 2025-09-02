@@ -102,5 +102,15 @@
         android:name="com.knbrgns.isparkappclone.view.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"
-        />
+        >
+        <action
+            android:id="@+id/action_nav_profile_to_myCarFragment"
+            app:destination="@id/myCarFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
 </navigation>

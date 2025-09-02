@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.knbrgns.isparkappclone.R
@@ -33,21 +34,55 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
+        setupButtons()
         viewModel.getUser()
+    }
+
+    private fun setupButtons() {
+        binding.btnLogout.setOnClickListener {
+            logout()
+        }
+
+        binding.layoutMyCar.setOnClickListener {
+            navigate(R.id.action_nav_profile_to_myCarFragment)
+        }
+
+        binding.layoutSettings.setOnClickListener {
+
+        }
+
+        binding.layoutParkingHistory.setOnClickListener {
+
+        }
+
+        binding.layoutPaymentMethods.setOnClickListener {
+
+        }
     }
 
     fun setupObserver() {
         viewModel.users.observe(viewLifecycleOwner) { user ->
             binding.tvUserName.text = user.name
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.btnLogout.isEnabled = !isLoading
+            binding.btnLogout.text = if (isLoading) "Çıkış yapılıyor..." else "Çıkış Yap"
+        }
+
+        viewModel.logoutSuccess.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                navigate(R.id.action_nav_profile_to_signInFragment)
+            }
+        }
     }
 
-    fun navigate() {
-
+    fun navigate(id: Int) {
+        findNavController().navigate(id)
     }
 
-    fun logout() {
-
+    private fun logout() {
+        viewModel.logout()
     }
 
     override fun onDestroyView() {
