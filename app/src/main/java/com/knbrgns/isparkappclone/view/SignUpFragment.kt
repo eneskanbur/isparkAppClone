@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.databinding.FragmentSignUpBinding
+import com.knbrgns.isparkappclone.model.User
 import com.knbrgns.isparkappclone.repository.AuthResult
 import com.knbrgns.isparkappclone.view.viewmodel.SignUpViewModel
 import kotlinx.coroutines.launch
@@ -47,18 +48,23 @@ class SignUpFragment : Fragment() {
 
     private fun handleSignUp() {
         // XML'de etEmail olduğunu varsayıyoruz.
+        val fullName = binding.etFullName.text.toString()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
         val confirmPassword = binding.etConfirmPassword.text.toString().trim()
 
-        if (validateInputs(email, password, confirmPassword)) {
-            viewModel.signUpUser(email, password)
+        if (validateInputs(fullName,email, password, confirmPassword)) {
+            viewModel.signUpUser(fullName,email, password)
         }
     }
 
-    private fun validateInputs(email: String, password: String, confirmPassword: String): Boolean {
+    private fun validateInputs(fullName: String, email: String, password: String, confirmPassword: String): Boolean {
         clearErrors()
         var isValid = true
+        if(fullName.isEmpty()){
+            binding.tilFullName.error = "Adınızı girin"
+            isValid = false
+        }
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.tilEmail.error = "Geçerli bir e-posta adresi girin"
             isValid = false
@@ -87,7 +93,7 @@ class SignUpFragment : Fragment() {
                 when (result) {
                     is AuthResult.Loading -> setLoadingState(true)
                     is AuthResult.Success -> {
-                        Toast.makeText(context, "Kayıt başarılı! Hoş geldiniz!", Toast.LENGTH_SHORT).show()
+                        saveUserToFirestore()
                         findNavController().navigate(R.id.action_signUpFragment_to_nav_home)
                     }
                     is AuthResult.Error -> {
@@ -97,6 +103,16 @@ class SignUpFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private suspend fun saveUserToFirestore() {
+        val currentUser = viewModel.getCurrentUser()
+        val user = User(
+            currentUser!!.uid,
+            binding.etFullName.text.toString(),
+            binding.etEmail.text.toString()
+        )
+        viewModel.saveUserToFirestore(user)
     }
 
     private fun setLoadingState(isLoading: Boolean) {

@@ -13,7 +13,6 @@
         android:clipToPadding="false"
         android:padding="16dp">
 
-        <!-- Profil Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardProfile"
             android:layout_width="0dp"
@@ -68,8 +67,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
                     android:text="₺125.50"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="16sp"
@@ -222,7 +219,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Araçlarım"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                     <ImageView
@@ -261,7 +258,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ic_debt"
+                        android:src="@drawable/ic_credit_card"
                         app:tint="@color/colorPrimary" />
 
                     <TextView
@@ -270,7 +267,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Ödeme Yöntemleri"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                     <ImageView
@@ -309,7 +306,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ic_history"
+                        android:src="@drawable/ic_history_clock"
                         app:tint="@color/colorPrimary" />
 
                     <TextView
@@ -318,7 +315,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Park Geçmişi"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                     <ImageView
@@ -366,7 +363,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="Ayarlar"
-                        android:textColor="@color/textPrimary"
+                        android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
                     <ImageView

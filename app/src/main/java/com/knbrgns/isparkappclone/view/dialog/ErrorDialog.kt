@@ -1,13 +1,10 @@
 package com.knbrgns.isparkappclone.view.dialog
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.knbrgns.isparkappclone.databinding.DialogErrorBinding
-import androidx.core.graphics.drawable.toDrawable
 
 class ErrorDialog(
     private val context: Context,

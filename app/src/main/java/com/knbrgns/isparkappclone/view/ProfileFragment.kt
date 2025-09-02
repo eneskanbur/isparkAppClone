@@ -6,20 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.knbrgns.isparkappclone.R
+import com.knbrgns.isparkappclone.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
+    fun navigate(){
+
+    }
+
+    fun logout(){
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

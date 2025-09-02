@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,15 @@ import com.knbrgns.isparkappclone.databinding.FragmentHomeBinding
 import com.knbrgns.isparkappclone.view.adapter.CampaignAdapter
 import com.knbrgns.isparkappclone.view.adapter.NewsAdapter
 import com.knbrgns.isparkappclone.view.viewmodel.HomeViewModel
-import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.knbrgns.isparkappclone.MainActivity
 import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.model.Campaign
 import com.knbrgns.isparkappclone.model.News
 import com.knbrgns.isparkappclone.view.dialog.ErrorDialog
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -29,6 +33,7 @@ class HomeFragment : Fragment() {
     private var isNewsSelected = true
     private var newsAdapter: NewsAdapter? = null
     private var campaignAdapter: CampaignAdapter? = null
+    private lateinit var user : com.knbrgns.isparkappclone.model.User
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +51,23 @@ class HomeFragment : Fragment() {
         observeViewModel()
         setupTabButtons()
         setupButtons()
+        setupUser()
         viewModel.initialize()
+    }
+
+    private fun setupUser() {
+        lifecycleScope.launch {
+            user = viewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid)!!
+            (activity as? MainActivity)?.let { mainActivity ->
+                val headerView = mainActivity.binding.navView.getHeaderView(0)
+
+                val nameTextView = headerView.findViewById<TextView>(R.id.textViewUserName)
+                val emailTextView = headerView.findViewById<TextView>(R.id.textViewUserEmail)
+
+                nameTextView.text = user.name
+                emailTextView.text = user.email
+            }
+        }
     }
 
     private fun setupButtons() {
@@ -174,9 +195,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        /*viewModel.loading.observe(viewLifecycleOwner){ isLoading ->
-            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }*/
     }
 
     private fun onNewsItemClick(news: News) {
@@ -214,19 +232,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun openWebUrl(url: String) {
-        try {
-            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
-            intent.data = url.toUri()
-            startActivity(intent)
-        } catch (e: Exception) {
-            android.widget.Toast.makeText(
-                context,
-                "Web sayfası açılamadı: ${e.message}",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -97,4 +97,10 @@
             android:id="@+id/action_signUpFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.knbrgns.isparkappclone.view.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        />
 </navigation>

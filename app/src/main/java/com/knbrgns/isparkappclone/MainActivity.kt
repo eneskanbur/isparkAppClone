@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,13 +18,16 @@ import androidx.navigation.ui.navigateUp
 import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import com.knbrgns.isparkappclone.databinding.ActivityMainBinding
+import com.knbrgns.isparkappclone.repository.ParkRepository
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
@@ -45,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         setupDestinationListener()
         checkCurrentUser()
     }
+
 
     private fun checkCurrentUser() {
         if (auth.currentUser != null && navController.currentDestination?.id == R.id.signInFragment) {

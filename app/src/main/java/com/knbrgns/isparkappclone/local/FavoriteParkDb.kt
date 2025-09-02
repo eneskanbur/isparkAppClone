@@ -9,7 +9,7 @@ import com.knbrgns.isparkappclone.model.Park
 
 @Database(
     entities = [Park::class, Car::class],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 abstract class FavoriteParkDatabase : RoomDatabase() {

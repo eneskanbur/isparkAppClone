@@ -4,10 +4,15 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.knbrgns.isparkappclone.model.Campaign
 import com.knbrgns.isparkappclone.model.News
+import com.knbrgns.isparkappclone.model.User
 import com.knbrgns.isparkappclone.repository.AuthRepository
+import com.knbrgns.isparkappclone.repository.FirebaseRepo
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,6 +20,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         private const val TAG = "ISPARK_FLOW"
     }
+
+    private lateinit var firebaseRepo : FirebaseRepo
 
     private val _news = MutableLiveData<List<News>>()
     val news: MutableLiveData<List<News>> = _news
@@ -29,6 +36,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val error: MutableLiveData<String> = _error
 
     private val repository = AuthRepository(application)
+
+
 
     private fun createMockNews(): List<News> {
         return listOf(
@@ -176,5 +185,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 _loading.value = false
             }
         }
+    }
+
+    suspend fun getUser(uid:String) : User? {
+        firebaseRepo = FirebaseRepo(application, FirebaseAuth.getInstance(),FirebaseFirestore.getInstance())
+        val user = firebaseRepo.getUser(firebaseRepo.getCurrentUser()!!.uid)
+        return user.getOrNull()
     }
 }
