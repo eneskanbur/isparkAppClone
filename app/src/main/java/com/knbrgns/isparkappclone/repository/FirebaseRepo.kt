@@ -17,10 +17,13 @@ class FirebaseRepo(
     private val firestore: FirebaseFirestore
 ) {
 
+    private var cachedUser: User? = null
+    private var cachedUid: String? = null
+
     private val _authResult = MutableStateFlow<AuthResult>(AuthResult.Idle)
     val authResult: StateFlow<AuthResult> = _authResult
 
-    fun signUpWithEmailPassword(fullName: String,email: String, password: String) {
+    fun signUpWithEmailPassword(fullName: String, email: String, password: String) {
         _authResult.value = AuthResult.Loading
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -46,40 +49,56 @@ class FirebaseRepo(
             }
     }
 
-    fun logout() {
-        auth.signOut()
-    }
-
     fun getCurrentUser() = auth.currentUser
 
     suspend fun saveUser(user: User): Result<String> =
         withContext(Dispatchers.IO) {
-        try {
-            val existingUser = firestore.collection("user").document(user.uid).get().await()
+            try {
+                val existingUser = firestore.collection("user").document(user.uid).get().await()
 
-            if (existingUser.exists()) {
-                return@withContext Result.failure(Exception("User already exists"))
+                if (existingUser.exists()) {
+                    return@withContext Result.failure(Exception("User already exists"))
+                }
+
+                firestore.collection("user").document(user.uid).set(user).await()
+                Result.success("User saved successfully")
+            } catch (e: Exception) {
+                Result.failure(e)
             }
-
-            firestore.collection("user").document(user.uid).set(user).await()
-            Result.success("User saved successfully")
-        } catch (e: Exception) {
-            Result.failure(e)
         }
-    }
 
     suspend fun getUser(uid: String): Result<User?> =
-        withContext(Dispatchers.IO) {
-        try {
-            val document = firestore.collection("user").document(uid).get().await()
-            if (document.exists()) {
-                val user = document.toObject(User::class.java)
-                Result.success(user)
-            } else {
-                Result.success(null)
+        withContext(Dispatchers.IO){
+            try {
+
+                if ( cachedUser != null && cachedUid == uid) {
+                    return@withContext Result.success(cachedUser)
+                }
+
+                val document = firestore.collection("user").document(uid).get().await()
+                if (document.exists()) {
+                    val user = document.toObject(User::class.java)
+                    cachedUser = user
+                    cachedUid = uid
+                    Result.success(user)
+                } else {
+                    Result.success(null)
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
             }
-        } catch (e: Exception) {
-            Result.failure(e)
+        }
+
+    fun clearUserCache() {
+        cachedUser = null
+        cachedUid = null
+    }
+
+
+    suspend fun logout() {
+        withContext(Dispatchers.IO) {
+            auth.signOut()
+            clearUserCache()
         }
     }
 

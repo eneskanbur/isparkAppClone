@@ -22,7 +22,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.knbrgns.isparkappclone.databinding.ActivityMainBinding
+import com.knbrgns.isparkappclone.repository.FirebaseRepo
 import com.knbrgns.isparkappclone.repository.ParkRepository
 import kotlinx.coroutines.launch
 
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseRepo: FirebaseRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         auth = FirebaseAuth.getInstance()
+        firebaseRepo = FirebaseRepo(this, auth, FirebaseFirestore.getInstance())
 
         setupNavigation()
         setupDrawer()
@@ -104,6 +108,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_logout -> {
                     auth.signOut()
+                    firebaseRepo.clearUserCache()
                     binding.root.closeDrawers()
 
                     val navOptions = NavOptions.Builder()
