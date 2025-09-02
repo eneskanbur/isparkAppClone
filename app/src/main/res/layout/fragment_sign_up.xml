@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Hesap Oluştur"
+            android:text="@string/create_account"
             android:textColor="@color/textPrimary"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="İSPARK'a katılın ve akıllı park çözümlerini keşfedin"
+            android:text="@string/join_ispark"
             android:textColor="@color/textSecondary"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/signupFormCard"
@@ -237,7 +237,7 @@
                     android:layout_height="56dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Hesap Oluştur"
+                    android:text="@string/create_account"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -275,7 +275,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zaten hesabınız var mı? "
+                android:text="@string/already_have_account"
                 android:textColor="@color/textSecondary"
                 android:textSize="16sp" />
 
@@ -283,7 +283,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
-                android:text="Giriş Yap"
+                android:text="@string/sign_in"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold" />

@@ -9,31 +9,28 @@
             android:title="Ana Sayfa" />
         <item
             android:id="@+id/nav_parking"
-            android:title="Otopark Bul" />
+            android:title="@string/find_parking" />
         <item
             android:id="@+id/nav_applications"
-            android:title="Başvuru İşlemleri" />
+            android:title="@string/applications" />
         <item
             android:id="@+id/nav_istmarin"
-            android:title="İstmarin Panel" />
+            android:title="@string/istmarin_panel" />
         <item
             android:id="@+id/nav_payment"
-            android:title="Ücret Öde" />
+            android:title="@string/payment" />
         <item
             android:id="@+id/nav_solution_center"
-            android:title="İBB Çözüm Merkezi" />
+            android:title="@string/solution_center" />
         <item
             android:id="@+id/nav_news"
-            android:title="Haberler" />
+            android:title="@string/news_tag" />
         <item
             android:id="@+id/nav_campaigns"
-            android:title="Kampanyalar" />
+            android:title="@string/campaigns" />
         <item
             android:id="@+id/nav_profile"
-            android:title="Profil" />
-        <item
-            android:id="@+id/nav_logout"
-            android:title="Çıkış" />
+            android:title="@string/profile" />
     </group>
 
 </menu>

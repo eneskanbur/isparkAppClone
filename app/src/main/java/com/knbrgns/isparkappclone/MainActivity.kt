@@ -136,23 +136,6 @@ class MainActivity : AppCompatActivity() {
             var navigationSuccess = false
 
             when (menuItem.itemId) {
-                R.id.nav_logout -> {
-                    auth.signOut()
-                    firebaseRepo.clearUserCache()
-                    binding.root.closeDrawers()
-
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.nav_graph, true)
-                        .build()
-
-                    try {
-                        navController.navigate(R.id.signInFragment, null, navOptions)
-                        navigationSuccess = true
-                    } catch (e: Exception) {
-                        navigationSuccess = false
-                    }
-                }
-
                 R.id.nav_home -> {
                     try {
                         if (navController.currentDestination?.id != R.id.nav_home) {

@@ -55,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="+90 555 123 45 67"
+                    android:text="@string/sample_phone"
                     android:textColor="@color/textOnSecondary"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/tvUserName"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="₺125.50"
+                    android:text="@string/sample_balance"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
-                    android:text="Park İstatistikleri"
+                    android:text="@string/park_statistics"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="247"
+                    android:text="@string/total_parks_count"
                     android:textColor="@color/colorPrimary"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -126,7 +126,7 @@
                     android:id="@+id/tvTotalParkingsLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Toplam Park"
+                    android:text="@string/total_parks"
                     android:textColor="@color/textOnSecondary"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/tvTotalParkings"
@@ -144,7 +144,7 @@
                     android:id="@+id/tvTotalHours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.2K"
+                    android:text="@string/total_hours_count"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -156,7 +156,7 @@
                     android:id="@+id/tvTotalHoursLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Toplam Saat"
+                    android:text="@string/total_hours"
                     android:textColor="@color/textOnSecondary"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/tvTotalHours"
@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Araçlarım"
+                        android:text="@string/my_cars"
                         android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
@@ -266,7 +266,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Ödeme Yöntemleri"
+                        android:text="@string/payment_methods"
                         android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
@@ -314,7 +314,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Park Geçmişi"
+                        android:text="@string/parking_history"
                         android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 
@@ -362,7 +362,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Ayarlar"
+                        android:text="@string/settings"
                         android:textColor="@color/textOnPrimary"
                         android:textSize="16sp" />
 

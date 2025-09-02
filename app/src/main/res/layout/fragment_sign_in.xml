@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Hoş Geldiniz"
+            android:text="@string/welcome"
             android:textColor="@color/textPrimary"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Akıllı park çözümleriniz için giriş yapın"
+            android:text="@string/sign_in_subtitle"
             android:textColor="@color/textSecondary"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/loginFormCard"
@@ -184,7 +184,7 @@
                     android:focusable="true"
                     android:fontFamily="sans-serif-medium"
                     android:padding="8dp"
-                    android:text="Şifremi Unuttum"
+                    android:text="@string/forgot_password"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -198,7 +198,7 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Giriş Yap"
+                    android:text="@string/sign_in"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -235,7 +235,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hesabınız yok mu? "
+                android:text="@string/no_account"
                 android:textColor="@color/textSecondary"
                 android:textSize="16sp" />
 
@@ -243,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
-                android:text="Kayıt Ol"
+                android:text="@string/register"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold" />

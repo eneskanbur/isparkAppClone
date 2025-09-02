@@ -7,27 +7,104 @@
     <string name="istmarin_panel">İstmarin Panel</string>
     <string name="payment">Ücret Öde</string>
     <string name="solution_center">İBB Çözüm Merkezi</string>
-    <string name="news">Haberler</string>
     <string name="campaigns">Kampanyalar</string>
     <string name="menu">Menu</string>
     <string name="notifications">Notifications</string>
     <string name="ispark_logo">İSPARK Logo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="en_yakin_otopark">En yakın otoparkı hızlıca bulmak için tıklayın!</string>
-    <string name="senin_icin">Senin İçin</string>
-    <string name="basvuru_islemleri">Başvuru İşlemleri</string>
-    <string name="ucret_ode">Ücret Öde</string>
-    <string name="ibb_cozum_merkezi">İBB Çözüm Merkezi</string>
-    <string name="tag_campaign">Kampanya</string>
-    <string name="tag_news">Haber</string>
     <string name="long_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="btnFavoritesFindParking">Favoriler</string>
     <string name="btnAllFindParking">Tümü</string>
     <string name="tvNumberOfParkFindParking">585 Otopark Bulundu</string>
-    <string name="btnCampaignsHome">Kampanyalar</string>
-    <string name="btnNewsHome">Haberler</string>
     <string name="dialog_confirm">Tamam</string>
     <string name="logout">Çıkış Yap</string>
+    
+    <!-- Navigation Header -->
+    <string name="user_name">İSPARK Kullanıcısı</string>
+    <string name="user_email">kullanici@ispark.istanbul</string>
+    <string name="social_media_follow">Sosyal Medya Hesaplarımızı Sen De Takip Et Güncel Kal!</string>
+    
+    <!-- Home Fragment -->
+    <string name="my_cars">Araçlarım</string>
+    <string name="parking_history">Park Geçmişi</string>
+    
+    <!-- Sign Up -->
+    <string name="create_account">Hesap Oluştur</string>
+    <string name="join_ispark">İSPARK\'a katılın ve akıllı park çözümlerini keşfedin</string>
+    <string name="already_have_account">Zaten hesabınız var mı? </string>
+    <string name="sign_in">Giriş Yap</string>
+    
+    <!-- Sign In -->
+    <string name="welcome">Hoş Geldiniz</string>
+    <string name="sign_in_subtitle">Akıllı park çözümleriniz için giriş yapın</string>
+    <string name="forgot_password">Şifremi Unuttum</string>
+    <string name="no_account">Hesabınız yok mu? </string>
+    <string name="register">Kayıt Ol</string>
+    
+    <!-- Find Parking -->
+    <string name="find_parking">Otopark Bul</string>
+    
+    <!-- Add Car Dialog -->
+    <string name="add_new_car">Yeni Araç Ekle</string>
+    <string name="enter_car_info">Araç bilgilerinizi girin</string>
+    <string name="cancel">İptal</string>
+    <string name="save">Kaydet</string>
+    
+    <!-- Car Detail -->
+    <string name="debt_status">Borç Durumu</string>
+    <string name="registration_date">Kayıt Tarihi</string>
+    <string name="last_park_location">Son Park Lokasyonu</string>
+    <string name="edit">Düzenle</string>
+    <string name="delete">Sil</string>
+    
+    <!-- My Car -->
+    <string name="manage_cars">Kayıtlı araçlarınızı yönetin</string>
+    <string name="no_cars_added">Henüz araç eklenmemiş</string>
+    <string name="add_first_car">İlk aracınızı ekleyerek park işlemlerinizi kolaylaştırın</string>
+    
+    <!-- Park Detail -->
+    <string name="loading_map">Harita Yükleniyor...</string>
+    <string name="empty_parking_spots">Boş Park Yeri</string>
+    <string name="working_hours">Çalışma Saati</string>
+    <string name="pricing">Ücretlendirme</string>
+    <string name="monthly_subscription">Aylık Abonelik</string>
+    <string name="parking_type">Park Tipi</string>
+    
+    <!-- Item Car -->
+    <string name="sample_car_model">BMW 3.20i</string>
+    <string name="sample_license_plate">34 ABC 123</string>
+    <string name="sample_car_type">Sedan</string>
+    <string name="sample_parking_location">Taksim Meydanı Otoparkı</string>
+    
+    <!-- Settings -->
+    <string name="settings">Ayarlar</string>
+    <string name="dark_theme">Koyu Tema</string>
+    <string name="use_dark_theme">Uygulamayı koyu renkte kullan</string>
+    <string name="app_language">Uygulama Dili</string>
+    <string name="choose_language">Tercih ettiğiniz dili seçin</string>
+    <string name="ispark_clone">İSPARK Klonu</string>
+    <string name="version_info">Sürüm 1.0 • Geliştirilmiş park deneyimi</string>
+    
+    <!-- Item Parking -->
+    <string name="empty_spots_count">24 Boş</string>
+    <string name="sample_district">Beyoğlu, İstanbul</string>
+    <string name="first_30_min_free">İlk 30 dk ücretsiz</string>
+    
+    <!-- Profile -->
+    <string name="sample_phone">+90 555 123 45 67</string>
+    <string name="sample_balance">₺125.50</string>
+    <string name="park_statistics">Park İstatistikleri</string>
+    <string name="total_parks_count">247</string>
+    <string name="total_parks">Toplam Park</string>
+    <string name="total_hours_count">1.2K</string>
+    <string name="total_hours">Toplam Saat</string>
+    <string name="payment_methods">Ödeme Yöntemleri</string>
+    
+    <!-- Detail Fragment -->
+    <string name="news_tag">Haberler</string>
+    <string name="sample_news_title">İSPARK Hizmetleri Artık Daha Kolay</string>
+    <string name="sample_date">15 Temmuz 2024</string>
+    <string name="profile">Profil</string>
 
     <string-array name="languages">
         <item>Türkçe</item>

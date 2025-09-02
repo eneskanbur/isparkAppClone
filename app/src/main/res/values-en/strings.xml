@@ -1,37 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-    <string name="find_nearest_parking">Tap to quickly find the nearest parking lot!</string>
-    <string name="social_media_text">News, updates, offers...\nIt\'s all on our social media accounts\nFollow us and stay up to date</string>
+    <string name="app_name" translatable="false">Ispark</string>
+    <string name="find_nearest_parking">Click to quickly find the nearest parking!</string>
+    <string name="social_media_text">News, innovations, advantages...\nAll on our social media accounts\nYou follow too, stay updated</string>
     <string name="for_you">FOR YOU</string>
     <string name="applications">Applications</string>
-    <string name="istmarin_panel">İstmarin Panel</string>
+    <string name="istmarin_panel">Istmarin Panel</string>
     <string name="payment">Pay Fee</string>
     <string name="solution_center">IBB Solution Center</string>
-    <string name="news">News</string>
     <string name="campaigns">Campaigns</string>
     <string name="menu">Menu</string>
     <string name="notifications">Notifications</string>
     <string name="ispark_logo">İSPARK Logo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="en_yakin_otopark">Tap to quickly find the nearest parking lot!</string>
-    <string name="senin_icin">For You</string>
-    <string name="basvuru_islemleri">Applications</string>
-    <string name="ucret_ode">Pay Fee</string>
-    <string name="ibb_cozum_merkezi">IBB Solution Center</string>
-
-    <string name="tag_campaign">Campaign</string>
-    <string name="tag_news">News</string>
-    <string name="long_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string> <!-- Placeholder text -->
     <string name="btnFavoritesFindParking">Favorites</string>
     <string name="btnAllFindParking">All</string>
-
-    <string name="tvNumberOfParkFindParking">585 Parking Lots Found</string>
-
-    <string name="btnCampaignsHome">Campaigns</string>
-    <string name="btnNewsHome">News</string>
+    <string name="tvNumberOfParkFindParking">585 Parking Found</string>
+    <string name="long_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="dialog_confirm">OK</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Logout</string>
+    
+    <!-- Navigation Header -->
+    <string name="user_name">İSPARK User</string>
+    <string name="user_email">user@ispark.istanbul</string>
+    <string name="social_media_follow">Follow Our Social Media Accounts Too, Stay Updated!</string>
+    
+    <!-- Home Fragment -->
+    <string name="my_cars">My Cars</string>
+    <string name="parking_history">Parking History</string>
+    
+    <!-- Sign Up -->
+    <string name="create_account">Create Account</string>
+    <string name="join_ispark">Join İSPARK and discover smart parking solutions</string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="sign_in">Sign In</string>
+    
+    <!-- Sign In -->
+    <string name="welcome">Welcome</string>
+    <string name="sign_in_subtitle">Sign in for your smart parking solutions</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="no_account">Don\'t have an account? </string>
+    <string name="register">Register</string>
+    
+    <!-- Find Parking -->
+    <string name="find_parking">Find Parking</string>
+    
+    <!-- Add Car Dialog -->
+    <string name="add_new_car">Add New Car</string>
+    <string name="enter_car_info">Enter your car information</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    
+    <!-- Car Detail -->
+    <string name="debt_status">Debt Status</string>
+    <string name="registration_date">Registration Date</string>
+    <string name="last_park_location">Last Parking Location</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    
+    <!-- My Car -->
+    <string name="manage_cars">Manage your registered cars</string>
+    <string name="no_cars_added">No cars added yet</string>
+    <string name="add_first_car">Add your first car to facilitate your parking operations</string>
+    
+    <!-- Park Detail -->
+    <string name="loading_map">Loading Map...</string>
+    <string name="empty_parking_spots">Empty Parking Spots</string>
+    <string name="working_hours">Working Hours</string>
+    <string name="pricing">Pricing</string>
+    <string name="monthly_subscription">Monthly Subscription</string>
+    <string name="parking_type">Parking Type</string>
+    
+    <!-- Item Car -->
+    <string name="sample_car_model">BMW 3.20i</string>
+    <string name="sample_license_plate">34 ABC 123</string>
+    <string name="sample_car_type">Sedan</string>
+    <string name="sample_parking_location">Taksim Square Parking</string>
+    
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="use_dark_theme">Use the app in dark color</string>
+    <string name="app_language">App Language</string>
+    <string name="choose_language">Choose your preferred language</string>
+    <string name="ispark_clone">İSPARK Clone</string>
+    <string name="version_info">Version 1.0 • Enhanced parking experience</string>
+    
+    <!-- Item Parking -->
+    <string name="empty_spots_count">24 Empty</string>
+    <string name="sample_district">Beyoğlu, Istanbul</string>
+    <string name="first_30_min_free">First 30 min free</string>
+    
+    <!-- Profile -->
+    <string name="sample_phone">+90 555 123 45 67</string>
+    <string name="sample_balance">₺125.50</string>
+    <string name="park_statistics">Parking Statistics</string>
+    <string name="total_parks_count">247</string>
+    <string name="total_parks">Total Parks</string>
+    <string name="total_hours_count">1.2K</string>
+    <string name="total_hours">Total Hours</string>
+    <string name="payment_methods">Payment Methods</string>
+    
+    <!-- Detail Fragment -->
+    <string name="news_tag">NEWS</string>
+    <string name="sample_news_title">İSPARK Services Are Now Easier</string>
+    <string name="sample_date">July 15, 2024</string>
+    <string name="profile">Profile</string>
+
+    <string-array name="languages">
+        <item>Türkçe</item>
+        <item>English</item>
+    </string-array>
+
 </resources>

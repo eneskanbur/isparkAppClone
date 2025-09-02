@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Harita Yükleniyor..."
+                android:text="@string/loading_map"
                 android:textColor="@color/textOnSecondary"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,7 +234,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Boş Park Yeri"
+                            android:text="@string/empty_parking_spots"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -293,7 +293,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Çalışma Saati"
+                            android:text="@string/working_hours"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -349,7 +349,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Ücretlendirme"
+                        android:text="@string/pricing"
 
                         android:textColor="@color/textOnPrimary"
                         android:textSize="18sp"
@@ -410,7 +410,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_gravity="top"
-                            android:text="Aylık Abonelik"
+                            android:text="@string/monthly_subscription"
                             android:layout_weight="1"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
@@ -449,7 +449,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Park Tipi"
+                            android:text="@string/parking_type"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp" />
 

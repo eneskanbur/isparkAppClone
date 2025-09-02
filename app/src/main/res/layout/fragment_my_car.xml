@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Araçlarım"
+                android:text="@string/my_cars"
                 android:textColor="@color/textPrimary"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif"
-                android:text="Kayıtlı araçlarınızı yönetin"
+                android:text="@string/manage_cars"
                 android:textColor="@color/textSecondary"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Henüz araç eklenmemiş"
+            android:text="@string/no_cars_added"
             android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -99,7 +99,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="İlk aracınızı ekleyerek park işlemlerinizi kolaylaştırın"
+            android:text="@string/add_first_car"
             android:textColor="@color/textSecondary"
             android:textSize="14sp" />
 

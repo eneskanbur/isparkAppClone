@@ -97,7 +97,7 @@
                     android:id="@+id/chipCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HABER"
+                    android:text="@string/news_tag"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -114,7 +114,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:lineHeight="32dp"
-                    android:text="İSPARK Hizmetleri Artık Daha Kolay"
+                    android:text="@string/sample_news_title"
                     android:textColor="@color/textOnPrimary"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:fontFamily="sans-serif"
-                        android:text="15 Temmuz 2024"
+                        android:text="@string/sample_date"
                         android:textColor="@color/textOnSecondary"
                         android:textSize="14sp" />
 

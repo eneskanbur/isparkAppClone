@@ -21,7 +21,7 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Ayarlar"
+            android:text="@string/settings"
             android:textColor="@color/textPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Koyu Tema"
+                            android:text="@string/dark_theme"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Uygulamayı koyu renkte kullan"
+                            android:text="@string/use_dark_theme"
                             android:textColor="@color/textOnSecondary"
                             android:textSize="14sp" />
 
@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Uygulama Dili"
+                            android:text="@string/app_language"
                             android:textColor="@color/textOnPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -197,7 +197,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Tercih ettiğiniz dili seçin"
+                            android:text="@string/choose_language"
                             android:textColor="@color/textOnSecondary"
                             android:textSize="14sp" />
 
@@ -275,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="İSPARK Klonu"
+                        android:text="@string/ispark_clone"
                         android:textColor="@color/textOnPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -284,7 +284,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Sürüm 1.0 • Geliştirilmiş park deneyimi"
+                        android:text="@string/version_info"
                         android:textColor="@color/textOnSecondary"
                         android:textSize="14sp" />
 

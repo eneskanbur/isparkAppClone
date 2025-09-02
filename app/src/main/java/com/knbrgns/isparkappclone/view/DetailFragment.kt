@@ -34,13 +34,13 @@ class DetailFragment : Fragment() {
             Glide.with(binding.ivDetail.context).load(news.imageUrl).into(binding.ivDetail)
             binding.tvDetailTitle.text = news.title
             binding.tvDate.text = news.sDate
-            binding.chipCategory.text = getString(R.string.tag_news)
+            binding.chipCategory.text = getString(R.string.news_tag)
         } else if (campaign != null) {
             binding.tvDetailDescription.text = campaign.descriptionLong
             Glide.with(binding.ivDetail.context).load(campaign.imageUrl).into(binding.ivDetail)
             binding.tvDetailTitle.text = campaign.title
             binding.tvDate.text = campaign.sDate
-            binding.chipCategory.text = getString(R.string.tag_campaign)
+            binding.chipCategory.text = getString(R.string.campaigns)
         }
     }
 }
