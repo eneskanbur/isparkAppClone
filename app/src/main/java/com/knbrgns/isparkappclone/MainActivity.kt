@@ -1,5 +1,6 @@
 package com.knbrgns.isparkappclone
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.ui.navigateUp
 import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -27,6 +29,7 @@ import com.knbrgns.isparkappclone.databinding.ActivityMainBinding
 import com.knbrgns.isparkappclone.repository.FirebaseRepo
 import com.knbrgns.isparkappclone.repository.ParkRepository
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -35,7 +38,34 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firebaseRepo: FirebaseRepo
 
+    companion object {
+        fun wrap(context: Context): Context {
+            val prefs = context.getSharedPreferences("ispark_settings", Context.MODE_PRIVATE)
+            val language = prefs.getString("language", "system") ?: "system"
+            if (language != "system") {
+                val locale = Locale.forLanguageTag(language)
+                Locale.setDefault(locale)
+                val config = context.resources.configuration
+                config.setLocale(locale)
+                return context.createConfigurationContext(config)
+            }
+            return context
+        }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(wrap(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val prefs = getSharedPreferences("ispark_settings", Context.MODE_PRIVATE)
+        val isDarkMode = prefs.getBoolean("dark_mode", false)
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         installSplashScreen()
         super.onCreate(savedInstanceState)
 

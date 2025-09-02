@@ -29,9 +29,6 @@
             android:id="@+id/nav_campaigns"
             android:title="Kampanyalar" />
         <item
-            android:id="@+id/nav_settings"
-            android:title="Ayarlar" />
-        <item
             android:id="@+id/nav_profile"
             android:title="Profil" />
         <item

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="find_nearest_parking">Tap to quickly find the nearest parking lot!</string>
+    <string name="social_media_text">News, updates, offers...\nIt\'s all on our social media accounts\nFollow us and stay up to date</string>
+    <string name="for_you">FOR YOU</string>
+    <string name="applications">Applications</string>
+    <string name="istmarin_panel">İstmarin Panel</string>
+    <string name="payment">Pay Fee</string>
+    <string name="solution_center">IBB Solution Center</string>
+    <string name="news">News</string>
+    <string name="campaigns">Campaigns</string>
+    <string name="menu">Menu</string>
+    <string name="notifications">Notifications</string>
+    <string name="ispark_logo">İSPARK Logo</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="en_yakin_otopark">Tap to quickly find the nearest parking lot!</string>
+    <string name="senin_icin">For You</string>
+    <string name="basvuru_islemleri">Applications</string>
+    <string name="ucret_ode">Pay Fee</string>
+    <string name="ibb_cozum_merkezi">IBB Solution Center</string>
+
+    <string name="tag_campaign">Campaign</string>
+    <string name="tag_news">News</string>
+    <string name="long_description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string> <!-- Placeholder text -->
+    <string name="btnFavoritesFindParking">Favorites</string>
+    <string name="btnAllFindParking">All</string>
+
+    <string name="tvNumberOfParkFindParking">585 Parking Lots Found</string>
+
+    <string name="btnCampaignsHome">Campaigns</string>
+    <string name="btnNewsHome">News</string>
+    <string name="dialog_confirm">OK</string>
+    <string name="logout">Log Out</string>
+</resources>

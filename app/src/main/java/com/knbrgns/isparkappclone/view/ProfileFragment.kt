@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.knbrgns.isparkappclone.R
 import com.knbrgns.isparkappclone.databinding.FragmentProfileBinding
 import com.knbrgns.isparkappclone.repository.FirebaseRepo
+import com.knbrgns.isparkappclone.view.dialog.ErrorDialog
 import com.knbrgns.isparkappclone.view.viewmodel.ProfileViewModel
 import kotlinx.coroutines.launch
 
@@ -48,15 +49,27 @@ class ProfileFragment : Fragment() {
         }
 
         binding.layoutSettings.setOnClickListener {
-
+            navigate(R.id.action_nav_profile_to_settingsFragment)
         }
 
         binding.layoutParkingHistory.setOnClickListener {
-
+            ErrorDialog.Builder(requireContext())
+                .setCancelable(true)
+                .setOnConfirm {  }
+                .setErrorTitle("İşlem Başarısız")
+                .setErrorMessage("Bu işlem henüz uygulanmamaktadır.")
+                .build()
+                .show()
         }
 
         binding.layoutPaymentMethods.setOnClickListener {
-
+            ErrorDialog.Builder(requireContext())
+                .setCancelable(true)
+                .setOnConfirm {  }
+                .setErrorTitle("İşlem Başarısız")
+                .setErrorMessage("Bu işlem henüz uygulanmamaktadır.")
+                .build()
+                .show()
         }
     }
 
